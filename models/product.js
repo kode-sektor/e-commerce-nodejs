@@ -1,10 +1,8 @@
-const product = 
-{
+const product = {
 
     fakedb : [],
 
-    initDB()
-    {
+    initDB() {
 
             this.fakedb.push({
                 title : "Blackberry",
@@ -15,49 +13,40 @@ const product =
 
             });
 
-            
             this.fakedb.push({
                 title : "Samsung S10",
                 descrition : "Cool phone",
                 price : "700",
                 featured: true,
                 imgPath : "2.jpg"
-            })
+            });
 
-            
             this.fakedb.push({
                 title : "IPhone X",
                 descrition : "Very cool evice",
                 price : "1100",
                 featured: false,
                 imgPath : "3.jpg"
-            })
+            });
 
-
-            
             this.fakedb.push({
                 title : "Samsung S10+",
                 descrition : "Cool phone",
                 price : "900",
                 featured: false,
                 imgPath : "4.jpg"
-            })
-
+            });
 
     },
 
-    getAllProducts()
-    {
-
+    getAllProducts() {
         return this.fakedb;
     },
 
-    getFeaturedProducts()
-    {
+    getFeaturedProducts() {
 
 
     }
-
 
 }
 

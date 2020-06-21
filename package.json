@@ -1,17 +1,28 @@
 {
-  "name": "assignment1StarterPack",
+  "name": "e-commerce-nodejs",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "scripts": "node server",
+    "dev": "nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kode-sektor/e-commerce-nodejs.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kode-sektor/e-commerce-nodejs/issues"
+  },
+  "homepage": "https://github.com/kode-sektor/e-commerce-nodejs#readme",
   "dependencies": {
     "express": "^4.17.1",
     "express-handlebars": "^4.0.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }

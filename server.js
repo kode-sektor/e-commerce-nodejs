@@ -14,12 +14,13 @@ app.use(express.static("public"));
 app.get("/",(req,res) => {
 
     res.render("index", {
-        title : "Home Page"
-    })
+        title : "Home Page",
+        desc : "Description"
+    });
 
 });
 
-app.get("/productListing",(req,res)=>{
+app.get("/productListing",(req,res) => {
     
     res.render("productListing", {
         title : "Product Listing Page",
