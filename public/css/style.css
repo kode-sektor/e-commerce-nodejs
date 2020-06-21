@@ -79,7 +79,7 @@ a:link, a:visited {
    cursor: pointer;
    transition: color .3s ease-in-out;
    border-bottom: /*dotted 1px rgba(160, 160, 160, 0.65)*/;
-   transition: color 0.2s ease, border-bottom-color 0.2s ease;		
+   transition: all .2s ease-in;		
 }
 a {
 	color: #6a6a6a;
@@ -116,6 +116,9 @@ h3 {
 	position: relative;
 	z-index: 3;
 	background-color: rgba(255,255,255,.9);
+}
+.header-area {
+	padding: 10px;
 }
 .header-area, .main-menu {
     display: flex;
@@ -287,6 +290,7 @@ h3 {
 .slide-title-ad {
 	line-height: 150%;
 	letter-spacing: 10px;
+	font-size: 1.2em;
 }
 .slide-title-ad span {
 	display: block;
@@ -330,6 +334,9 @@ h3 {
 
 .page-footer {
 	width: 100%;
+}
+.page-footer a:hover, .page-footer:focus {
+	font-weight: bold;
 }
 .primary-footer-group, .sec-footer {
 	display: flex;
