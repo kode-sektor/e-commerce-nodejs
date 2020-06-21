@@ -96,6 +96,10 @@ a:link:hover, a:link:focus {
   	text-decoration: none;
     color: rgb(136,13,30 )!important;*/
 }
+input[type=checkbox], input[type=radio] {
+    box-sizing: border-box;
+    padding: 0;
+}
 h1, h2 {
 	font-size: 1.3em;
 }
@@ -373,6 +377,7 @@ h3 {
 	width: 80%;
 	display: flex;
 	align-items: center;
+	margin: 0 auto;
 }
 .create-account, .login {
 	flex: 0 0 50%;
@@ -409,6 +414,7 @@ h3 {
 	display: flex;
 	align-items: center;
 	padding: 80px 70px;
+	text-align: center;
 }
 .login-form-inner h2 {
 	font-size: 38px;
@@ -419,9 +425,10 @@ h3 {
 .form-input {
     display: inline-block;
     position: relative;
+    width: 100%;
     margin-bottom: 1rem;
 }
-.form-input input[type=text] {
+.form-input input[type=text], .form-input input[type=password] {
     display: block;
     width: 100%;
     height: calc(2.25rem + 2px);
@@ -429,9 +436,55 @@ h3 {
     font-size: 1rem;
     line-height: 1.5;
     color: #495057;
-    background-color: #fff;
+    background-color: #000;
     background-clip: padding-box;
     border: 1px solid #ced4da;
     border-radius: .25rem;
+    border: 0px solid transparent;
+    border-bottom: 1px solid #ddd;
+    border-radius: 0;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.create-account-action {
+	display: flex;
+	margin-top: 11px;
+	align-items: center;	
+}
+.create-account-action label {
+	display: inline-block;
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 0;
+    margin-left: 10px;
+}
+.form-input-final {
+	display: block !important;
+}
+.login-btn {
+    display: inline-block;
+    border: 1px solid #2577fd;
+    background-color: transparent;
+    padding: 15px 25px;
+    font-family: Dosis, sans-serif;
+    font-weight: 700;
+    transition: .5s;
+    color: var(--white);
+    display: block;
+    width: 100%;
+    margin: 30px 0 17px;
+}
+.lost-password {
+    color: #777;
+    text-align: right;
+    float: right;
+    text-transform: capitalize;
+}
+.user-acct .fa-close {
+	position: absolute;
+	z-index: 100;
+	right: 30px;
+	top: 20px;
+	cursor: pointer;
+	font-size: 2em;
+	font-weight: lighter;
 }
