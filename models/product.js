@@ -673,9 +673,11 @@ const product = {
     },
 
     getNProducts () {
-        (this.fakedb).slice(0, 9).map((item, i) => {
+        this.nProductList = (this.fakedb).slice(0, 9);
+
+/*        tempFakedb.map((item, i) => {
             (this.nProductList).push(item);
-        });
+        });*/
         return this.nProductList;
     },
 
