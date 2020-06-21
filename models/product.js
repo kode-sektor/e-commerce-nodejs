@@ -1,6 +1,8 @@
 const product = {
 
     fakedb : [],
+    bestSeller : [],
+    
 
     initDB() {
 
@@ -39,7 +41,6 @@ const product = {
                 imgPath : "4.jpg",
                 category : "phone"
             });
-
 
 
             this.fakedb.push({
@@ -270,7 +271,7 @@ const product = {
             this.fakedb.push({
                 title : "Lsvtr-US Quartz Wristwatch",
                 description : "LsvtrUS Popular Low-key Men's Quartz Wristwatch Minimalist Connotation",
-                price : 205",
+                price : "205",
                 featured: true,
                 imgPath : "watch-lsvtrus.jpg",
                 category : "watch"
@@ -279,7 +280,7 @@ const product = {
             this.fakedb.push({
                 title : "Michael Kors Watch",
                 description : "Michael Kors Slim Runway Stainless Steel Watch",
-                price : 205",
+                price : "205",
                 featured: false,
                 imgPath : "watch-kors.jpg",
                 category : "watch"
@@ -288,7 +289,7 @@ const product = {
             this.fakedb.push({
                 title : "Senors Watches",
                 description : "Men's Watches Mechanical Skeleton Classic Luxury",
-                price : 395",
+                price : "395",
                 featured: false,
                 imgPath : "watch-senors.jpg",
                 category : "watch"
@@ -297,7 +298,7 @@ const product = {
             this.fakedb.push({
                 title : "Casio G-Shock Mens",
                 description : "Casio G-Shock Mens GA-700UC 4.6 out of 5 stars",
-                price : 200",
+                price : "200",
                 featured: false,
                 imgPath : "watch-casio-gshock.jpg",
                 category : "watch"
@@ -306,7 +307,7 @@ const product = {
             this.fakedb.push({
                 title : "Garmin Vivoactive 3 Smartwatch",
                 description : "Black & Stainless, 010-01769-00",
-                price : 205",
+                price : "205",
                 featured: true,
                 imgPath : "watch-garmin-vivoactive.jpg",
                 category : "watch"
@@ -315,7 +316,7 @@ const product = {
             this.fakedb.push({
                 title : "HUAWEI Watch GT 2 2019",
                 description : "HUAWEI Watch GT 2 2019 Bluetooth SmartWatch",
-                price : 305",
+                price : "305",
                 featured: false,
                 imgPath : "watch-huawei-gt.jpg",
                 category : "watch"
@@ -324,7 +325,7 @@ const product = {
             this.fakedb.push({
                 title : "Samsung Galaxy Watch Active",
                 description : "Samsung Galaxy Watch Active - Silver",
-                price : 200",
+                price : "200",
                 featured: true,
                 imgPath : "watch-samsung-watch-active.jpg",
                 category : "watch"
@@ -333,7 +334,7 @@ const product = {
             this.fakedb.push({
                 title : "GUANK Men’s Wooden Watch",
                 description : "GUANK Men’s Wooden Watches Personalized Engraved",
-                price : 125",
+                price : "125",
                 featured: false,
                 imgPath : "watchh-guanke-wooden.jpg",
                 category : "watch"
@@ -347,14 +348,23 @@ const product = {
         return this.fakedb;
     },
 
+    getNProducts (start, end) {
+        this.fakedb(start, end).map((item, i) => {
+            placeIDs.push(item);
+        });
+    },
+
     getFeaturedProducts() {
-
-
+        console.log(this.fakedb);
+        this.bestSeller =  (this.getAllProducts()).filter(function(feature) {
+            return feature.featured == true;
+        });
+        return this.bestSeller;
     }
 
 }
 
-console.log(product.getAllProducts());
+// console.log(product.getFeaturedProducts());
 
 product.initDB();
 module.exports = product;
