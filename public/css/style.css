@@ -550,7 +550,7 @@ h3 {
 	text-align: center;
 }
 .section-title {
-	font-size: 2em;
+	font-size: 1.4em;
 	padding: 1em 8px;
 	font-family: var(--font-secondary);
 	border-bottom: 2px solid var(--blue);
@@ -620,7 +620,7 @@ h3 {
 
 /*Category Product List*/
 .category.product-list li {
-	width: 25%;
+	width: 100%;
 	padding: 0;
 }
 .category .category-title {
