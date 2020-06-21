@@ -363,16 +363,27 @@ h3 {
 
 /*Login*/
 
-.user-acct {
+.user-acct, .create-account-modal {
 	position: fixed;
-	right: 0;
+	left: 100%;
 	top: 60px;
 	width: 100%;
 	bottom: 0;
 	height: 100%;
 	z-index: 99;
 	background: black;
+	-webkit-transition: left .5s ease-out;
+	transition: left .5s ease-out;
 }
+	/*modal*/
+	.create-account-modal {
+		width: 50%;
+		z-index: 100;
+		display: flex;
+		align-items: center;
+		padding: 80px 120px;
+		text-align: center;
+	}
 .page-form {
 	width: 80%;
 	display: flex;
@@ -385,6 +396,7 @@ h3 {
 }
 .create-account {
 	display: flex;
+	align-items: center;
 	background-image: linear-gradient(90deg, rgba(0, 0, 51, .7) 0%, rgba(222, 180, 6, .2) 64%, rgba(0, 0, 51, .5) 100%);
 	background-size: 200% auto;
 	padding: 80px 70px;
@@ -416,11 +428,12 @@ h3 {
 	padding: 80px 70px;
 	text-align: center;
 }
-.login-form-inner h2 {
+.login-form-inner h2, .account-form-inner h2 {
 	font-size: 38px;
 	line-height: 56px;
 	font-weight: 700;
 	margin-bottom: 80px;
+	color: #fff;
 }
 .form-input {
     display: inline-block;
@@ -428,7 +441,7 @@ h3 {
     width: 100%;
     margin-bottom: 1rem;
 }
-.form-input input[type=text], .form-input input[type=password] {
+.form-input input[type=text], .form-input input[type=password], .form-input input[type=email] {
     display: block;
     width: 100%;
     height: calc(2.25rem + 2px);
@@ -479,7 +492,7 @@ h3 {
     float: right;
     text-transform: capitalize;
 }
-.user-acct .fa-close {
+.user-acct .fa-close, .create-account-modal .fa-close {
 	position: absolute;
 	z-index: 100;
 	right: 30px;
@@ -487,4 +500,18 @@ h3 {
 	cursor: pointer;
 	font-size: 2em;
 	font-weight: lighter;
+	color: var(--yellow);
+}
+.create-account-modal .fa-close {
+	color: var(--yellow);
+	z-index: 101;
+}
+
+/*modal behaviour*/
+
+.active .user-acct {
+  left: 0;
+}
+.create-account-modal.active {
+	left: 50%;
 }
