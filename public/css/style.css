@@ -72,29 +72,9 @@ img {
 ul, ol {
 	list-style: none;
 }
-a:link, a:visited {
-   text-decoration: none;
-   outline: 0;
-   /color: #007fff;
-   cursor: pointer;
-   transition: color .3s ease-in-out;
-   border-bottom: /*dotted 1px rgba(160, 160, 160, 0.65)*/;
-   transition: all .2s ease-in;		
-}
 a {
 	color: #6a6a6a;
-}
-a:visited{
-	/color: #333399;
-}
-a:active{
-	color: #0033ff;
-	text-decoration: underline;
-}
-a:link:hover, a:link:focus {
-  	/*outline-offset: -2px;
-  	text-decoration: none;
-    color: rgb(136,13,30 )!important;*/
+	text-decoration: none;
 }
 button {
 	cursor: pointer;
@@ -328,8 +308,12 @@ h3 {
 	font-size: 14px;
 	text-decoration: none;
 	text-transform: uppercase;
+	transition: all .2s;
 }
-
+.cta-btn:hover, .cta-btn:focus {
+	background: black;
+	color: var(--yellow);
+}
 /*Page Footer*/
 
 .page-footer {

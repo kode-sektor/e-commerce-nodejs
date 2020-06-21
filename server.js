@@ -3,6 +3,7 @@ const exphbs  = require('express-handlebars');
 
 const product = require("./models/product");
 const catProduct = require("./models/productCategory");
+const bestSeller = require("./models/bestSeller");
 
 const app = express();
 
@@ -15,7 +16,7 @@ app.get("/",(req,res) => {
 
     res.render("index", {
         title : "Home Page",
-        data : product.getFeaturedProducts(),
+        data : bestSeller.getFeaturedProducts(),
         dataCat : catProduct.getCategProducts()
     });
 

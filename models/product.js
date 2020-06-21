@@ -338,21 +338,6 @@ const product = {
         });
         return this.bestSeller.slice(0,9);
     },
-
-    getCategories(num) {
-        let categoryExists = false;
-        const tempListing = [];
-
-        this.fakedb.forEach((listing) => {
-            categoryExists = tempListing.some(function(listing) {
-                return 'category' === listing['category'];
-            });
-            if (!categoryExists) {
-                tempListing.push(listing);
-            }
-        });
-
-    }
   
 
 };
