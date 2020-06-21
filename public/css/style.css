@@ -123,31 +123,50 @@ h3 {
 	margin-left: auto;
 	width: 85%;
 	justify-content: space-between;
-	padding-right: 20px;
+
+	position: absolute;
+	left: 0;
+	top: 60px;
+	right: 0;
+	width: 100%;
+}
+.main-menu-nav {
+	display: flex;
+	flex-flow: row wrap;
+	flex: 0 0 100%;
+	background : rgba(0,0,0,.9);
+	border: 3px solid var(--blue);
 }
 .main-menu-nav > [class^=categories] {
 	/background: rgba(20, 21, 23, .1);
 }
-.main-menu-nav > .categories-first {
-	margin-left: 15px;
-}
-.main-menu-nav > .categories-last {
-	margin-right: 15px;
-}
 .main-menu-nav, .user-related-links {
 	display: flex;
+}
+.user-related-links {
+	position: absolute;
+	right: 20px;
+	top: -50px;
 }
 .main-menu-nav li {
 	position: relative;
 	z-index: 1;
+	flex: 0 0 50%;
+
+	padding: 5px;
+	text-align: center;
+}
+.main-menu-nav li:hover, .main-menu-nav li:focus {
+	background: rgba(255,255,255,.5);
 }
 .main-menu-nav li a, .user-related-links li a, .user-related-links .fa-search {
-    font-size: 16px;
-    color: var(--text-grey);
+    font-size: 1.3em;
+    color: var(--yellow);
     font-weight: 600;
     padding: 10px;
     display: inline-block;
     text-transform: capitalize;
+    text-transform: uppercase;
     transition: all .3s ease-out 0s;
 }
 .user-related-links li a, .user-related-links .fa-search {
@@ -170,6 +189,19 @@ h3 {
     border-radius: 7px 7px 3px 3px;
     transition: all .2s ease-out 0s;
 }
+.toggle-btn-nav {
+	padding: 7.5px;
+	color: var(--light-grey);
+	background: var(--blue);
+	border: none;
+	margin-left: 30px;
+	margin-top: 7px;
+}
+.toggle-btn-nav:hover, .toggle-btn-nav:focus {
+	opacity: .7;
+}
+
+
 
 /*Hero*/
 
@@ -185,6 +217,7 @@ h3 {
 	position: absolute;
 	top: 55px;
 	left: 30%;
+	transform: scale(0.7);
 }
 .hero:before {
 	content: "";
@@ -200,8 +233,6 @@ h3 {
 /*Carousel*/
 
 .carousel-container {
-	width: 75%;
-	margin-left: 5%;
 	z-index: 1;
 	font-family: var(--font-secondary);
 }
@@ -268,15 +299,15 @@ h3 {
 	text-align: center;
 }
 .slide-title-ad {
-	line-height: 150%;
-	letter-spacing: 10px;
-	font-size: 1.2em;
+	line-height: 120%;
+	letter-spacing: 2px;
+	font-size: .6em;
 }
 .slide-title-ad span {
 	display: block;
 }
 .slide-watchword p {
-	font-size: .7em;
+	font-size: .3em;
 	font-family: Dosis, sans-serif;
 	font-weight: bold;
 }
@@ -289,7 +320,7 @@ h3 {
 .indicators {
   position: absolute;
   bottom: 0;
-  left: -50px;
+  left: 0;
   border: 1px solid black;
   padding: 15px 25px;
   background: var(--blue);
