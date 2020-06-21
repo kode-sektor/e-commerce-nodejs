@@ -15,7 +15,8 @@ app.get("/",(req,res) => {
 
     res.render("index", {
         title : "Home Page",
-        desc : "Description"
+        desc : "Description",
+        data : product.getNProducts()
     });
 
 });

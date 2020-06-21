@@ -96,6 +96,9 @@ a:link:hover, a:link:focus {
   	text-decoration: none;
     color: rgb(136,13,30 )!important;*/
 }
+button {
+	cursor: pointer;
+}
 input[type=checkbox], input[type=radio] {
     box-sizing: border-box;
     padding: 0;
@@ -193,6 +196,7 @@ h3 {
 	padding-top: 120px;
 	z-index: 2;
 	min-height: 450px;
+	margin-bottom: 4em;
 }
 .promo-coupon {
 	position: absolute;
@@ -514,4 +518,36 @@ h3 {
 }
 .create-account-modal.active {
 	left: 50%;
+}
+
+/*Page Product Listing*/
+.product-listing {
+	width: 85%;
+	padding: 25px;
+	margin: 0 auto;
+	text-align: center;
+	border: 2px solid purple;
+}
+.section-title {
+	font-size: 2em;
+	padding: 1em 8px;
+	font-family: var(--font-secondary);
+	border-bottom: 2px solid var(--blue);
+}
+.product-list {
+	display: flex;
+	flex-flow: row wrap;
+	padding: 25px 20px;
+}
+.product-list li {
+	width: 33.33%;
+	border: 1px solid grey;
+}
+.product-listing-single {
+	display: flex;
+	flex-flow: column;
+	padding: 5px 15px;
+}
+.product-listing-single > * {
+	margin-bottom: 5px;
 }

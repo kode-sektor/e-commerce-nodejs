@@ -63,3 +63,30 @@
 
 	</section>
 
+	<section class="product-listing">
+
+		<div class="page-product">
+
+			<h2 class="section-title">Product Listings</h2>
+
+			<ul class="product-list">
+				{{#each data}}
+				<li>
+					<div class="product-listing-single">
+					    <h4>{{this.title}}</h4>
+						<h5>Price : {{this.price}}</h5>
+					    <figure>
+					    	<img src="/img/{{this.imgPath}}">
+					    	<figcaption>
+					    		<p>Description : {{this.description}}</p>
+					    	</figcaption>
+					    </figure>
+					</div>
+				</li>
+				{{/each}}
+			</ul>
+
+		</div>
+
+	</section>
+

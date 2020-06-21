@@ -328,7 +328,7 @@ const product = {
     bestSeller : [],
     nProductList : [],
 
-    initDB() {
+/*    initDB() {
 
             this.fakedb.push({
                 title : "Blackberry",
@@ -666,16 +666,17 @@ const product = {
 
 
 
-    },
+    },*/
 
     getAllProducts() {
         return this.fakedb;
     },
 
-    getNProducts (start, end) {
-        (this.fakedb).slice(start, end).map((item, i) => {
+    getNProducts () {
+        (this.fakedb).slice(0, 9).map((item, i) => {
             (this.nProductList).push(item);
         });
+        return this.nProductList;
     },
 
     getFeaturedProducts() {
