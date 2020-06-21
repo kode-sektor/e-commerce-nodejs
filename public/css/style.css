@@ -30,6 +30,7 @@
   --grey: #F6F6F6;
   --light-grey: #efefef;
   --mid-grey: #f2f2f2;
+  --text-grey: #141517;
   --black: #000;
   --white: #fff;
 
@@ -70,16 +71,39 @@ img {
 ul, ol {
 	list-style: none;
 }
+a:link, a:visited {
+   text-decoration: none;
+   outline: 0;
+   /color: #007fff;
+   cursor: pointer;
+   transition: color .3s ease-in-out;
+   border-bottom: /*dotted 1px rgba(160, 160, 160, 0.65)*/;
+   transition: color 0.2s ease, border-bottom-color 0.2s ease;		
+}
+a {
+	color: #6a6a6a;
+}
+a:visited{
+	/color: #333399;
+}
+a:active{
+	color: #0033ff;
+	text-decoration: underline;
+}
+a:link:hover, a:link:focus {
+  	outline-offset: -2px;
+  	text-decoration: none;
+    color: rgb(136,13,30 )!important;
+}
 
 /*Header*/
 
 .page-header {
 	border: 1px solid maroon;
 }
-.header-area, .main-menu-nav {
+.header-area, .main-menu {
     display: flex;
     align-content: center;
-    justify-content: space-between;
     flex-wrap: wrap;
     align-items: center;
 }
@@ -90,13 +114,55 @@ ul, ol {
 	margin-right: auto;
 	margin-left: auto;
 }
+.logo {
+	width: 15%;
+	text-align: center;
+}
+.main-menu {
+	/flex-wrap: nowrap;
+	margin-left: auto;
+	width: 85%;
+	justify-content: space-between;
+}
+.main-menu-nav, .user-related-links {
+	display: flex;
+}
+.user-related-links {
+	border: 2px solid green;
+}
 .main-menu-nav li {
 	position: relative;
 	z-index: 1;
 }
-.main-menu-nav li .submenu {
+.main-menu-nav li a, .user-related-links li a, .user-related-links .fa-search {
+    font-size: 16px;
+    color: var(--text-grey);
+    font-weight: 600;
+    padding: 10px;
+    display: inline-block;
+    text-transform: capitalize;
+    transition: all .3s ease-out 0s;
 }
-
+.user-related-links li a, .user-related-links .fa-search {
+	font-weight: lighter !important;
+	opacity: .4;
+	line-height: 24px;
+	color: var(--dark-grey);
+}
+.main-menu-nav li .submenu {
+    position: absolute;
+    width: 170px;
+    background: #fff;
+    left: 0;
+    top: 90%;
+    visibility: hidden;
+    opacity: 0;
+    box-shadow: 0 0 10px 3px rgba(0,0,0,0.05);
+    padding: 17px 0;
+    border-top: 3px solid #ff2020;
+    border-radius: 7px 7px 3px 3px;
+    transition: all .2s ease-out 0s;
+}
 
 /*Carousel*/
 
