@@ -1,4 +1,64 @@
-body
-{
-    background-color: lightcoral;
+/*
+
+* Project Title: Humber-Zon 
+* Author Email: kayodeibiyemi92@gmail.com
+* GitHub Link: https:https://github.com/kode-sektor/e-commerce-nodejs
+* Author URI: www.kode-sektor.com
+* Start date: 20-6-2020
+  __   __                           
+ |  |_/  /
+ |      / 
+ |     /    __ ____  __
+ |  '  \  / _` | |  | |          
+ |  |\  \| (_| | |__| |
+ |__| \__\\__,_|____. |         
+                    | |  
+                    | |
+              |_______|  
+                                                                  
+=====================================================================*/
+
+/*basic*/
+
+:root {
+  /*primary colours*/
+  --blue: #000033;
+  --yellow: #DEB406;
+  --link: #007BFF;
+
+  /*shades of grey*/
+  --grey: #F6F6F6;
+  --light-grey: #efefef;
+  --mid-grey: #f2f2f2;
+  --black: #000;
+  --white: #fff;
+
+  --shadow: 0 1px 5px rgba(104, 104, 104, 0.8);
+
+  /*font families*/
+  --font-primary: Dosis, Tahoma, Calibri, sans-serif;
+  --font-secondary: Titillium, Tahoma, Calibri, sans-serif;
+  --font-tertiary: "Century Gothic", Tahoma, Calibri, sans-serif;
+
 }
+
+*, *:before, *:after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}	
+html{
+	height:100%;
+	font-smoothing: antialiased;	
+	line-height: 1.5em; 		/*1.42857143*/		
+	font-size: 16px; 			/*62.5%*/		
+	background:;
+	-webkit-text-size-adjust: 100%;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}	
+body{
+	min-height:100%;
+	line-height: inherit; 
+	font-weight: normal;
+}
+
