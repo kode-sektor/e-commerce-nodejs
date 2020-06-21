@@ -3,15 +3,15 @@ const product = {
     fakedb : [
         {
             title : "Blackberry",
-            description : "Outdated",
+            description : "Black Blackberry Phone",
             price : "70",
             featured: false,
             imgPath : "1.jpg",
-            category : "phone"
+            category : "Black Blackberry Phone"
         },
         {
             title : "Samsung S10",
-            description : "Cool phone",
+            description : "Samsung Latest S10 with a New Experience",
             price : "700",
             featured: true,
             imgPath : "2.jpg",
@@ -19,15 +19,15 @@ const product = {
         },
         {
             title : "IPhone X",
-            description : "Very cool evice",
+            description : "Comes with a range of the latest applications ",
             price : "1100",
             featured: false,
             imgPath : "3.jpg",
-            category : "phone"
+            category : "phone, "
         },
         {
             title : "Samsung S10+",
-            description : "Cool phone",
+            description : "",
             price : "900",
             featured: false,
             imgPath : "4.jpg",
@@ -325,16 +325,9 @@ const product = {
     bestSeller : [],
     nProductList : [],
 
-    getAllProducts() {
-        return this.fakedb;
-    },
-
     getNProducts (start, end) {
         this.nProductList = (this.fakedb).slice(start, end);
 
-/*        tempFakedb.map((item, i) => {
-            (this.nProductList).push(item);
-        });*/
         return this.nProductList;
     },
 
@@ -344,9 +337,25 @@ const product = {
             return feature.featured == true;
         });
         return this.bestSeller.slice(0,9);
-    }
+    },
 
-}
+    getCategories(num) {
+        let categoryExists = false;
+        const tempListing = [];
+
+        this.fakedb.forEach((listing) => {
+            categoryExists = tempListing.some(function(listing) {
+                return 'category' === listing['category'];
+            });
+            if (!categoryExists) {
+                tempListing.push(listing);
+            }
+        });
+
+    }
+  
+
+};
 
 // console.log(product.getFeaturedProducts());
 
