@@ -37,7 +37,7 @@
 
   /*font families*/
   --font-primary: Dosis, Tahoma, Calibri, sans-serif;
-  --font-secondary: Titillium, Tahoma, Calibri, sans-serif;
+  --font-secondary: "Titillium Web", Tahoma, Calibri, sans-serif;
   --font-tertiary: "Century Gothic", Tahoma, Calibri, sans-serif;
 
 }
@@ -56,9 +56,99 @@ html{
 	-webkit-text-size-adjust: 100%;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }	
-body{
+body {
 	min-height:100%;
 	line-height: inherit; 
 	font-weight: normal;
+	font-family: var(--font-primary);
+}
+img {
+   max-width: 100%;
+   height: auto;
+   border: none;
+}
+ul, ol {
+	list-style: none;
 }
 
+/*Header*/
+
+.page-header {
+	border: 1px solid maroon;
+}
+.header-area, .main-menu-nav {
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.header-area {
+	width: 100%;
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: auto;
+}
+.main-menu-nav li {
+	position: relative;
+	z-index: 1;
+}
+.main-menu-nav li .submenu {
+}
+
+
+/*Carousel*/
+
+.carousel {
+  position: relative;
+  height: 400px;
+  width: 750px;
+}
+
+.slides {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  font-size: 3em;
+  color: white;
+  line-height: 400px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 1000ms;
+}
+
+.slide:nth-child(1) {
+    background-color: red;
+    opacity: 1;
+}
+
+.slide:nth-child(2) {
+    background-color: green;
+}
+
+.slide:nth-child(3) {
+    background-color: blue;
+}
+
+.slide[data-state=active] {
+  display: block;
+}
+
+.indicators {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+
+.indicator {
+    cursor: pointer;
+}
