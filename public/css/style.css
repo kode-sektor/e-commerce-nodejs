@@ -216,7 +216,7 @@ h3 {
 .carousel {
   position: relative;
   height: 400px;
-  background: #f3f3f3;
+  background: var(--light-grey);
 }
 .slides {
   height: 100%;
@@ -313,4 +313,43 @@ h3 {
 	border: 2px solid black;
 	letter-spacing: 3px;
 	font-size: 14px;
+}
+
+/*Page Footer*/
+
+.page-footer {
+	width: 100%;
+}
+.primary-footer-group, .sec-footer {
+	display: flex;
+	width: 80%;
+	margin: auto;
+}
+.primary-footer {
+	width: 25%;
+	padding: 25px;
+}
+.footer-header {
+	font-weight: 600;
+	font-size: 1.2em;
+	margin-bottom: 1em;
+}
+.footer-links li {
+	margin-bottom: 5px;
+}
+.sec-footer > section {
+	width: 75%;
+}
+.footer-social {
+	width: 25% !important;
+}
+.footer-social > ul {
+	justify-content: flex-end !important;
+}
+.footer-social > ul > li {
+	padding-right: 15px;
+}
+.sec-footer > section > ul {
+	display: flex;
+	justify-content: space-between;
 }
