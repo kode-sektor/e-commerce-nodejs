@@ -99,7 +99,6 @@ a:link:hover, a:link:focus {
 /*Header*/
 
 .page-header {
-	border: 1px solid maroon;
 }
 .header-area, .main-menu {
     display: flex;
@@ -123,12 +122,19 @@ a:link:hover, a:link:focus {
 	margin-left: auto;
 	width: 85%;
 	justify-content: space-between;
+	padding-right: 20px;
+}
+.main-menu-nav > [class^=categories] {
+	/background: rgba(20, 21, 23, .1);
+}
+.main-menu-nav > .categories-first {
+	margin-left: 15px;
+}
+.main-menu-nav > .categories-last {
+	margin-right: 15px;
 }
 .main-menu-nav, .user-related-links {
 	display: flex;
-}
-.user-related-links {
-	border: 2px solid green;
 }
 .main-menu-nav li {
 	position: relative;
