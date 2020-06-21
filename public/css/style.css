@@ -67,6 +67,7 @@ img {
    max-width: 100%;
    height: auto;
    border: none;
+   vertical-align: bottom;
 }
 ul, ol {
 	list-style: none;
@@ -94,6 +95,12 @@ a:link:hover, a:link:focus {
   	outline-offset: -2px;
   	text-decoration: none;
     color: rgb(136,13,30 )!important;
+}
+h1, h2 {
+	font-size: 1.3em;
+}
+h3 {
+	font-size: 1.1em;
 }
 
 /*Header*/
@@ -180,8 +187,12 @@ a:link:hover, a:link:focus {
 	margin-top: -66px;
 	padding-top: 120px;
 	z-index: 2;
-	border: 2px solid turquoise;
 	min-height: 450px;
+}
+.promo-coupon {
+	position: absolute;
+	top: 55px;
+	left: 30%;
 }
 .hero:before {
 	content: "";
@@ -220,42 +231,86 @@ a:link:hover, a:link:focus {
   height: 100%;
   width: 100%;
   font-size: 3em;
-  color: white;
-  line-height: 400px;
+  color: var(--text-grey);
   text-align: center;
   opacity: 0;
   transition: opacity 1000ms;
 }
 .slide:nth-child(1) {
-    background-color: red;
     opacity: 1;
 }
 .slide:nth-child(2) {
-    background-color: green;
 }
 .slide:nth-child(3) {
-    background-color: blue;
 }
 .slide-content {
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	position: relative;
+	padding-left: 30%;
 	height: 400px;
+}
+.slide-product-img {
+	position: absolute;
+	top: 15px;
+	left: 15px;
+	bottom: 15px;
+	width: 30%;
+	overflow: hidden;
+}
+.slide-product-img img {
+	max-height: 100%;
+}
+.slide-watchword {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	height: 100%;
+	width: 70%;
+	display: flex;
+	align-items: center;
+	text-transform: uppercase;
+	flex-flow: column;
+	justify-content: space-around;
+	text-align: center;
+}
+.slide-title-ad {
+	line-height: 150%;
+	letter-spacing: 10px;
+}
+.slide-title-ad span {
+	display: block;
+}
+.slide-watchword p {
+	font-size: .7em;
+	font-family: Dosis, sans-serif;
+	font-weight: bold;
+}
+.slide-product-logo {
+	margin-top: 10px;
 }
 .slide[data-state=active] {
   display: block;
 }
 .indicators {
   position: absolute;
-  bottom: 20px;
-  right: 20px;
+  bottom: 0;
+  left: -50px;
+  border: 1px solid black;
+  padding: 15px 25px;
+  background: var(--blue);
 }
 .indicator {
     cursor: pointer;
+    background: var(--yellow);
+    color: var(--yellow);
 }
-.slide-product-img {
-	width: 30%;
-	height: 100%;
-	overflow: hidden;
-	border: 2px solid green;
-}
-.slide-product-img img {
-	max-height: 100%;
+.cta-btn {
+	padding: 8px;
+	color: black;
+	font-weight: bolder;
+	border: 2px solid black;
+	letter-spacing: 3px;
+	font-size: 14px;
 }
