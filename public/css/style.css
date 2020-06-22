@@ -129,6 +129,7 @@ h3 {
 	top: 60px;
 	right: 0;
 	width: 100%;
+	transition: opacity .2s;
 }
 .main-menu-nav {
 	display: flex;
@@ -136,6 +137,9 @@ h3 {
 	flex: 0 0 100%;
 	background : rgba(0,0,0,.9);
 	border: 3px solid var(--blue);
+}
+.main-menu-nav.reveal {
+	opacity: 0;
 }
 .main-menu-nav > [class^=categories] {
 	/background: rgba(20, 21, 23, .1);
@@ -355,11 +359,13 @@ h3 {
 }
 .primary-footer-group, .sec-footer {
 	display: flex;
+	flex-flow: row wrap;
+	text-align: center;
 	width: 80%;
 	margin: auto;
 }
 .primary-footer {
-	width: 25%;
+	width: 100%;
 	padding: 25px;
 }
 .footer-header {
@@ -371,10 +377,12 @@ h3 {
 	margin-bottom: 5px;
 }
 .sec-footer > section {
-	width: 75%;
+	width: 100%;
+	margin-bottom: 10px;
 }
 .footer-social {
-	width: 25% !important;
+	width: 100%;
+	margin-bottom: 0;
 }
 .footer-social > ul {
 	justify-content: flex-end !important;
@@ -430,12 +438,12 @@ h3 {
 	text-align: center;
 }
 .page-form h2 {
-    font-size: 33px;
+    font-size: 20px;
     font-weight: 700;
-    line-height: 32px;
+    line-height: 25px;
     color: #fff;
     text-transform: uppercase;
-    margin-bottom: 18px;
+    margin-bottom: 12px;
 }
 .create-account-inner p {
 	font-size: 18px;
@@ -455,10 +463,10 @@ h3 {
 	text-align: center;
 }
 .login-form-inner h2, .account-form-inner h2 {
-	font-size: 38px;
-	line-height: 56px;
+	font-size: 18px;
+	line-height: 26px;
 	font-weight: 700;
-	margin-bottom: 80px;
+	margin-bottom: 20px;
 	color: #fff;
 }
 .form-input {
