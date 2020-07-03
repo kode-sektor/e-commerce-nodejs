@@ -17,7 +17,7 @@ app.get("/",(req,res) => {
     res.render("index", {
         title : "Home Page",
         data : bestSeller.getFeaturedProducts(),
-        dataCat : catProduct.getCategProducts()
+        dataCat : catProduct.getCategProducts(),
     });
 
 });

@@ -455,7 +455,9 @@ h3 {
 .create-account-inner .cta-btn {
 	color: var(--yellow);
 	padding: 15px 25px;
+	border: 1px solid var(--yellow);
 }
+
 .login {
 	display: flex;
 	align-items: center;

@@ -22,9 +22,18 @@ loginClose.addEventListener('click', (e) => {
 });
 
 // Listen to click of 'Create Account' button and slide in Account Form
+let open = false;
 createAcctBtn.addEventListener('click', (e) => {
 	e.preventDefault();
-  	createAcctModal.classList.add('active');
+	open = !open;
+  	createAcctModal.classList.toggle('active');
+
+  	if (open) {
+  		(e.target).textContent = "Back to Login";
+  	} else {
+  		(e.target).textContent = "Create an Account";
+  	}
+
 });
 
 // Listen to click of 'fa-close' button on account form and slide out Account Form

@@ -1,3 +1,89 @@
+	<section id="user-acct" class="user-acct">
+
+	    <span id="login-close" class="fa fa-close login-close"></span>
+
+	    <div class="page-form">
+
+	        <section class="create-account">
+	            <div class="create-account-inner">
+	                <h2>New to Humber-Zon?</h2>
+	                <p>We are the kings of merchandise. We sell an array of quality products, and we also buy as well. Registering with us means so much to us and is a necessary step for trust and commitment. </p>
+	                <a id="create-account-btn" href="#" class="cta-btn">Create an Account</a>
+	            </div>
+	        </section>
+	                
+	        <section class="login">
+	            <div class="login-form-inner">
+	                <h2>Welcome Back ! <br> Please Sign in now</h2>
+
+	                <form class="contact-form" action="#" method="post" novalidate="novalidate">
+
+	                    <div class="form-input">
+	                        <input type="text" class="form-control" id="name" name="name" value=""
+	                            placeholder="Username">
+	                    </div>
+	                    <div class="form-input">
+	                        <input type="password" class="password" id="password" name="password" value=""
+	                            placeholder="Password">
+	                    </div>
+	                    <div class="form-input-final">
+	                        <div class="create-account-action">
+	                            <input type="checkbox" id="remember-me" name="remember-me">
+	                            <label for="remember-me">Remember me</label>
+	                        </div>
+	                        <button class="login-btn cta-btn" type="submit" value="submit" class="submit">
+	                            log in
+	                        </button>
+	                        <a class="lost-password" href="#">Forgot Password?</a>
+	                    </div>
+
+	                </form>                            
+	            </div>
+	        </section>
+	        
+	    </div>
+
+	</section>
+
+	<section id="create-account-modal" class="create-account-modal">
+
+	    <span id="account-close" class="fa fa-close account-close"></span>
+
+	    <section class="">
+
+	        <div class="account-form-inner">
+	            <h2>Create Your Account with Us</h2>
+
+	            <form class="contact-form" action="#" method="post" novalidate="novalidate">
+
+	                <div class="form-input">
+	                    <input type="text" class="form-control" id="first-name" name="first-name" value=""
+	                        placeholder="First Name...">
+	                </div>
+	                <div class="form-input">
+	                    <input type="text" class="form-control" id="last-name" name="last-name" value=""
+	                        placeholder="Last Name...">
+	                </div>
+	                <div class="form-input">
+	                    <input type="email" class="form-control" id="email" name="email" value=""
+	                        placeholder="Email Address...">
+	                </div>
+	                <div class="form-input">
+	                    <input type="password" class="account-password" id="account-password" name="account-password" value=""
+	                        placeholder="Password...">
+	                </div>
+	                <div class="form-input-final">
+	                    <button class="login-btn cta-btn" type="submit" value="submit" class="submit">
+	                        Create Account
+	                    </button>
+	                </div>
+
+	            </form>                            
+	        </div>
+	    </section>
+
+	</section>
+
 	<section class="hero promo-section"  role="banner">
 
 		<section class="carousel-container" id="carousel-container">
@@ -114,85 +200,4 @@
 
 	</section>
 
-	<script type="text/javascript">
-
-		let carousel = document.getElementById('slider');
-		const indicators = carousel.querySelectorAll('.indicator');	// Fetch indicators
-		let slides = '';
-		let speed = 5000; 
-
-		function hideCarousel(num, indicators) {
-		    indicators[num].setAttribute('data-state', '');
-		    slides[num].setAttribute('data-state', '');
-
-		    slides[num].style.opacity=0;
-		}
-
-		function showCarousel(num) {
-
-			// Show the slider in target
-		    indicators[num].checked = true;
-		    indicators[num].setAttribute('data-state', 'active');
-		    slides[num].setAttribute('data-state', 'active');
-
-		    slides[num].style.opacity=1;
-		}
-
-		function setSlide(slide, indicators) {
-		    return function() {
-		        // Reset all slides
-		        for (var i = 0; i < indicators.length; i++) {
-		            indicators[i].setAttribute('data-state', '');
-		            slides[i].setAttribute('data-state', '');
-		            
-		            hideCarousel(i, indicators);
-		        }
-
-		        // Set defined slide as active
-		        indicators[slide].setAttribute('data-state', 'active');
-		        slides[slide].setAttribute('data-state', 'active');
-		        showCarousel(slide);
-
-		        // Stop the auto-switcher
-		        clearInterval(switcher);
-		    };
-		}
-
-		function switchSlide(indicators) {
-
-		   let nextSlide = 0;
-		    // alert(nextSlide);
-
-		    // Loop across all slides
-		    for (let i = 0; i < indicators.length; i++) {
-		        // Only move if current slide is active & NOT equal to last slide then increment nextSlide
-		        if ((indicators[i].getAttribute('data-state') == 'active') && (i !== (indicators.length-1))) {
-		            nextSlide = i + 1;	// Get the index of 'active', then cache the subsequent element as this is the next-to-be active
-		        }
-
-		        // Remove all active states & hide
-		        hideCarousel(i, indicators);
-		    }
-		    // alert(nextSlide);
-
-		    // Otherwise, set next slide as active & show the next slide
-		    showCarousel(nextSlide);
-		}
-
-		if (carousel) {	// If a carousel exists:
-
-		    slides = carousel.querySelectorAll('.slide');	// Fetch slide in DOM
-
-		    // In a timer, loop across the slides
-		    let switcher = setInterval(function() {
-		        switchSlide(indicators);
-		    }, speed);
-
-		    // On click of slide, run setSlide function
-		    for (var i = 0; i < indicators.length; i++) {
-		        indicators[i].addEventListener("click", setSlide(i, indicators));
-		    }
-		}
-
-
-	</script>
+	<script type="text/javascript" src="/js/index.js"></script>
