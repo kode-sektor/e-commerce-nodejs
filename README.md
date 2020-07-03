@@ -44,3 +44,19 @@ Hosted Site: https://e-commerce-node-js-wddm-120.herokuapp.com/
 		1. A well-designed login form would be built implemented as a pop-up modal. 
  
 
+2. This is the second of 4 parts that involve sending emails and applying server side form validation to this web application. Here's a list this second stage would accomplish:
+
+
+* Server-Side Validation
+	+ This stage would implement server-side validation for both the login and registration form. It will involve no client-side validation.
+
+	+ For the login form, only nulls would be checked for (i.e, check to see if the user entered a value in the respective text fields). However, for the registration form, nulls would be checked for. Also there would be an implementation of at least 2 complex validation criteria using regular expressions on two separate fields(For example, enforcing that the user must enter a password that is 6 to 12 characters and the password must have letters and numbers only)  . 
+
+	+ Form would not clear the data entered in the form if there are validation errors.
+
+	+ All error messages would be rendered on their respective pages or areas and must be styled properly.
+
+* User Registration Form (Sending Emails)
+
+	+ When a user fills out the registration form and then hits the submit button, provided that all the validation criteria were not violated, your website must then send a welcome email message to the user’s email address and then redirect the user to a dashboard page. For now, the dashboard page should contain information welcoming the user and should be properly styled.
+
