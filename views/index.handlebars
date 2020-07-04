@@ -16,15 +16,20 @@
 	            <div class="login-form-inner">
 	                <h2>Welcome Back ! <br> Please Sign in now</h2>
 
-	                <form class="contact-form" action="#" method="post" novalidate="novalidate">
-
+	                <form id="user-details-login" class="user-details" action="/" method="post" novalidate="novalidate">
 	                    <div class="form-input">
-	                        <input type="text" class="form-control" id="name" name="name" value=""
-	                            placeholder="Username">
+	                        <input type="text" class="form-control" id="login-name" name="login-name" value=""
+	                            placeholder="Username" autofocus>
+	                        {{#if errors.name}}
+	                        	<span class="error">Username should not be empty <span class="fa fa-exclamation-triangle"></span></span>
+	                        {{/if}}
 	                    </div>
 	                    <div class="form-input">
 	                        <input type="password" class="password" id="password" name="password" value=""
 	                            placeholder="Password">
+	                        {{#if errors.password}}
+	                        	<span class="error">Password should not be empty <span class="fa fa-exclamation-triangle"></span></span>
+	                        {{/if}}
 	                    </div>
 	                    <div class="form-input-final">
 	                        <div class="create-account-action">
@@ -54,7 +59,7 @@
 	        <div class="account-form-inner">
 	            <h2>Create Your Account with Us</h2>
 
-	            <form class="contact-form" action="#" method="post" novalidate="novalidate">
+	            <form id="user-details-create" class="user-details" action="/" method="post" novalidate="novalidate">
 
 	                <div class="form-input">
 	                    <input type="text" class="form-control" id="first-name" name="first-name" value=""
@@ -200,4 +205,4 @@
 
 	</section>
 
-	<script type="text/javascript" src="/js/index.js"></script>
+	<script type="text/javascript" src="/js/index.js" defer></script>

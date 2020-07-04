@@ -90,6 +90,14 @@ h3 {
 	font-size: 1.1em;
 }
 
+.error {
+	font-family: var(--font-tertiary);
+}
+
+.error .fa {
+	color: red;
+}
+
 /*Header*/
 
 .page-header {
@@ -457,7 +465,11 @@ h3 {
 	padding: 15px 25px;
 	border: 1px solid var(--yellow);
 }
-
+.create-account-inner .cta-btn {
+	color: var(--yellow);
+	padding: 15px 25px;
+	border: 1px solid var(--yellow);
+}
 .login {
 	display: flex;
 	align-items: center;
@@ -470,6 +482,7 @@ h3 {
 	font-weight: 700;
 	margin-bottom: 20px;
 	color: #fff;
+	text-transform: uppercase;
 }
 .form-input {
     display: inline-block;
@@ -492,7 +505,7 @@ h3 {
     border: 0px solid transparent;
     border-bottom: 1px solid #ddd;
     border-radius: 0;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 .create-account-action {
 	display: flex;
@@ -541,6 +554,13 @@ h3 {
 .create-account-modal .fa-close {
 	color: var(--yellow);
 	z-index: 101;
+}
+.user-details .error {
+	display: inline-block;
+	color: var(--yellow);
+	text-align: start;
+	width: 100%;
+	font-size: .8rem;
 }
 
 /*modal behaviour*/

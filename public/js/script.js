@@ -6,6 +6,7 @@ const accountClose = document.getElementById('account-close');
 const userAvatar = document.getElementById('login-create-account');
 const createAcctBtn = document.getElementById('create-account-btn');
 const createAcctModal = document.getElementById('create-account-modal');
+const loginForm = document.getElementById('user-details-login');
 
 const toggleBtn = document.getElementById('toggle-btn-nav');
 const nav = document.getElementById('navigation');
@@ -14,6 +15,7 @@ const nav = document.getElementById('navigation');
 userAvatar.addEventListener('click', (e) => {
 	e.preventDefault();
   	html.classList.add('active');
+  	loginForm.querySelector('input[type="text"]:first-of-type').focus();
 });
 
 loginClose.addEventListener('click', (e) => {
