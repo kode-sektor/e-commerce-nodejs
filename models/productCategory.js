@@ -37,13 +37,12 @@ const productCategory = {
 		    category : "watch"
 		}
 
-		],
+	],
 
-		getCategProducts() {
-		    return this.productCategorySamples;
-		},
+	getCategProducts() {
+	    return this.productCategorySamples;
+	},
 
+}
 
-	}
-
-	module.exports = productCategory;
+module.exports = productCategory;
