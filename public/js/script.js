@@ -11,12 +11,18 @@ const loginForm = document.getElementById('user-details-login');
 const toggleBtn = document.getElementById('toggle-btn-nav');
 const nav = document.getElementById('navigation');
 
+// Listen to click on userAvatar icon and add a class of active to :root
+// which is responsible for sliding in the login form by virtue 
+// of contextual selection and transform property
 
 userAvatar.addEventListener('click', (e) => {
 	e.preventDefault();
   	html.classList.add('active');
   	loginForm.querySelector('input[type="text"]:first-of-type').focus();
 });
+
+// Listen to click of 'X' icon and remove the helper class responsible
+// for sliding in the login form
 
 loginClose.addEventListener('click', (e) => {
 	e.preventDefault();

@@ -54,7 +54,7 @@ app.get("/productListing", (req,res) => {
 
 });
 
-app.post("/", (req, res) => {
+app.post("/login", (req, res) => {
 
     // Fetch login values from form
     const name = req.body["login-name"];
@@ -82,7 +82,8 @@ app.post("/", (req, res) => {
     // and export errors object
     if (Object.keys(errors).length > 0) {
         res.render("index", {
-            errors
+            errors,
+            errorClass : "active error"
         });
     }   // Otherwise redirect (and reload) Home page
 
