@@ -50,6 +50,7 @@
 	.carousel-container {
 		width: 75%;
 		margin-left: 5%;
+		border-top: 3px solid var(--blue);
 	}
 	.slide-title-ad {
 		line-height: 150%;

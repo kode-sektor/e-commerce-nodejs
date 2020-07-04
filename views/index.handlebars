@@ -18,15 +18,21 @@
 
 	                <form id="user-details-login" class="user-details" action="/login" method="post" novalidate="novalidate">
 	                    <div class="form-input">
-	                        <input type="text" class="form-control" id="login-name" name="login-name" value=""
-	                            placeholder="Username" autofocus>
+	                        <input type="text" class="form-control" id="login-name" name="login-name" 
+	                        {{#if loginVals.name}}
+	                        	value="{{loginVals.name}}"
+	                        {{/if}}
+	                            placeholder="Username">
 	                        {{#if errors.name}}
 	                        	<span class="error">Username should not be empty <span class="fa fa-exclamation-triangle"></span></span>
 	                        {{/if}}
 	                    </div>
 	                    <div class="form-input">
-	                        <input type="password" class="password" id="password" name="password" value=""
-	                            placeholder="Password">
+	                        <input type="password" class="password" id="password" name="password"  
+	                        	{{#if loginVals.password}}
+	                        		value="{{loginVals.password}}"
+	                        	{{/if}}
+	                        	placeholder="Password">
 	                        {{#if errors.password}}
 	                        	<span class="error">Password should not be empty <span class="fa fa-exclamation-triangle"></span></span>
 	                        {{/if}}

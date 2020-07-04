@@ -62,31 +62,30 @@ app.post("/login", (req, res) => {
 
     // Create object to hold errors
     const errors = {};
+    const loginVals = {};
 
     // Check if user enters nothing
-    if (name == "") {
-        errors.name = true;
-    }
 
-    if (password == "") {
-        errors.password = true;
-    }
+    (name == "") ? errors.name = true : loginVals.name = name;
 
-    console.log(name, password);
+    (password == "") ? errors.password = true : loginVals.password = password;
+
+    console.log(loginVals);
     console.log (errors);
 
     // Check Object length to see if errors
-    console.log(Object.keys(errors).length);
 
     // If errors exist, re-render "/" route (which is where form exists)
     // and export errors object
     if (Object.keys(errors).length > 0) {
         res.render("index", {
             errors,
+            loginVals,
             errorClass : "active error"
         });
-    }   // Otherwise redirect (and reload) Home page
+    }   
 
+    // Otherwise redirect (and reload) Home page
      else {
        // res.redirect("/");  // redirect to homepage
                             // Place this in the .then() container from Twilo's API

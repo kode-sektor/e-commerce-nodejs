@@ -288,11 +288,18 @@ main form .error .fa {
 }
 .slide-product-img {
 	position: absolute;
+	opacity: 0;
 	top: 15px;
 	left: 15px;
 	bottom: 15px;
 	width: 30%;
 	overflow: hidden;
+	transition-delay: .5s;
+	transition-duration: 3s;
+
+}
+.slide[data-state="active"] .slide-product-img {
+	opacity: 1;
 }
 .slide-product-img img {
 	max-height: 100%;
@@ -311,12 +318,23 @@ main form .error .fa {
 	text-align: center;
 }
 .slide-title-ad {
+	position: relative;
+	top: -25px;
+	opacity: 0;
 	line-height: 120%;
 	letter-spacing: 2px;
 	font-size: .6em;
+	transition: all .5s .5s ease-out;
+}
+.slide[data-state="active"] .slide-title-ad {
+	opacity: 1;
+	top: 0;
 }
 .slide-title-ad span {
 	display: block;
+}
+.slide-title-ad + div {
+	color: var(--blue);
 }
 .slide-watchword p {
 	font-size: .3em;
@@ -654,3 +672,7 @@ main form .error .fa {
 	color: var(--blue);
 	margin: 10px 0;
 }
+
+
+/*Animation*/
+
