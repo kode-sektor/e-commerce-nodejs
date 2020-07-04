@@ -90,12 +90,11 @@ h3 {
 	font-size: 1.1em;
 }
 
-.error {
-	font-family: var(--font-tertiary);
-}
-
 main form .error .fa {
 	color: red;
+}
+main form .error {
+	font-family: var(--font-tertiary);
 }
 
 /*Header*/
@@ -525,7 +524,7 @@ main form .error .fa {
     border-radius: 0;
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
-.create-account-action {
+.login-action {
 	display: flex;
 	margin-top: 11px;
 	align-items: center;	

@@ -57,17 +57,16 @@ app.get("/productListing", (req,res) => {
 app.post("/login", (req, res) => {
 
     // Fetch login values from form
-    const name = req.body["login-name"];
-    const password = req.body["password"];
+    let name = req.body["login-name"];
+    let password = req.body["password"];
 
     // Create object to hold errors
-    const errors = {};
-    const loginVals = {};
+    let errors = {};
+    let loginVals = {};
 
     // Check if user enters nothing
 
     (name == "") ? errors.name = true : loginVals.name = name;
-
     (password == "") ? errors.password = true : loginVals.password = password;
 
     console.log(loginVals);
@@ -81,7 +80,7 @@ app.post("/login", (req, res) => {
         res.render("index", {
             errors,
             loginVals,
-            errorClass : "active error"
+            errorClass : {active: "active"}
         });
     }   
 
@@ -90,7 +89,49 @@ app.post("/login", (req, res) => {
        // res.redirect("/");  // redirect to homepage
                             // Place this in the .then() container from Twilo's API
     }
-})
+
+});
+
+app.post("/create-acct", (req, res) => {
+
+    // Create object to hold errors
+    let errors = {};
+    let loginVals = {};
+
+    let firstName = req.body["first-name"];
+    let lastName = req.body["last-name"];
+    let email = req.body["email"];
+    let accountPassword = req.body["account-password"];
+
+    // Stage 1: Check for nulls
+
+    (firstName == "") ? errors.firstName = true : loginVals.firstName = firstName;
+    (lastName == "") ? errors.lastName = true : loginVals.lastName = lastName;
+    (email == "") ? errors.email = true : loginVals.email = email;
+    (accountPassword == "") ? errors.accountPassword = true : loginVals.accountPassword = accountPassword;
+
+    console.log(loginVals);
+    console.log (errors);
+
+    // Check Object length to see if errors
+
+    // If errors exist, re-render "/" route (which is where form exists)
+    // and export errors object
+    if (Object.keys(errors).length > 0) {
+        res.render("index", {
+            errors,
+            loginVals,
+            errorClass : {active : "active", slide : "active"}
+        });
+    }   
+
+    // Otherwise redirect (and reload) Home page
+     else {
+       // res.redirect("/");  // redirect to homepage
+                            // Place this in the .then() container from Twilo's API
+    }
+
+});
 
 const PORT = process.env.PORT || 3000;
 

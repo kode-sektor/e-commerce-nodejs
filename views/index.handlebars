@@ -38,7 +38,7 @@
 	                        {{/if}}
 	                    </div>
 	                    <div class="form-input-final">
-	                        <div class="create-account-action">
+	                        <div class="login-action">
 	                            <input type="checkbox" id="remember-me" name="remember-me">
 	                            <label for="remember-me">Remember me</label>
 	                        </div>
@@ -56,7 +56,7 @@
 
 	</section>
 
-	<section id="create-account-modal" class="create-account-modal">
+	<section id="create-account-modal" class="create-account-modal {{errorClass.slide}}">
 
 	    <span id="account-close" class="fa fa-close account-close"></span>
 
@@ -68,20 +68,44 @@
 	            <form id="user-details-create" class="user-details" action="/create-acct" method="post" novalidate="novalidate">
 
 	                <div class="form-input">
-	                    <input type="text" class="form-control" id="first-name" name="first-name" value=""
-	                        placeholder="First Name...">
+	                    <input type="text" class="form-control" id="first-name" name="first-name" 
+                    	{{#if loginVals.firstName}}
+                    		value="{{loginVals.firstName}}"
+                    	{{/if}}
+	                        placeholder="First Name">
+	                    {{#if errors.firstName}}
+	                    	<span class="error">First Name should not be empty <span class="fa fa-exclamation-triangle"></span></span>
+	                    {{/if}}
 	                </div>
 	                <div class="form-input">
-	                    <input type="text" class="form-control" id="last-name" name="last-name" value=""
-	                        placeholder="Last Name...">
+	                    <input type="text" class="form-control" id="last-name" name="last-name" 
+	                   	{{#if loginVals.lastName}}
+	                   		value="{{loginVals.lastName}}"
+	                   	{{/if}}
+	                        placeholder="Last Name">
+	                    {{#if errors.lastName}}
+	                    	<span class="error">Last Name should not be empty <span class="fa fa-exclamation-triangle"></span></span>
+	                    {{/if}}
 	                </div>
 	                <div class="form-input">
-	                    <input type="email" class="form-control" id="email" name="email" value=""
-	                        placeholder="Email Address...">
+	                    <input type="email" class="form-control" id="email" name="email" 
+	                    {{#if loginVals.email}}
+	                    	value="{{loginVals.email}}"
+	                    {{/if}}
+	                        placeholder="Email Address">
+	                    {{#if errors.email}}
+	                    	<span class="error">Email should not be empty <span class="fa fa-exclamation-triangle"></span></span>
+	                    {{/if}}
 	                </div>
 	                <div class="form-input">
-	                    <input type="password" class="account-password" id="account-password" name="account-password" value=""
-	                        placeholder="Password...">
+	                    <input type="password" class="account-password" id="account-password" name="account-password"
+	                    {{#if loginVals.accountPassword}}
+	                    	value="{{loginVals.accountPassword}}"
+	                    {{/if}}
+	                        placeholder="Password">
+	                    {{#if errors.accountPassword}}
+	                    	<span class="error">Password should not be empty <span class="fa fa-exclamation-triangle"></span></span>
+	                    {{/if}}
 	                </div>
 	                <div class="form-input-final">
 	                    <button class="login-btn cta-btn" type="submit" value="submit" class="submit">

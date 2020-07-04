@@ -21,6 +21,23 @@ userAvatar.addEventListener('click', (e) => {
   	loginForm.querySelector('input[type="text"]:first-of-type').focus();
 });
 
+// On (re-)load event that arises from the user submitting login form, the same class
+// 'active' used to slide out the form on click is the same class passed in through
+// when loading. Thus when form slides in onload, the 'Create an Account' button 
+// responsible for toggling it should have it's text correspond to the panel's visibility
+
+let open = false;
+window.addEventListener('DOMContentLoaded', (event) => {
+	if (createAcctModal.classList.contains('active')) {
+		if (createAcctBtn.textContent.toLowerCase() != "back to login") {
+			open = true; // first-time click (true)
+			createAcctBtn.textContent = "Back to Login";			
+		}
+	} else {
+		createAcctBtn.textContent = "Create an Account";
+	}  
+});
+
 // Listen to click of 'X' icon and remove the helper class responsible
 // for sliding in the login form
 
@@ -30,15 +47,14 @@ loginClose.addEventListener('click', (e) => {
 });
 
 // Listen to click of 'Create Account' button and slide in Account Form
-let open = false;
 createAcctBtn.addEventListener('click', (e) => {
 	e.preventDefault();
 	open = !open;
   	createAcctModal.classList.toggle('active');
 
-  	if (open) {
+  	if (open) {	// first-time click (true) made true by 3 lines up
   		(e.target).textContent = "Back to Login";
-  	} else {
+  	} else {	// second-time click (false)
   		(e.target).textContent = "Create an Account";
   	}
 
@@ -48,6 +64,10 @@ createAcctBtn.addEventListener('click', (e) => {
 accountClose.addEventListener('click', (e) => {
 	e.preventDefault();
   	createAcctModal.classList.remove('active');
+
+	open = false; // should be set to false so that first-time click would set it to true
+	createAcctBtn.textContent = "Create an Account";			
+
 });
 
 // Listen to click of 'toggle' button and add class that toggles nav opacity
