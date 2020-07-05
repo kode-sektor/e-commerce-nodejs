@@ -57,7 +57,7 @@ app.get("/productListing", (req,res) => {
 app.post("/login", (req, res) => {
 
     // Fetch login values from form
-    let name = req.body["login-name"];
+    let name = (req.body["login-name"]).trim();
     let password = req.body["password"];
 
     // Create object to hold errors
@@ -65,7 +65,6 @@ app.post("/login", (req, res) => {
     let loginVals = {};
 
     // Check if user enters nothing
-
     (name == "") ? errors.name = true : loginVals.name = name;
     (password == "") ? errors.password = true : loginVals.password = password;
 
@@ -95,42 +94,84 @@ app.post("/login", (req, res) => {
 app.post("/create-acct", (req, res) => {
 
     // Create object to hold errors
-    let errors = {};
+    /*
+    What errors object will eventually look like: 
+    errors = {
+        null : {firstName : true, lastName : true}
+        regex : {accountPassword : 'Should be between 6 and 12 characters long'}
+    }
+    */
+    let errors = {
+        null : {},
+        regex : {}
+    };
     let loginVals = {};
+    
+    console.log(req.body["first-name"]);
 
-    let firstName = req.body["first-name"];
-    let lastName = req.body["last-name"];
-    let email = req.body["email"];
-    let accountPassword = req.body["account-password"];
+    let firstName = (req.body["first-name"]).trim().toLowerCase();
+    let lastName = (req.body["last-name"]).trim().toLowerCase();
+    let email = (req.body["email"]).trim();
+    let accountPassword = (req.body["account-password"]).trim();
+
+    const regexMail = new RegExp(/^[\w-]+(\.[\w-]+)@([\w-]+\.)+[a-zA-Z]+$/);
+    const regexLettersNos = new RegExp(/[A-za-z0–9_]/);
+
+    console.log(firstName);
 
     // Stage 1: Check for nulls
 
-    (firstName == "") ? errors.firstName = true : loginVals.firstName = firstName;
-    (lastName == "") ? errors.lastName = true : loginVals.lastName = lastName;
-    (email == "") ? errors.email = true : loginVals.email = email;
-    (accountPassword == "") ? errors.accountPassword = true : loginVals.accountPassword = accountPassword;
+    (firstName == "") ? errors.null.firstName = true : loginVals.firstName = firstName;
+    (lastName == "") ? errors.null.lastName = true : loginVals.lastName = lastName;
+    (email == "") ? errors.null.email = true : loginVals.email = email;
+    (accountPassword == "") ? errors.null.accountPassword = true : loginVals.accountPassword = accountPassword;
 
     console.log(loginVals);
     console.log (errors);
 
     // Check Object length to see if errors
 
-    // If errors exist, re-render "/" route (which is where form exists)
+    // If errors for null values exist, re-render "index" route (which is where form exists)
     // and export errors object
-    if (Object.keys(errors).length > 0) {
+    if (Object.keys(errors.null).length > 0) {
         res.render("index", {
-            errors,
+            errors : errors.null,
             loginVals,
             errorClass : {active : "active", slide : "active"}
         });
-    }   
+
+    } else {
+        // Check password length and pattern
+
+        if (accountPassword.length < 6 || accountPassword.length > 12) {
+            errors.regex.passwordLength = "Password should be between 6 and 12 characters";
+        }
+        if (!regexMail.test(accountPassword)) {
+            errors.regex.mailRegex = "Mail address is invalid";
+        }
+        if (!regexLettersNos.test(accountPassword)) {
+            errors.regex.accountPasswordMix = "Mix of uppercase, lowercase and nos required";
+        }
+
+        // If errors for invalid patterns exist, re-render "index" route (which is where form exists)
+        // and export errors object
+        if (Object.keys(errors.regex).length > 0) {
+            res.render("index", {
+                errors : errors.regex,
+                loginVals,
+                errorClass : {active : "active", slide : "active"}
+            });
+        } 
+
+    }
+
 
     // Otherwise redirect (and reload) Home page
-     else {
+     /*else { run in console: npm i twilio
        // res.redirect("/");  // redirect to homepage
                             // Place this in the .then() container from Twilo's API
     }
-
+*/
 });
 
 const PORT = process.env.PORT || 3000;

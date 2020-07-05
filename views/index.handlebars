@@ -102,10 +102,20 @@
 	                    {{#if loginVals.accountPassword}}
 	                    	value="{{loginVals.accountPassword}}"
 	                    {{/if}}
-	                        placeholder="Password">
+	                        placeholder="Password (between 6 & 12 upper- and lower-case characters, and nos)">
 	                    {{#if errors.accountPassword}}
 	                    	<span class="error">Password should not be empty <span class="fa fa-exclamation-triangle"></span></span>
 	                    {{/if}}
+	                    {{#if errors.passwordLength}}
+	                    	<span class="error">{{errors.passwordLength}}<span class="fa fa-exclamation-triangle"></span></span>
+	                    {{/if}}
+	                    {{#if errors.mailRegex}}
+	                    	<span class="error">{{errors.mailRegex}}<span class="fa fa-exclamation-triangle"></span></span>
+	                    {{/if}}
+	                    {{#if errors.accountPasswordMix}}
+	                    	<span class="error">{{errors.accountPasswordMix}}<span class="fa fa-exclamation-triangle"></span></span>
+	                    {{/if}}
+
 	                </div>
 	                <div class="form-input-final">
 	                    <button class="login-btn cta-btn" type="submit" value="submit" class="submit">
