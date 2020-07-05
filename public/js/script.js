@@ -67,10 +67,12 @@ accountClose.addEventListener('click', (e) => {
 
 	open = false; // should be set to false so that first-time click would set it to true
 	createAcctBtn.textContent = "Create an Account";			
-
 });
 
 // Listen to click of 'toggle' button and add class that toggles nav opacity
 toggleBtn.addEventListener('click', (e) => {
 	nav.classList.toggle('reveal');
 });
+
+
+

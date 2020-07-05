@@ -86,6 +86,138 @@
 
         <main>
 
+            <section id="user-acct" class="user-acct">
+
+                <span id="login-close" class="fa fa-close login-close"></span>
+
+                <div class="page-form">
+
+                    <section class="create-account">
+                        <div class="create-account-inner">
+                            <h2>New to Humber-Zon?</h2>
+                            <p>We are the kings of merchandise. We sell an array of quality products, and we also buy as well. Registering with us means so much to us and is a necessary step for trust and commitment. </p>
+                            <a id="create-account-btn" href="#" class="cta-btn">Create an Account</a>
+                        </div>
+                    </section>
+                            
+                    <section class="login">
+                        <div class="login-form-inner">
+                            <h2>Welcome Back ! <br> Please Sign in now</h2>
+
+                            <form id="user-details-login" class="user-details" action="/login" method="post" novalidate="novalidate">
+                                <div class="form-input">
+                                    <input type="text" class="form-control" id="login-name" name="login-name" 
+                                    {{#if loginVals.name}}
+                                        value="{{loginVals.name}}"
+                                    {{/if}}
+                                        placeholder="Username">
+                                    {{#if errors.name}}
+                                        <span class="error">Username should not be empty <span class="fa fa-exclamation-triangle"></span></span>
+                                    {{/if}}
+                                </div>
+                                <div class="form-input">
+                                    <input type="password" class="password" id="password" name="password"  
+                                        {{#if loginVals.password}}
+                                            value="{{loginVals.password}}"
+                                        {{/if}}
+                                        placeholder="Password">
+                                    {{#if errors.password}}
+                                        <span class="error">Password should not be empty <span class="fa fa-exclamation-triangle"></span></span>
+                                    {{/if}}
+                                </div>
+                                <div class="form-input-final">
+                                    <div class="login-action">
+                                        <input type="checkbox" id="remember-me" name="remember-me">
+                                        <label for="remember-me">Remember me</label>
+                                    </div>
+                                    <button class="login-btn cta-btn" type="submit" value="submit" class="submit">
+                                        log in
+                                    </button>
+                                    <a class="lost-password" href="#">Forgot Password?</a>
+                                </div>
+
+                            </form>                            
+                        </div>
+                    </section>
+                    
+                </div>
+
+            </section>
+
+            <section id="create-account-modal" class="create-account-modal {{errorClass.slide}}">
+
+                <span id="account-close" class="fa fa-close account-close"></span>
+
+                <section class="">
+
+                    <div class="account-form-inner">
+                        <h2>Create Your Account with Us</h2>
+
+                        <form id="user-details-create" class="user-details" action="/create-acct" method="post" novalidate="novalidate">
+
+                            <div class="form-input">
+                                <input type="text" class="form-control" id="first-name" name="first-name" 
+                                {{#if loginVals.firstName}}
+                                    value="{{loginVals.firstName}}"
+                                {{/if}}
+                                    placeholder="First Name">
+                                {{#if errors.firstName}}
+                                    <span class="error">First Name {{errors.firstName}} <span class="fa fa-exclamation-triangle"></span></span>
+                                {{/if}}
+                            </div>
+                            <div class="form-input">
+                                <input type="text" class="form-control" id="last-name" name="last-name" 
+                                {{#if loginVals.lastName}}
+                                    value="{{loginVals.lastName}}"
+                                {{/if}}
+                                    placeholder="Last Name">
+                                {{#if errors.lastName}}
+                                    <span class="error">Last Name {{errors.lastName}} <span class="fa fa-exclamation-triangle"></span></span>
+                                {{/if}}
+                            </div>
+                            <div class="form-input">
+                                <input type="email" class="form-control" id="email" name="email" 
+                                {{#if loginVals.email}}
+                                    value="{{loginVals.email}}"
+                                {{/if}}
+                                    placeholder="Email Address">
+                                {{#if errors.email}}
+                                    <span class="error">Email {{errors.email}} <span class="fa fa-exclamation-triangle"></span></span>
+                                {{/if}}
+                                {{#if errors.mailRegex}}
+                                    <span class="error">{{errors.mailRegex}} <span class="fa fa-exclamation-triangle"></span></span>
+                                {{/if}}
+                            </div>
+                            <div class="form-input">
+                                <input type="password" class="account-password" id="account-password" name="account-password"
+                                {{#if loginVals.accountPassword}}
+                                    value="{{loginVals.accountPassword}}"
+                                {{/if}}
+                                    placeholder="Password (between 6 & 12 upper- and lower-case characters, and nos)">
+                                {{#if errors.accountPassword}}
+                                    <span class="error">Password should not be empty <span class="fa fa-exclamation-triangle"></span></span>
+                                {{/if}}
+                                {{#if errors.passwordLength}}
+                                    <span class="error">{{errors.passwordLength}} <span class="fa fa-exclamation-triangle"></span></span>
+                                {{/if}}
+                                {{#if errors.accountPasswordMix}}
+                                    <span class="error">{{errors.accountPasswordMix}} <span class="fa fa-exclamation-triangle"></span></span>
+                                {{/if}}
+
+                            </div>
+                            <div class="form-input-final">
+                                <button class="login-btn cta-btn" type="submit" value="submit" class="submit">
+                                    Create Account
+                                </button>
+                            </div>
+
+                        </form>                            
+                    </div>
+                </section>
+
+            </section>
+
+
             {{{body}}}
 
         </main>

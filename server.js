@@ -54,7 +54,20 @@ app.get("/productListing", (req,res) => {
 
 });
 
+const checkNull = (key, field, errors, loginVals) => {
+    (field == "") ? errors.null[`${key}`] = ' should not be empty' : loginVals[`${key}`] = field;
+}
+
 app.post("/login", (req, res) => {
+
+    // Create object to hold errors
+    /*
+    What errors object will eventually look like: 
+    errors = {
+        null : {firstName : true, lastName : true}
+        regex : {accountPassword : 'Should be between 6 and 12 characters long'}
+    }
+    */
 
     // Fetch login values from form
     let name = (req.body["login-name"]).trim();
@@ -65,19 +78,22 @@ app.post("/login", (req, res) => {
     let loginVals = {};
 
     // Check if user enters nothing
-    (name == "") ? errors.name = true : loginVals.name = name;
-    (password == "") ? errors.password = true : loginVals.password = password;
-
-    console.log(loginVals);
-    console.log (errors);
+    checkNull ("name", name, errors, loginVals);
+    checkNull ("password", password, errors, loginVals);
 
     // Check Object length to see if errors
 
-    // If errors exist, re-render "/" route (which is where form exists)
-    // and export errors object
+    // If errors for invalid patterns exist, re-render route to referring page and export errors object
     if (Object.keys(errors).length > 0) {
-        res.render("index", {
-            errors,
+        formValid = false;
+
+        let referer = req.headers.referer;  // http://localhost:3000/productListing
+        let route = referer.substring(referer.lastIndexOf('/'));    // /productListing
+        route = route.replace(/\//, "");
+        route = (route) ? route : "index";
+
+        res.render(route, {
+            errors : errors.null,
             loginVals,
             errorClass : {active: "active"}
         });
@@ -85,8 +101,8 @@ app.post("/login", (req, res) => {
 
     // Otherwise redirect (and reload) Home page
      else {
-       // res.redirect("/");  // redirect to homepage
-                            // Place this in the .then() container from Twilo's API
+        // res.redirect("/");  // redirect to homepage
+        // Place this in the .then() container from Twilo's API
     }
 
 });
@@ -106,57 +122,78 @@ app.post("/create-acct", (req, res) => {
         regex : {}
     };
     let loginVals = {};
+    let formValid = false;
     
-    console.log(req.body["first-name"]);
-
     let firstName = (req.body["first-name"]).trim().toLowerCase();
     let lastName = (req.body["last-name"]).trim().toLowerCase();
     let email = (req.body["email"]).trim();
     let accountPassword = (req.body["account-password"]).trim();
 
-    const regexMail = new RegExp(/^[\w-]+(\.[\w-]+)@([\w-]+\.)+[a-zA-Z]+$/);
-    const regexLettersNos = new RegExp(/[A-za-z0–9_]/);
+    const regexMail = new RegExp(/[a-zA-Z0-9_.+-]+@[a-zA-Z0-9]+\.[a-zA-Z0-9-.]+/);
+    const regexLettersNos = new RegExp(/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/);
 
-    console.log(firstName);
 
     // Stage 1: Check for nulls
 
-    (firstName == "") ? errors.null.firstName = true : loginVals.firstName = firstName;
-    (lastName == "") ? errors.null.lastName = true : loginVals.lastName = lastName;
-    (email == "") ? errors.null.email = true : loginVals.email = email;
-    (accountPassword == "") ? errors.null.accountPassword = true : loginVals.accountPassword = accountPassword;
+    const checkLength = (key, field, msg) => {
+        if (field.length < 6 || field.length > 12) {
+            errors.regex[`${key}`] = msg;
+        }
+    }
 
-    console.log(loginVals);
-    console.log (errors);
+    const checkRegexMail = (key, field, pattern, msg) => {
+        if (!pattern.test(field)) {
+            errors.regex[`${key}`] = msg;
+        }
+    }
+
+    const checkRegexLettersNos = (key, field, pattern, msg) => {
+        if (!pattern.test(field)) {
+            errors.regex[`${key}`] = msg;
+        }
+    }
+
+    checkNull ("firstName", firstName, errors, loginVals);
+    checkNull ("lastName", lastName, errors, loginVals);
+    checkNull ("email", email, errors, loginVals);
+    checkNull ("accountPassword", accountPassword, errors, loginVals);
+
+    // Consider referring page to send back to in case of errors
+    let referer = req.headers.referer;  // http://localhost:3000/productListing
+    let route = referer.substring(referer.lastIndexOf('/'));    // /productListing
+    route = route.replace(/\//, "");
+    route = (route) ? route : "index";
 
     // Check Object length to see if errors
 
-    // If errors for null values exist, re-render "index" route (which is where form exists)
-    // and export errors object
+    // If errors for invalid patterns exist, re-render route to referring page and export errors object
     if (Object.keys(errors.null).length > 0) {
-        res.render("index", {
+        formValid = false;
+
+        res.render(route, {
             errors : errors.null,
             loginVals,
             errorClass : {active : "active", slide : "active"}
         });
 
     } else {
+
+        // Stage 2:
+
         // Check password length and pattern
+        checkLength ("passwordLength", accountPassword, "Password should be between 6 and 12 characters");
 
-        if (accountPassword.length < 6 || accountPassword.length > 12) {
-            errors.regex.passwordLength = "Password should be between 6 and 12 characters";
-        }
-        if (!regexMail.test(accountPassword)) {
-            errors.regex.mailRegex = "Mail address is invalid";
-        }
-        if (!regexLettersNos.test(accountPassword)) {
-            errors.regex.accountPasswordMix = "Mix of uppercase, lowercase and nos required";
-        }
+        // Check for valid mail
+        checkRegexMail ("mailRegex", email, regexMail, "Mail address is invalid");
 
-        // If errors for invalid patterns exist, re-render "index" route (which is where form exists)
-        // and export errors object
+        // Check for combination of uppercase, lowercase and required nos
+        checkRegexLettersNos ("accountPasswordMix", accountPassword, regexLettersNos, "Mix of uppercase, lowercase and numbers required");
+
+        // If errors for invalid patterns exist, re-render route to referring page and export errors object
         if (Object.keys(errors.regex).length > 0) {
-            res.render("index", {
+            formValid = false;
+
+            res.render(route, {
                 errors : errors.regex,
                 loginVals,
                 errorClass : {active : "active", slide : "active"}
@@ -169,7 +206,7 @@ app.post("/create-acct", (req, res) => {
     // Otherwise redirect (and reload) Home page
      /*else { run in console: npm i twilio
        // res.redirect("/");  // redirect to homepage
-                            // Place this in the .then() container from Twilo's API
+       // Place this in the .then() container from Twilo's API
     }
 */
 });
