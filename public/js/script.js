@@ -11,14 +11,31 @@ const loginForm = document.getElementById('user-details-login');
 const toggleBtn = document.getElementById('toggle-btn-nav');
 const nav = document.getElementById('navigation');
 
+const signUp = document.getElementById('signup');
+// Close all modals once with 'Esc' !
+/*$(document).keyup(function(e) {
+     if (e.key == "Escape") { 
+
+    }
+});*/
+
 // Listen to click on userAvatar icon and add a class of active to :root
 // which is responsible for sliding in the login form by virtue 
 // of contextual selection and transform property
 
 userAvatar.addEventListener('click', (e) => {
 	e.preventDefault();
-  	html.classList.add('active');
   	loginForm.querySelector('input[type="text"]:first-of-type').focus();
+
+  	html.classList.toggle('active');	// toggle the first panel 
+
+  	let doNotSlideCreateAcct = true;
+
+  	console.log (createAcctBtn.textContent);
+
+  	if ((createAcctBtn.textContent).toLowerCase() == "back to login") {
+  		createAcctModal.classList.toggle('active');
+  	}	
 });
 
 // On (re-)load event that arises from the user submitting login form, the same class
@@ -26,7 +43,6 @@ userAvatar.addEventListener('click', (e) => {
 // when loading. Thus when form slides in onload, the 'Create an Account' button 
 // responsible for toggling it should have it's text correspond to the panel's visibility
 
-let open = false;
 window.addEventListener('DOMContentLoaded', (event) => {
 	if (createAcctModal.classList.contains('active')) {
 		if (createAcctBtn.textContent.toLowerCase() != "back to login") {
@@ -39,12 +55,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
 });
 
 // Listen to click of 'X' icon and remove the helper class responsible
-// for sliding in the login form
+// for sliding in the LOGIN form
 
 loginClose.addEventListener('click', (e) => {
 	e.preventDefault();
   	html.classList.remove('active');
 });
+
+let open = false;
 
 // Listen to click of 'Create Account' button and slide in Account Form
 createAcctBtn.addEventListener('click', (e) => {
@@ -57,10 +75,24 @@ createAcctBtn.addEventListener('click', (e) => {
   	} else {	// second-time click (false)
   		(e.target).textContent = "Create an Account";
   	}
-
 });
 
-// Listen to click of 'fa-close' button on account form and slide out Account Form
+// Listen to click event on 'signUp' button and toggle 'Create an Account'
+// button's text as well as the 'Create Account' form
+signUp.addEventListener('click', (e) => {
+	e.preventDefault();
+	open = !open;
+  	createAcctModal.classList.toggle('active');
+
+  	if (open) {	// first-time click (true) made true by 3 lines up
+  		(createAcctBtn).textContent = "Back to Login";
+  	} else {	// second-time click (false)
+  		(createAcctBtn).textContent = "Create an Account";
+  	}
+});
+
+
+// Listen to click of 'fa-close' button on ACCOUNT form and slide out Account Form
 accountClose.addEventListener('click', (e) => {
 	e.preventDefault();
   	createAcctModal.classList.remove('active');

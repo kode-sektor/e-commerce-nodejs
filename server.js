@@ -53,7 +53,10 @@ app.get("/productListing", (req,res) => {
     });
 
 });
-let addParams = {};
+
+let addParams = {}; // Object to hold parameters to be sent to existing pages 
+                    // so user is not left hanging after submitting a form 
+                    // because the form lives on every page
 let route = '';
 const checkNull = (key, field, errors, loginVals) => {
     (field == "") ? errors.null[`${key}`] = ' should not be empty' : loginVals[`${key}`] = field;
