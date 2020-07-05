@@ -40,7 +40,7 @@ app.get('/', (req, res) => {
     res.render("index", {
         title : "Home Page",
         data : bestSeller.getFeaturedProducts(),
-        dataCat : catProduct.getCategProducts(),
+        dataCat : catProduct.getCategProducts()
     });
 
 });
@@ -53,10 +53,11 @@ app.get("/productListing", (req,res) => {
     });
 
 });
-
+let addParams = {};
+let route = '';
 const checkNull = (key, field, errors, loginVals) => {
     (field == "") ? errors.null[`${key}`] = ' should not be empty' : loginVals[`${key}`] = field;
-}
+};
 
 app.post("/login", (req, res) => {
 
@@ -74,8 +75,12 @@ app.post("/login", (req, res) => {
     let password = req.body["password"];
 
     // Create object to hold errors
-    let errors = {};
+    let errors = {
+        null : {},
+        regex : {}
+    };
     let loginVals = {};
+    let formValid = false;
 
     // Check if user enters nothing
     checkNull ("name", name, errors, loginVals);
@@ -87,15 +92,43 @@ app.post("/login", (req, res) => {
     if (Object.keys(errors).length > 0) {
         formValid = false;
 
+        // Consider referring page to send back to in case of errors
         let referer = req.headers.referer;  // http://localhost:3000/productListing
-        let route = referer.substring(referer.lastIndexOf('/'));    // /productListing
-        route = route.replace(/\//, "");
-        route = (route) ? route : "index";
+        // console.log ("referer : " + referer);
+
+        referer = referer.substring(referer.lastIndexOf('/'));    // /productListing
+        referer = referer.replace(/\//g, "");  // productListing
+
+        // This is necessary because if the user submits the page once, the url becomes 
+        // something like "http://localhost:3000/create-acct", meaning the next time user 
+        // submits form, the referer would become 'create-acct', instead of the erstwhile 
+        // url like "http://localhost:3000/productListing"
+        if (referer != "login" && referer != "create-acct") { // Combine both bcos url would retain one 
+                                                              // of them if user switches both forms
+            route = (referer) ? referer : "index"; 
+        }
+        // console.log ("route : " + route);
+
+        // Consider additional parameters to pass to depending on what route user 
+        // interacts with the form 
+        if (route == "index") {
+            addParams = {
+                title : "Home Page",
+                data : bestSeller.getFeaturedProducts(),
+                dataCat : catProduct.getCategProducts() 
+            }  
+        } else if (route == "productListing") {
+           addParams = {
+               title : "Product Listing Page",
+               data : product.getNProducts(0,9) 
+           }   
+        }
 
         res.render(route, {
             errors : errors.null,
             loginVals,
-            errorClass : {active: "active"}
+            errorClass : {active: "active"},
+            ...addParams
         });
     }   
 
@@ -134,7 +167,6 @@ app.post("/create-acct", (req, res) => {
 
 
     // Stage 1: Check for nulls
-
     const checkLength = (key, field, msg) => {
         if (field.length < 6 || field.length > 12) {
             errors.regex[`${key}`] = msg;
@@ -160,9 +192,36 @@ app.post("/create-acct", (req, res) => {
 
     // Consider referring page to send back to in case of errors
     let referer = req.headers.referer;  // http://localhost:3000/productListing
-    let route = referer.substring(referer.lastIndexOf('/'));    // /productListing
-    route = route.replace(/\//, "");
-    route = (route) ? route : "index";
+    referer = referer.substring(referer.lastIndexOf('/'));    // /productListing
+    referer = referer.replace(/\//g, "");  // productListing
+
+    // This is necessary because if the user submits the page once, the url becomes 
+    // something like "http://localhost:3000/create-acct", meaning the next time user 
+    // submits form, the referer would become 'create-acct', instead of the erstwhile 
+    // url like "http://localhost:3000/productListing"
+    if (referer != "login" && referer != "create-acct") {   // Combine both bcos url would retain one 
+                                                              // of them if user switches both forms
+
+        route = (referer) ? referer : "index"; 
+    }
+    // console.log ("referer2 : " + referer);
+    // Consider additional parameters to pass to depending on what route user 
+    // interacts with the form 
+
+    // console.log ("route : " + route);
+
+    if (route == "index") {
+        addParams = {
+            title : "Home Page",
+            data : bestSeller.getFeaturedProducts(),
+            dataCat : catProduct.getCategProducts() 
+        }  
+    } else if (route == "productListing") {
+       addParams = {
+           title : "Product Listing Page",
+           data : product.getNProducts(0,9) 
+       }   
+    }
 
     // Check Object length to see if errors
 
@@ -173,12 +232,13 @@ app.post("/create-acct", (req, res) => {
         res.render(route, {
             errors : errors.null,
             loginVals,
-            errorClass : {active : "active", slide : "active"}
+            errorClass : {active : "active", slide : "active"},
+            ...addParams
         });
 
     } else {
 
-        // Stage 2:
+        // STAGE 2:
 
         // Check password length and pattern
         checkLength ("passwordLength", accountPassword, "Password should be between 6 and 12 characters");
@@ -196,12 +256,11 @@ app.post("/create-acct", (req, res) => {
             res.render(route, {
                 errors : errors.regex,
                 loginVals,
-                errorClass : {active : "active", slide : "active"}
+                errorClass : {active : "active", slide : "active"},
+                ...addParams
             });
         } 
-
     }
-
 
     // Otherwise redirect (and reload) Home page
      /*else { run in console: npm i twilio
