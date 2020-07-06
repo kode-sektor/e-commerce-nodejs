@@ -22,17 +22,44 @@
 	.signup, .backToLogin {
 		display: none;
 	}
-
+	.slide {
+		padding: 0;
+	}
+	.slide-content {
+		padding-left: 30%;
+	}
+	.slide-product-img {
+		position: absolute;
+		top: 15px;
+		left: 15px;
+		bottom: 15px;
+		width: 30%;
+	}
+	.slide-watchword {
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		height: 100%;
+		width: 70%;
+	}
 	.slide-title-ad {
 		line-height: 120%;
 		letter-spacing: 7px;
 		font-size: 1em;
+		width: auto;
+		margin-bottom: .2em;
+	}
+	.slide-title-ad span {
+		display: block;
 	}
 	.slide-watchword p {
 		font-size: .55em;
 	}
 	.promo-coupon {
 		transform: scale(0.8);
+	}
+	.cta-btn {
+		margin-top: .2em;
 	}
 
 	.category.product-list li {
@@ -67,6 +94,18 @@
 
 }
 
+/*Use max-width instead because if you use min-width , when browser first reads style.css 
+it will set the modal at far left (left: 0%) before parsing responsive.css to bring it
+halfway (left: 50%;). That brief milli-second time to parse creates a sort of unwanted 
+sliding effect.
+
+So better to set left at 50% in style.css so browser always meets that first*/
+@media (max-width: 767px) {
+	.create-account-modal.active {
+	    left: 0%;
+	}
+}
+
 @media (min-width: 992px) {
 
 	/*modal*/
@@ -78,11 +117,6 @@
 		width: 75%;
 		margin-left: 5%;
 		border-top: 3px solid var(--blue);
-	}
-	.slide-title-ad {
-		line-height: 150%;
-		letter-spacing: 10px;
-		font-size: 1.2em;
 	}
 	.slide-watchword p {
 		font-size: .7em;
@@ -116,11 +150,9 @@
 		display: flex;
 		flex-flow: row wrap;
 		flex: none;
+		opacity: 1;
 		background : none;
 		border: 0;
-	}
-	.main-menu-nav.reveal {
-		opacity: 1;
 	}
 	.main-menu-nav li {
 		z-index: 1;

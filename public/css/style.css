@@ -164,6 +164,7 @@ a {
 	right: 0;
 	width: 100%;
 	transition: opacity .2s;
+	z-index: 6;
 }
 .main-menu-nav {
 	display: flex;
@@ -171,9 +172,12 @@ a {
 	flex: 0 0 100%;
 	background : rgba(0,0,0,.9);
 	border: 3px solid var(--blue);
+	opacity: 0;
+	display: none;
 }
 .main-menu-nav.reveal {
-	opacity: 0;
+	opacity: 1;
+	display: flex;
 }
 .main-menu-nav > [class^=categories] {
 	/background: rgba(20, 21, 23, .1);
@@ -202,7 +206,7 @@ a {
     color: var(--yellow);
     font-weight: 600;
     padding: 10px;
-    display: inline-block;
+    display: block;
     text-transform: capitalize;
     text-transform: uppercase;
     transition: all .3s ease-out 0s;
@@ -261,6 +265,7 @@ a {
 	top: 55px;
 	left: 30%;
 	transform: scale(0.7);
+	z-index: 5;
 }
 .hero:before {
 	content: "";
@@ -276,6 +281,7 @@ a {
 /*Carousel*/
 
 .carousel-container {
+	position: relative;
 	z-index: 1;
 	font-family: var(--font-secondary);
 }
@@ -296,6 +302,7 @@ a {
   left: 0;
   height: 100%;
   width: 100%;
+  padding: 20px;
   font-size: 3em;
   color: var(--text-grey);
   text-align: center;
@@ -314,20 +321,14 @@ a {
 	flex-flow: column;
 	align-items: center;
 	position: relative;
-	padding-left: 30%;
+	padding-left: 0%;
 	height: 400px;
 }
 .slide-product-img {
-	position: absolute;
 	opacity: 0;
-	top: 15px;
-	left: 15px;
-	bottom: 15px;
-	width: 30%;
-	overflow: hidden;
-	transition-delay: .5s;
-	transition-duration: 3s;
-
+	width: 100%;
+	overflow: hidden;	
+	transition: all .5s .5s ease-out;
 }
 .slide[data-state="active"] .slide-product-img {
 	opacity: 1;
@@ -336,11 +337,7 @@ a {
 	max-height: 100%;
 }
 .slide-watchword {
-	position: absolute;
-	right: 0;
-	bottom: 0;
-	height: 100%;
-	width: 70%;
+	width: 100%;
 	display: flex;
 	align-items: center;
 	text-transform: uppercase;
@@ -352,25 +349,32 @@ a {
 	position: relative;
 	top: -25px;
 	opacity: 0;
-	line-height: 120%;
+	line-height: 150%;
+	margin: 1em;
+	width: 100%;
 	letter-spacing: 2px;
-	font-size: .6em;
-	transition: all .5s .5s ease-out;
+	font-size: .5em;
+	transition: all .5s ease-out;
 }
 .slide[data-state="active"] .slide-title-ad {
 	opacity: 1;
 	top: 0;
 }
-.slide-title-ad span {
-	display: block;
-}
 .slide-title-ad + div {
 	color: var(--blue);
 }
 .slide-watchword p {
+	position: relative;
+	top: -25px;
 	font-size: .3em;
 	font-family: Dosis, sans-serif;
 	font-weight: bold;
+	opacity: 0;
+	transition: all .5s .25s ease-out;
+}
+.slide[data-state="active"] .slide-watchword p {
+	opacity: 1;
+	top: 0;
 }
 .slide-product-logo {
 	margin-top: 10px;
@@ -393,6 +397,7 @@ a {
 }
 .cta-btn {
 	padding: 8px;
+	margin-top: 1em;
 	color: black;
 	font-weight: bolder;
 	border: 2px solid black;
@@ -410,6 +415,7 @@ a {
 
 .page-footer {
 	width: 100%;
+	border-top: thin solid var(--blue);
 }
 .page-footer a:hover, .page-footer:focus {
 	font-weight: bold;
@@ -446,6 +452,10 @@ a {
 }
 .footer-social > ul > li {
 	padding-right: 15px;
+}
+.sec-footer {
+	padding: 20px;
+	background-color: rgba(0, 0, 51, .2);
 }
 .sec-footer > section > ul {
 	display: flex;
@@ -628,7 +638,7 @@ a {
   left: 0;
 }
 .create-account-modal.active {
-	left: 0%;
+	left: 50%;
 }
 
 /*Page Product Listing*/
@@ -700,6 +710,8 @@ a {
 .product-listing-single figcaption p {
 	padding: 5px 0;
 	font-size: 1.1em;
+	color: var(--blue);
+	font-weight: bolder;
 }
 
 /*Category Product List*/
