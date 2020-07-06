@@ -2,6 +2,27 @@
 }
 
 @media (min-width: 768px) {
+
+	.create-account {
+		display: flex;
+	}
+	.create-account, .login {
+		flex: 0 0 50%;
+		max-width: 50%;
+		padding-right: 0;
+	}
+	/*modal*/
+	.create-account-modal {
+		width: 50%;
+		padding: 50px 70px;
+	}
+	.create-account-modal.active {
+		left: 50%;
+	}
+	.signup, .backToLogin {
+		display: none;
+	}
+
 	.slide-title-ad {
 		line-height: 120%;
 		letter-spacing: 7px;
@@ -47,6 +68,12 @@
 }
 
 @media (min-width: 992px) {
+
+	/*modal*/
+	.create-account-modal {
+		padding: 60px 100px;
+	}
+
 	.carousel-container {
 		width: 75%;
 		margin-left: 5%;

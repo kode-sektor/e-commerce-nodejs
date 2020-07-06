@@ -255,7 +255,6 @@ app.post("/create-acct", (req, res) => {
         // If errors for invalid patterns exist, re-render route to referring page and export errors object
         if (Object.keys(errors.regex).length > 0) {
             formValid = false;
-
             res.render(route, {
                 errors : errors.regex,
                 loginVals,

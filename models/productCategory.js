@@ -9,7 +9,7 @@ const productCategory = {
 		    description : "24 carat-golden sparkling chain",
 		    price : "1700",
 		    featured: false,
-		    imgPath : "jewelry-1.jpg",
+		    imgPath : "jewelry-1.png",
 		    category : "jewelry"
 		},
 		{
@@ -17,7 +17,7 @@ const productCategory = {
 		    description : "Multifunction Meat Food Scale Tempered Glass surface with LCD Display",
 		    price : "300",
 		    featured: false,
-		    imgPath : "kitchen-scale.jpg",
+		    imgPath : "kitchen-scale.png",
 		    category : "kitchen"
 		},
 		{
@@ -25,7 +25,7 @@ const productCategory = {
 		    description : "Reebok Work Men's Sublite Cushion IB4041 Industrial Shoe",
 		    price : "220",
 		    featured: true,
-		    imgPath : "shoe-reebok.jpg",
+		    imgPath : "shoe-reebok.png",
 		    category : "shoe"
 		},
 		{
@@ -33,7 +33,7 @@ const productCategory = {
 		    description : "GUANK Men’s Wooden Watches Personalized Engraved",
 		    price : "125",
 		    featured: false,
-		    imgPath : "watchh-guanke-wooden.jpg",
+		    imgPath : "watchh-guanke-wooden.png",
 		    category : "watch"
 		}
 

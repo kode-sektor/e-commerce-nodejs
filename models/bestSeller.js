@@ -8,7 +8,7 @@ const bestSeller = {
             description : "Black Blackberry Phone",
             price : "70",
             featured: false,
-            imgPath : "1.jpg",
+            imgPath : "1.png",
             category : "Black Blackberry Phone"
         },
         {
@@ -16,7 +16,7 @@ const bestSeller = {
             description : "Samsung Latest S10 with a New Experience",
             price : "700",
             featured: true,
-            imgPath : "2.jpg",
+            imgPath : "2.png",
             category : "phone"
         },
         {
@@ -24,7 +24,7 @@ const bestSeller = {
             description : "Comes with a range of the latest applications ",
             price : "1100",
             featured: false,
-            imgPath : "3.jpg",
+            imgPath : "3.png",
             category : "phone, "
         },
         {
@@ -32,7 +32,7 @@ const bestSeller = {
             description : "",
             price : "900",
             featured: false,
-            imgPath : "4.jpg",
+            imgPath : "4.png",
             category : "phone"
         },
 
@@ -43,7 +43,7 @@ const bestSeller = {
             description : "24 carat-golden sparkling chain",
             price : "1700",
             featured: false,
-            imgPath : "jewelry-1.jpg",
+            imgPath : "jewelry-1.png",
             category : "jewelry"
         },
         {
@@ -51,7 +51,7 @@ const bestSeller = {
             description : "Reflects like the sun",
             price : "2300",
             featured: true,
-            imgPath : "jewelry-2.jpg",
+            imgPath : "jewelry-2.png",
             category : "jewelry"
         },
         {
@@ -59,7 +59,7 @@ const bestSeller = {
             description : "Brighter than the stars",
             price : "900",
             featured: false,
-            imgPath : "jewelry-3.jpg",
+            imgPath : "jewelry-3.png",
             category : "jewelry"
         },
         {
@@ -67,7 +67,7 @@ const bestSeller = {
             description : "Sparkle summer or winter",
             price : "4500",
             featured: false,
-            imgPath : "jewelry-4.jpg",
+            imgPath : "jewelry-4.png",
             category : "jewelry"
         },
         {
@@ -75,7 +75,7 @@ const bestSeller = {
             description : "Only few could outrival",
             price : "300",
             featured: false,
-            imgPath : "jewelry-5.jpg",
+            imgPath : "jewelry-5.png",
             category : "jewelry"
         },
         {
@@ -83,7 +83,7 @@ const bestSeller = {
             description : "See in the dark",
             price : "3600",
             featured: false,
-            imgPath : "jewelry-6.jpg",
+            imgPath : "jewelry-6.png",
             category : "jewelry"
         },
         {
@@ -91,7 +91,7 @@ const bestSeller = {
             description : "Sparkle, Dazzle, Sizzle",
             price : "2900",
             featured: false,
-            imgPath : "jewelry-7.jpg",
+            imgPath : "jewelry-7.png",
             category : "jewelry"
         },
         {
@@ -99,7 +99,7 @@ const bestSeller = {
             description : "Lightweight Ear Gold Toy",
             price : "1600",
             featured: false,
-            imgPath : "jewelry-8.jpg",
+            imgPath : "jewelry-8.png",
             category : "jewelry"
         },
         {
@@ -107,7 +107,7 @@ const bestSeller = {
             description : "Professional Culinary Torch Refillable Portable Blow Torch Lighter with Safety Lock",
             price : "150",
             featured: false,
-            imgPath : "bukane-torch.jpg",
+            imgPath : "bukane-torch.png",
             category : "kitchen"
         },
 
@@ -120,7 +120,7 @@ const bestSeller = {
             description : "Multifunction Meat Food Scale Tempered Glass surface with LCD Display",
             price : "300",
             featured: false,
-            imgPath : "kitchen-scale.jpg",
+            imgPath : "kitchen-scale.png",
             category : "kitchen"
         },
         {
@@ -128,7 +128,7 @@ const bestSeller = {
             description : "Stainless Steel Platform Baking Scale with Removable Bowl, Large LCD Screen",
             price : "150",
             featured: true,
-            imgPath : "kitchen-scale-2.jpg",
+            imgPath : "kitchen-scale-2.png",
             category : "kitchen"
         },
         {
@@ -136,7 +136,7 @@ const bestSeller = {
             description : "YouCopia 15017 StoreMore Bakeware Rack, White",
             price : "150",
             featured: false,
-            imgPath : "bakeware-rack.jpg",
+            imgPath : "bakeware-rack.png",
             category : "kitchen"
         },
         {
@@ -144,7 +144,7 @@ const bestSeller = {
             description : "Saver and Dispenser, Wall-Secure, Stainless Steel, Wide Opening for Ease of Access ",
             price : "90",
             featured: false,
-            imgPath : "grocery-holder.jpg.jpg",
+            imgPath : "grocery-holder.png.png",
             category : "kitchen"
         },
         {
@@ -152,7 +152,7 @@ const bestSeller = {
             description : "Saver and Dispenser, Wall-Secure, Stainless Steel, Wide Opening for Ease of Access ",
             price : "90",
             featured: false,
-            imgPath : "grocery-holder.jpg.jpg",
+            imgPath : "grocery-holder.png.png",
             category : "kitchen"
         },
         {
@@ -160,7 +160,7 @@ const bestSeller = {
             description : "SimpleHouseware Kitchen Cabinet Pantry Pan and Pot Lid Organizer Rack Holder, Bronze",
             price : "125",
             featured: false,
-            imgPath : "cabinet-pantry.jpg",
+            imgPath : "cabinet-pantry.png",
             category : "kitchen"
         },
         {
@@ -168,7 +168,7 @@ const bestSeller = {
             description : "SimpleHouseware Stackable 3 Tier Sliding Basket Organizer Drawer, Chrome",
             price : "80",
             featured: true,
-            imgPath : "stackable-basket.jpg",
+            imgPath : "stackable-basket.png",
             category : "kitchen"
         },
         {
@@ -176,7 +176,7 @@ const bestSeller = {
             description : "Desai® Kitchen Towel Set, 12 Pack, Hypoallergenic 100% Pure Organic Cotton, Tea Towels Cotton, Kitchen Towels Cotton, Dish Cloths Cotton, Kitchen Towels",
             price : "300",
             featured: false,
-            imgPath : "kitchen-towel.jpg",
+            imgPath : "kitchen-towel.png",
             category : "kitchen"
         },
 
@@ -187,7 +187,7 @@ const bestSeller = {
             description : "Reebok Work Men's Sublite Cushion IB4041 Industrial Shoe",
             price : "220",
             featured: true,
-            imgPath : "shoe-reebok.jpg",
+            imgPath : "shoe-reebok.png",
             category : "shoe"
         },
         {
@@ -195,7 +195,7 @@ const bestSeller = {
             description : "FilaMens F-13v Lea/Syn Fashion Sneaker",
             price : "300",
             featured: false,
-            imgPath : "shoe-fila.jpg",
+            imgPath : "shoe-fila.png",
             category : "shoe"
         },
         {
@@ -203,7 +203,7 @@ const bestSeller = {
             description : "Merrell Womens Moab 2 Vent Hiking Shoes",
             price : "150",
             featured: false,
-            imgPath : "shoe-merrell.jpg",
+            imgPath : "shoe-merrell.png",
             category : "shoe"
         },
         {
@@ -211,7 +211,7 @@ const bestSeller = {
             description : "Callaway Mens Balboa TRX Golf Shoe",
             price : "120",
             featured: false,
-            imgPath : "shoe-callaway.jpg",
+            imgPath : "shoe-callaway.png",
             category : "shoe"
         },
         {
@@ -219,7 +219,7 @@ const bestSeller = {
             description : "Lightweight Breathable Running Tennis Sneakerse",
             price : "125",
             featured: false,
-            imgPath : "shoe-caitin.jpg",
+            imgPath : "shoe-caitin.png",
             category : "shoe"
         },
         {
@@ -227,7 +227,7 @@ const bestSeller = {
             description : "Salomon Mens Speedcross 5 Running Shoe",
             price : "275",
             featured: true,
-            imgPath : "shoe-salomon.jpg",
+            imgPath : "shoe-salomon.png",
             category : "shoe"
         },
         {
@@ -235,7 +235,7 @@ const bestSeller = {
             description : "Women Lightweight Sneakers Work Hiking Running Shoes Breathable Air Cushion Indoor Outdoor",
             price : "175",
             featured: false,
-            imgPath : "shoe-belilent.jpg",
+            imgPath : "shoe-belilent.png",
             category : "shoe"
         },
         {
@@ -243,7 +243,7 @@ const bestSeller = {
             description : "Womens Charged Assert 8 Running Shoe",
             price : "225",
             featured: false,
-            imgPath : "shoe-under-armour.jpg",
+            imgPath : "shoe-under-armour.png",
             category : "shoe"
         },
 
@@ -253,7 +253,7 @@ const bestSeller = {
             description : "LsvtrUS Popular Low-key Men's Quartz Wristwatch Minimalist Connotation",
             price : "205",
             featured: true,
-            imgPath : "watch-lsvtrus.jpg",
+            imgPath : "watch-lsvtrus.png",
             category : "watch"
         },
         {
@@ -261,7 +261,7 @@ const bestSeller = {
             description : "Michael Kors Slim Runway Stainless Steel Watch",
             price : "205",
             featured: false,
-            imgPath : "watch-kors.jpg",
+            imgPath : "watch-kors.png",
             category : "watch"
         },
         {
@@ -269,7 +269,7 @@ const bestSeller = {
             description : "Michael Kors Slim Runway Stainless Steel Watch",
             price : "205",
             featured: false,
-            imgPath : "watch-kors.jpg",
+            imgPath : "watch-kors.png",
             category : "watch"
         },
         {
@@ -277,7 +277,7 @@ const bestSeller = {
             description : "Men's Watches Mechanical Skeleton Classic Luxury",
             price : "395",
             featured: false,
-            imgPath : "watch-senors.jpg",
+            imgPath : "watch-senors.png",
             category : "watch"
         },
         {
@@ -285,7 +285,7 @@ const bestSeller = {
             description : "Casio G-Shock Mens GA-700UC 4.6 out of 5 stars",
             price : "200",
             featured: false,
-            imgPath : "watch-casio-gshock.jpg",
+            imgPath : "watch-casio-gshock.png",
             category : "watch"
         },
         {
@@ -293,7 +293,7 @@ const bestSeller = {
             description : "Black & Stainless, 010-01769-00",
             price : "205",
             featured: true,
-            imgPath : "watch-garmin-vivoactive.jpg",
+            imgPath : "watch-garmin-vivoactive.png",
             category : "watch"
         },
         {
@@ -301,7 +301,7 @@ const bestSeller = {
             description : "HUAWEI Watch GT 2 2019 Bluetooth SmartWatch",
             price : "305",
             featured: false,
-            imgPath : "watch-huawei-gt.jpg",
+            imgPath : "watch-huawei-gt.png",
             category : "watch"
         },
         {
@@ -309,7 +309,7 @@ const bestSeller = {
             description : "Samsung Galaxy Watch Active - Silver",
             price : "200",
             featured: true,
-            imgPath : "watch-samsung-watch-active.jpg",
+            imgPath : "watch-samsung-watch-active.png",
             category : "watch"
         },
         {
@@ -317,7 +317,7 @@ const bestSeller = {
             description : "GUANK Men’s Wooden Watches Personalized Engraved",
             price : "125",
             featured: false,
-            imgPath : "watchh-guanke-wooden.jpg",
+            imgPath : "watchh-guanke-wooden.png",
             category : "watch"
         }
 

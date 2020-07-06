@@ -12,13 +12,17 @@ const toggleBtn = document.getElementById('toggle-btn-nav');
 const nav = document.getElementById('navigation');
 
 const signUp = document.getElementById('signup');
-// Close all modals once with 'Esc' !
-/*$(document).keyup(function(e) {
-     if (e.key == "Escape") { 
+const backToLogin = document.getElementById('backToLogin');
 
+// Hide all modals once with 'Esc'. 
+
+document.addEventListener('keydown', function(event) {
+    let escKey = event.key; // Or const {key} = event; in ES6+
+    if (escKey === "Escape") {
+    	html.classList.remove('active');	// toggle the first panel 
+    	createAcctModal.classList.remove('active');
     }
-});*/
-
+});
 // Listen to click on userAvatar icon and add a class of active to :root
 // which is responsible for sliding in the login form by virtue 
 // of contextual selection and transform property
@@ -29,9 +33,15 @@ userAvatar.addEventListener('click', (e) => {
 
   	html.classList.toggle('active');	// toggle the first panel 
 
-  	let doNotSlideCreateAcct = true;
+  	// Toggling the second panel (Create Account form) will be out of sync if 
+  	// its currently hidden while the Login form is on display. You should only
+  	// toggle it when it's on display while the Login form is on display or if 
+  	// both are hidden 
 
-  	console.log (createAcctBtn.textContent);
+  	// And at the same time, it should not be toggled right from page load 
+  	// because user is to first interact with login form. Hence only determine to 
+  	// toggle it when the user as interacted with it by clicking the 'Create Account'
+  	// button
 
   	if ((createAcctBtn.textContent).toLowerCase() == "back to login") {
   		createAcctModal.classList.toggle('active');
@@ -79,6 +89,9 @@ createAcctBtn.addEventListener('click', (e) => {
 
 // Listen to click event on 'signUp' button and toggle 'Create an Account'
 // button's text as well as the 'Create Account' form
+
+// Just simply make it act like the 'Create Account' button so there's no 
+// conflict in all the modal relationships at any screen width
 signUp.addEventListener('click', (e) => {
 	e.preventDefault();
 	open = !open;
@@ -91,6 +104,17 @@ signUp.addEventListener('click', (e) => {
   	}
 });
 
+backToLogin.addEventListener('click', (e) => {
+	e.preventDefault();
+	open = !open;
+  	createAcctModal.classList.toggle('active');
+
+  	if (open) {	// first-time click (true) made true by 3 lines up
+  		(createAcctBtn).textContent = "Back to Login";
+  	} else {	// second-time click (false)
+  		(createAcctBtn).textContent = "Create an Account";
+  	}
+});
 
 // Listen to click of 'fa-close' button on ACCOUNT form and slide out Account Form
 accountClose.addEventListener('click', (e) => {
