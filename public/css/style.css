@@ -124,6 +124,9 @@ main form .error {
 a {
 	transition: .2s;
 }
+label {
+	color: var(--white);
+}
 /*Header*/
 
 .page-header {
@@ -248,7 +251,9 @@ a {
 	opacity: .7;
 }
 
-
+main {
+	min-height: 60vh;
+}
 
 /*Hero*/
 
@@ -553,6 +558,9 @@ a {
     width: 100%;
     margin-bottom: .75rem;
 }
+.user-details .form-input:last-of-type {
+	margin-bottom: 17px;
+}
 .form-input input[type=text], .form-input input[type=password], .form-input input[type=email] {
     display: block;
     width: 100%;
@@ -573,7 +581,12 @@ a {
 .login-action {
 	display: flex;
 	margin-top: 11px;
+	margin-bottom: 14px;
 	align-items: center;	
+}
+label[for=remember-me] {
+	display: inline-block;
+	margin-left: 10px;
 }
 .create-account-action label {
 	display: inline-block;
@@ -584,6 +597,7 @@ a {
 }
 .form-input-final {
 	display: block !important;
+	margin-top: 10px;
 }
 .login-btn {
     display: inline-block;

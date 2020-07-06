@@ -54,10 +54,22 @@ app.get("/productListing", (req,res) => {
 
 });
 
-let addParams = {}; // Object to hold parameters to be sent to existing pages 
-                    // so user is not left hanging after submitting a form 
-                    // because the form lives on every page
+app.get("/dashboard", (req,res) => {
+    
+    res.render("dashboard", {
+        title : "Dashboard",
+    });
+
+});
+
+// Object to hold parameters to be sent to existing pages 
+// so user is not left hanging after submitting a form 
+// because the form lives on every page
+
+let addParams = {}; 
 let route = '';
+const senderMail = 'kayodeibiyemi92@gmail.com';
+
 const checkNull = (key, field, errors, loginVals) => {
     (field == "") ? errors.null[`${key}`] = ' should not be empty' : loginVals[`${key}`] = field;
 };
@@ -165,9 +177,11 @@ app.post("/create-acct", (req, res) => {
     let email = (req.body["email"]).trim();
     let accountPassword = (req.body["account-password"]).trim();
 
+    firstName = firstName.charAt(0).toUpperCase() + firstName.slice(1);
+    lastName = lastName.charAt(0).toUpperCase() + lastName.slice(1)
+
     const regexMail = new RegExp(/[a-zA-Z0-9_.+-]+@[a-zA-Z0-9]+\.[a-zA-Z0-9-.]+/);
     const regexLettersNos = new RegExp(/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/);
-
 
     // Stage 1: Check for nulls
     const checkLength = (key, field, msg) => {
@@ -265,21 +279,29 @@ app.post("/create-acct", (req, res) => {
     }
 
     if (formValid) {
-        // using Twilio SendGrid's v3 Node.js Library
-        // https://github.com/sendgrid/sendgrid-nodejs
+
         const sgMail = require('@sendgrid/mail');
         sgMail.setApiKey(process.env.SENDGRID_API_KEY);
         const mail = {
-            to: 'kodesektor@gmail.com',
-            from: 'kayodeibiyemi92@gmail.com',
-            subject: 'Sending with Twilio SendGrid wasn\'t initially fun at first',
-            text: 'and easy to do anywhere, even with Node.js',
-            html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+            to: email,
+            from: senderMail,
+            subject: 'Thank you for registering with Humber-Zon',
+            html: ` <section class="body" style="background: rgba(0, 0, 51, .2); color: white; font-family: Calibri; font-size: 14px; padding: 20px; border: 1px solid rgba(222, 180, 6, 0.4)">
+                        <p>
+                            Hello ${firstName}, thank you once again for registering with us. At Humber-Zon, rest assured 
+                            you will always get the best deals at competitive prices. Please let us serve you. 
+                        </p>
+                        <p>Return to <a style="color: white;" href="localhost:3000/">Humber-Zon</a></p>
+                    </section>`
         };
 
         (async () => {
           try {
             await sgMail.send(mail);
+            console.log ('Mail sent');
+
+            res.redirect("dashboard");
+
           } catch (error) {
             console.error(error);
          
