@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/kode-sektor/e-commerce-nodejs#readme",
   "dependencies": {
+    "@sendgrid/mail": "^7.2.1",
     "express": "^4.17.1",
     "express-handlebars": "^4.0.4"
   },

@@ -9,8 +9,8 @@
 	.create-account, .login {
 		flex: 0 0 50%;
 		max-width: 50%;
-		padding-right: 0;
 	}
+
 	/*modal*/
 	.create-account-modal {
 		width: 50%;
@@ -177,7 +177,6 @@ So better to set left at 50% in style.css so browser always meets that first*/
 		top: auto;
 	}
 
-
 	.page-form {
 		width: 80%;
 	}
@@ -199,6 +198,9 @@ So better to set left at 50% in style.css so browser always meets that first*/
 		font-weight: normal;
 	    color: #fff;
 	    line-height: 43px;
+	}
+	.login {
+		padding-right: 0;
 	}
 	.login-form-inner h2, .account-form-inner h2 {
 		font-size: 32px;

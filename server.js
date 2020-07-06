@@ -158,7 +158,7 @@ app.post("/create-acct", (req, res) => {
         regex : {}
     };
     let loginVals = {};
-    let formValid = false;
+    let formValid = true;
     
     let firstName = (req.body["first-name"]).trim().toLowerCase();
     let lastName = (req.body["last-name"]).trim().toLowerCase();
@@ -264,12 +264,32 @@ app.post("/create-acct", (req, res) => {
         } 
     }
 
-    // Otherwise redirect (and reload) Home page
-     /*else { run in console: npm i twilio
-       // res.redirect("/");  // redirect to homepage
-       // Place this in the .then() container from Twilo's API
+    if (formValid) {
+        // using Twilio SendGrid's v3 Node.js Library
+        // https://github.com/sendgrid/sendgrid-nodejs
+        const sgMail = require('@sendgrid/mail');
+        sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+        const mail = {
+            to: 'kodesektor@gmail.com',
+            from: 'kayodeibiyemi92@gmail.com',
+            subject: 'Sending with Twilio SendGrid wasn\'t initially fun at first',
+            text: 'and easy to do anywhere, even with Node.js',
+            html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+        };
+
+        (async () => {
+          try {
+            await sgMail.send(mail);
+          } catch (error) {
+            console.error(error);
+         
+            if (error.response) {
+              console.error(error.response.body)
+            }
+          }
+        })();
     }
-*/
+
 });
 
 const PORT = process.env.PORT || 3000;
