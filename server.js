@@ -45,7 +45,7 @@ app.get('/', (req, res) => {
 
 });
 
-app.get("/productListing", (req,res) => {
+app.get("/productListing", (req, res) => {
     
     res.render("productListing", {
         title : "Product Listing Page",
@@ -54,10 +54,10 @@ app.get("/productListing", (req,res) => {
 
 });
 
-app.get("/dashboard", (req,res) => {
+app.get("/dashboard", (req, res) => {
     
     res.render("dashboard", {
-        title : "Dashboard",
+        title : "Dashboard"
     });
 
 });
@@ -104,7 +104,7 @@ app.post("/login", (req, res) => {
     // Check Object length to see if errors
 
     // If errors for invalid patterns exist, re-render route to referring page and export errors object
-    if (Object.keys(errors).length > 0) {
+    if (Object.keys(errors.null).length > 0) {
         formValid = false;
 
         // Consider referring page to send back to in case of errors
@@ -149,8 +149,8 @@ app.post("/login", (req, res) => {
 
     // Otherwise redirect (and reload) Home page
      else {
-        // res.redirect("/");  // redirect to homepage
-        // Place this in the .then() container from Twilo's API
+        console.log ('Login successful');
+        res.redirect("dashboard");
     }
 
 });
