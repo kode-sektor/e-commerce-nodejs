@@ -286,12 +286,13 @@ app.post("/create-acct", (req, res) => {
             to: email,
             from: senderMail,
             subject: 'Thank you for registering with Humber-Zon',
-            html: ` <section class="body" style="background: rgba(0, 0, 51, .2); color: white; font-family: Calibri; font-size: 14px; padding: 20px; border: 1px solid rgba(222, 180, 6, 0.4)">
+            html: `<h1 style="border: rgba(0, 0, 51, 1); color: #000033; font-family: sans-serif; margin-bottom: 14px;">HUMBER-ZON TRULY CARES</h1>
+
+                <section class="body" style="border: rgba(0, 0, 51, 1); color: #000033; font-family: Calibri; font-size: 18px; padding: 20px; border: 1px solid rgba(222, 180, 6, 0.4)">
                         <p>
-                            Hello ${firstName}, thank you once again for registering with us. At Humber-Zon, rest assured 
+                            Hello <b>${firstName}</b>, thank you once again for registering with us. At Humber-Zon, rest assured 
                             you will always get the best deals at competitive prices. Please let us serve you. 
                         </p>
-                        <p>Return to <a style="color: white;" href="localhost:3000/">Humber-Zon</a></p>
                     </section>`
         };
 
