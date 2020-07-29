@@ -191,58 +191,72 @@ router.post("/create-acct", (req, res) => {
         };
 
         (async () => {
-          try {
-            await sgMail.send(mail);
-            console.log ('Mail sent');
+            try {
+	            await sgMail.send(mail);
+	            console.log ('Mail sent');
 
-            /*SAVE TO DATABASE*/
+	            /*ARRANGE SCHEMA TO SAVE TO DATABASE*/
 
-            const newUser = {
-            	firstName,
-            	lastName,
-            	email,
-            	password : accountPassword
-            }
+	            const newUser = {
+	            	firstName,
+	            	lastName,
+	            	email,
+	            	password : accountPassword
+	            }
 
-            const user = new userModel(newUser);
+	            const user = new userModel(newUser);
 
-            // FIRST SAVE USER TO DB, THEN FETCH THAT SAME USER AND UPDATE HIS RECORD 
-            // WITH HIS IMAGE
+	            // BEFORE SAVING TO DATABASE , ENSURE PASSWORD DOESNT EXIST IN DATABASE
 
-            user.save().then((user) => {
+	        	userModel.findOne({password : accountPassword}, function(err, passwordExists) {
+	                if (err) {
+	                	return res(err);
+	                }
+	                if (passwordExists) { 
+	                	errors.passwordExists = true;
+	                	console.log ("Errors: ", errors);
+	                	res.render(route, {
+	                	    errors,
+	                	    loginVals,
+	                	    errorClass : {active : "active", slide : "active"},
+	                	    ...addParams
+	                	});	 
 
-            	console.log("FILE IMAGE : ", req.files["profile-pic"]);
+	                } else {
 
-            	// DO NOT BOTHER UPDATING IMAGE IF ITS NULL (BECAUSE IT'S NOT REQUIRED)
+	                	user.save().then((user) => {
 
-            	if (req.files["profile-pic"]) {
-            		// Rename image to prevent overriding image in DB. So user does not meet a different image to what he uploaded
-            		req.files["profile-pic"].name = `pro_pic_${user._id}${path.parse(req.files["profile-pic"].name).ext}`
+	                		console.log("FILE IMAGE : ", req.files["profile-pic"]);
 
-            		req.files["profile-pic"].mv(`public/uploads/${req.files["profile-pic"].name}`)
-            			.then(()=> {
-            				userModel.updateOne({_id : user._id}, {
-            					profilePic :req.files["profile-pic"].name
-            				}).then(()=> {
-            					// STILL LATER AUTH THIS
+	                		// DO NOT BOTHER UPDATING IMAGE IF ITS NULL (BECAUSE IT'S NOT REQUIRED)
 
-            					res.redirect("/user/dashboard");
-            				});
-            			});
-            	}
+	                		if (req.files["profile-pic"]) {
+	                			// Rename image to prevent overriding image in DB. So user does not meet a different image to what he uploaded
+	                			req.files["profile-pic"].name = `pro_pic_${user._id}${path.parse(req.files["profile-pic"].name).ext}`
 
-            }).catch(err => console.log(`Error while inserting into the data ${err}`));
+	                			req.files["profile-pic"].mv(`public/uploads/${req.files["profile-pic"].name}`)
+	                				.then(()=> {
+	                					userModel.updateOne({_id : user._id}, {
+	                						profilePic :req.files["profile-pic"].name
+	                					}).then(()=> {
+	                						// STILL LATER AUTH THIS
 
+	                						res.redirect("/user/dashboard");
+	                					});
+	                				});
+	                		}
 
-            
+	                	}).catch(err => console.log(`Error while inserting into the data ${err}`));	
+	                }
+	            });           
 
-          } catch (error) {
-            console.error(error);
-         
-            if (error.response) {
-              console.error(error.response.body)
-            }
-          }
+	        } catch (error) {	            
+	            console.error(error);
+	         
+	            if (error.response) {
+	              console.error(error.response.body)
+	            }
+	        }
         })();
     }
 
