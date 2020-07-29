@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-// const bcrypt = require("bcryptjs"); /*Import bcrypt*/
+const bcrypt = require("bcryptjs"); /*Import bcrypt*/
 
 /*createdBy and dateCreated are 2 important things when creating a DB.
 Just good practice*/
@@ -33,17 +33,18 @@ const userSchema = new Schema({
 });
 
 // Double hashing is used 
-/*userSchema.pre("save", function(next) {
+userSchema.pre("save", function(next) {
     // salt random generated characters or strings 
     bcrypt.genSalt(10).then((salt) => {
         // this.password refers to the password in User.js/controllers (ln 20)
+        console.log("PASSWORD FROM MODEL: ", this.password)
         bcrypt.hash(this.password, salt).then((encryptPassword) => {
             this.password = encryptPassword;
             next();
         }).catch(err => console.log(`Error occured when hashing ${err}`));
     });
 
-});*/
+});
 
 
 /*For every Schema you create (create a schema per collection), you must also create a model

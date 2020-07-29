@@ -6,9 +6,9 @@ const router = express.Router();
 const userModel = require("../models/Users");
 const path = require("path");	// For easy filename dismembering
 
-/*const bcrypt = require("bcryptjs");
+const bcrypt = require("bcryptjs");
 
-const isAuthenticated = require("../middleware/auth");	// Fetch auth*/
+/*const isAuthenticated = require("../middleware/auth");	// Fetch auth*/
 
 // Object to hold parameters to be sent to existing pages 
 // so user is not left hanging after submitting a form 
@@ -214,7 +214,7 @@ router.post("/create-acct", (req, res) => {
 	                }
 	                if (passwordExists) { 
 	                	errors.passwordExists = true;
-	                	console.log ("Errors: ", errors);
+
 	                	res.render(route, {
 	                	    errors,
 	                	    loginVals,
@@ -226,24 +226,35 @@ router.post("/create-acct", (req, res) => {
 
 	                	user.save().then((user) => {
 
-	                		console.log("FILE IMAGE : ", req.files["profile-pic"]);
+	                		console.log("FILE IMAGE : ", req.files);
 
 	                		// DO NOT BOTHER UPDATING IMAGE IF ITS NULL (BECAUSE IT'S NOT REQUIRED)
 
-	                		if (req.files["profile-pic"]) {
-	                			// Rename image to prevent overriding image in DB. So user does not meet a different image to what he uploaded
-	                			req.files["profile-pic"].name = `pro_pic_${user._id}${path.parse(req.files["profile-pic"].name).ext}`
+	                		if (req.files) {	// First check if images is uploaded, 
 
-	                			req.files["profile-pic"].mv(`public/uploads/${req.files["profile-pic"].name}`)
-	                				.then(()=> {
-	                					userModel.updateOne({_id : user._id}, {
-	                						profilePic :req.files["profile-pic"].name
-	                					}).then(()=> {
-	                						// STILL LATER AUTH THIS
+	                			if (req.files["profile-pic"]) {	// Then check for this particular image. Breaking it down
+	                												// this way avoids throwing error
 
-	                						res.redirect("/user/dashboard");
+	                				console.log("DO NOT RUN IF IMAGE IS NULL : ", req.files);
+
+	                				// Rename image to prevent overriding image in DB. So user does not meet a different image to what he uploaded
+	                				req.files["profile-pic"].name = `pro_pic_${user._id}${path.parse(req.files["profile-pic"].name).ext}`
+
+	                				req.files["profile-pic"].mv(`public/uploads/${req.files["profile-pic"].name}`)
+	                					.then(()=> {
+	                						userModel.updateOne({_id : user._id}, {
+	                							profilePic :req.files["profile-pic"].name
+	                						}).then(()=> {
+	                							// STILL LATER AUTH THIS
+
+	                							// Redirect to dashboard after updating record with image
+	                							res.redirect("/user/dashboard");
+	                						});
 	                					});
-	                				});
+
+	                			}
+	                		} else {	// Redirect to dashboard after saving
+	                			res.redirect("/user/dashboard");
 	                		}
 
 	                	}).catch(err => console.log(`Error while inserting into the data ${err}`));	
