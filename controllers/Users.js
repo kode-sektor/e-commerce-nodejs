@@ -27,38 +27,29 @@ const checkNull = (key, field, errors, loginVals) => {
     (field == "") ? errors.null[`${key}`] = ' should not be empty' : loginVals[`${key}`] = field;
 };
 
+// Create object to hold errors
+/*
+What errors object will eventually look like: 
+errors = {
+    null : {firstName : true, lastName : true}
+    regex : {accountPassword : 'Should be between 6 and 12 characters long'}
+}
+*/
+let errors = {
+    null : {},
+    regex : {}
+};
+let loginVals = {};
+let formValid = true;
 
-router.get("/dashboard", (req, res) => {
-    
+router.get("/dashboard", (req, res) => {    
     res.render("dashboard", {
         title : "Dashboard"
     });
-
-});
-
-//Route to direct use to Registration form
-// Means the last 
-router.get("/register", (req, res) => {
-    res.render("User/register");
 });
 
 
 router.post("/create-acct", (req, res) => {
-
-    // Create object to hold errors
-    /*
-    What errors object will eventually look like: 
-    errors = {
-        null : {firstName : true, lastName : true}
-        regex : {accountPassword : 'Should be between 6 and 12 characters long'}
-    }
-    */
-    let errors = {
-        null : {},
-        regex : {}
-    };
-    let loginVals = {};
-    let formValid = true;
     
     let firstName = (req.body["first-name"]).trim().toLowerCase();
     let lastName = (req.body["last-name"]).trim().toLowerCase();
@@ -275,46 +266,144 @@ router.post("/create-acct", (req, res) => {
 
 });
 
+
 // LOGIN ROUTE
 //Route to direct user to the login form
-/*router.post("/login", (req,res) => {
-	userModel.findOne({email:req.body.email})
-		.then(user => {
-			const errors = [];
+router.post("/login", (req, res) => {	
 
-			if (user == null) {	// email not found
-				errors.push("Sorry, wrong credentials");
-				res.render("User/login", {
-					errors
-				})  ;
-			} else {	// email found
-				bcrypt.compare(req.body.password, user.password)
-					.then(isMatched => {
-						if (isMatched) {	// password and email matches
-							req.session.userInfo = user;	// assign entire 'user' response
-							res.redirect("/user/profile");
-						} else {
-							errors.push("Sorry, wrong credentials");
-							res.render("User/login", {
-								errors
-							})
-						}
-					})
-					.catch(err => console.log(`Error: ${err}`))
-			}
-		})
+	// Create object to hold errors
+	/*
+	What errors object will eventually look like: 
+	errors = {
+	    null : {firstName : true, lastName : true}
+	    regex : {accountPassword : 'Should be between 6 and 12 characters long'}
+	}
+	*/
+
+	// Fetch login values from form
+	let loginMail = (req.body["login-mail"]).trim();
+	let password = req.body["password"];
+
+	// Create object to hold errors
+	let errors = {
+	    null : {},
+	    regex : {}
+	};
+	let loginVals = {};
+	let formValid = false;
+
+	// Check if user enters nothing
+	checkNull ("loginMail", loginMail, errors, loginVals);
+	checkNull ("password", password, errors, loginVals);
+
+	// Check Object length to see if errors
+
+	// Consider referring page to send back to in case of errors
+	let referer = req.headers.referer;  // http://localhost:3000/productListing
+	referer = referer.substring(referer.lastIndexOf('/'));    // /productListing
+	referer = referer.replace(/\//g, "");  // productListing
+
+	// This is necessary because if the user submits the page once, the url becomes 
+	// something like "http://localhost:3000/create-acct", meaning the next time user 
+	// submits form, the referer would become 'create-acct', instead of the erstwhile 
+	// url like "http://localhost:3000/productListing"
+
+	// If there's /login or /create-acct or simply nothing after localhost/3000, then its the homepage
+	if (referer != "login" && referer != "create-acct" & referer !="") {   // Combine both bcos url would retain one 
+	                                                          // of them if user switches both forms
+	    route = (referer); 
+	} else {
+		route = "User/index";
+	}
+	console.log ("referer : " + referer);
+	// Consider additional parameters to pass to depending on what route user 
+	// interacts with the form 
+
+	// console.log ("route : " + route);
+
+	if (route == "index") {
+	    addParams = {
+	        title : "Home Page",
+	       // data :   // bestSeller.getFeaturedProducts(), Fetch from MongoDB instead
+	        //dataCat : // catProduct.getCategProducts(),  Fetch from MongoDB instead
+	    }  
+	} else if (route == "productListing") {
+	   addParams = {
+	       title : "Product Listing Page",
+	       // data : // product.getNProducts(0,9)  Fetch from MongoDB instead
+	   }   
+	}
+
+	// If errors for invalid patterns exist, re-render route to referring page and export errors object
+	if (Object.keys(errors.null).length > 0) {
+	    formValid = false;
+
+       res.render(route, {
+           errors : errors.null,
+           loginVals,
+           errorClass : {active: "active"},
+           ...addParams
+       });
+	}   
+
+	// Otherwise redirect (and reload) Home page
+	 else {
+
+	 	// But first check email exists in DB
+	 	userModel.findOne({email : loginMail}).then(user => {
+
+	 		console.log("CONFIRMING IF USER'S LOGIN DETAILS EXIST IN DB: ", user);
+ 			if (user) {
+ 				console.log (password); console.log(user.password);
+ 				// OK email is found but it can only be compared when decrypted
+ 				bcrypt.compare(password, user.password).then(isMatched => {
+ 						if (isMatched) {	// password and email matches
+ 							// req.session.userInfo = user;	// assign entire 'user' response
+ 							res.redirect("/user/dashboard");
+
+ 						} else { 							
+ 							errors.matchFail = true;
+
+ 							res.render(route, {
+ 							    errors,
+ 							    loginVals,
+ 							    errorClass : {active: "active"},
+ 							    ...addParams
+ 							});
+ 						}
+ 					})
+ 					.catch(err => console.log(`Error: ${err}`))
+ 			} else {
+ 				errors.matchFail = true;
+
+ 				res.render(route, {
+ 				    errors,
+ 				    loginVals,
+ 				    errorClass : {active: "active"},
+ 				    ...addParams
+ 				});
+ 			}
+ 		})
+	}	
     
-});*/
-
-//Route to process user's request and data when user submits login form
-router.get("/login", (req,res) => {
-    res.render("User/login")
 });
-
 
 // This is the route of the next page after filling the form. 
 router.get("/dashboard", /*isAuthenticated,*/ (req,res) => {
 	res.render("User/userDashboard");
+});
+
+// COVER FOR TRAILING URL WHEN POST IS SUBMITTED. 
+// After rendering, the URL sometimes becomes http://localhost:3000/user/login, 
+// but thats not a problem but sometimes user may refresh page with that URL, that is 
+// when the page breaks
+router.get("/login", /*isAuthenticated,*/ (req,res) => {
+	res.render("User/index");
+});
+
+// This is the route of the next page after filling the form. 
+router.get("/create-acct", /*isAuthenticated,*/ (req,res) => {
+	res.render("User/index");
 });
 
 // LOGOUT ROUTE
@@ -324,3 +413,5 @@ router.get("/logout", (req, res) => {
 })
 
 module.exports=router;
+
+

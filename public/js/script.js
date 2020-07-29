@@ -30,7 +30,7 @@ document.addEventListener('keydown', function(event) {
 
 userAvatar.addEventListener('click', (e) => {
 	e.preventDefault();
-  	loginForm.querySelector('input[type="text"]:first-of-type').focus();
+  	loginForm.querySelector('input:first-of-type').focus();
 
   	html.classList.toggle('active');	// toggle the first panel 
 

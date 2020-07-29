@@ -110,15 +110,15 @@
 
                             <form id="user-details-login" class="user-details" action="/user/login" method="post" novalidate="novalidate">
                                 <div class="form-input">
-                                    <input type="text" class="form-control" id="login-name" name="login-name" 
-                                    {{#if loginVals.name}}
-                                        value="{{loginVals.name}}"
+                                    <input type="email" class="form-control" id="login-mail" name="login-mail" 
+                                    {{#if loginVals.loginMail}}
+                                        value="{{loginVals.loginMail}}"
                                     {{/if}}
-                                        placeholder="Username">
-                                    {{#if errors.name}}
-                                        <span class="error">Username should not be empty <span class="fa fa-exclamation-triangle"></span></span>
-                                    {{/if}}
+                                        placeholder="Email Address">
                                 </div>
+                                {{#if errors.loginMail}}
+                                    <span class="error">Email should not be empty <span class="fa fa-exclamation-triangle"></span></span>
+                                {{/if}}
                                 <div class="form-input">
                                     <input type="password" class="password" id="password" name="password"  
                                         {{#if loginVals.password}}
@@ -129,6 +129,9 @@
                                         <span class="error">Password should not be empty <span class="fa fa-exclamation-triangle"></span></span>
                                     {{/if}}
                                 </div>
+                                {{#if errors.matchFail}}
+                                    <span class="error">Credentials error <span class="fa fa-exclamation-triangle"></span></span>
+                                {{/if}}
                                 <div class="form-input-final">
                                     <div class="login-action">
                                         <input type="checkbox" id="remember-me" name="remember-me">
@@ -192,9 +195,6 @@
                                 {{#if errors.mailRegex}}
                                     <span class="error">{{errors.mailRegex}} <span class="fa fa-exclamation-triangle"></span></span>
                                 {{/if}}
-                                {{#if errors.passwordExists}}
-                                    <span class="error">Email is taken. Try another please <span class="fa fa-exclamation-triangle"></span></span>
-                                {{/if}}
                             </div>
                             <div class="form-input">
                                 <input type="password" class="account-password" id="account-password" name="account-password"
@@ -210,6 +210,9 @@
                                 {{/if}}
                                 {{#if errors.accountPasswordMix}}
                                     <span class="error">{{errors.accountPasswordMix}} <span class="fa fa-exclamation-triangle"></span></span>
+                                {{/if}}
+                                {{#if errors.passwordExists}}
+                                    <span class="error">Email is taken. Try another please <span class="fa fa-exclamation-triangle"></span></span>
                                 {{/if}}
                             </div>
                             <div class="form-input">

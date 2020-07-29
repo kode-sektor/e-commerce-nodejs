@@ -80,94 +80,10 @@ app.get("/productListing", (req, res) => {
 
 });
 
-app.get("/dashboard", (req, res) => {
-    
+app.get("/dashboard", (req, res) => {    
     res.render("User/dashboard", {
         title : "Dashboard"
     });
-
-});
-
-
-app.post("/login", (req, res) => {
-
-    // Create object to hold errors
-    /*
-    What errors object will eventually look like: 
-    errors = {
-        null : {firstName : true, lastName : true}
-        regex : {accountPassword : 'Should be between 6 and 12 characters long'}
-    }
-    */
-
-    // Fetch login values from form
-    let name = (req.body["login-name"]).trim();
-    let password = req.body["password"];
-
-    // Create object to hold errors
-    let errors = {
-        null : {},
-        regex : {}
-    };
-    let loginVals = {};
-    let formValid = false;
-
-    // Check if user enters nothing
-    checkNull ("name", name, errors, loginVals);
-    checkNull ("password", password, errors, loginVals);
-
-    // Check Object length to see if errors
-
-    // If errors for invalid patterns exist, re-render route to referring page and export errors object
-    if (Object.keys(errors.null).length > 0) {
-        formValid = false;
-
-        // Consider referring page to send back to in case of errors
-        let referer = req.headers.referer;  // http://localhost:3000/productListing
-        // console.log ("referer : " + referer);
-
-        referer = referer.substring(referer.lastIndexOf('/'));    // /productListing
-        referer = referer.replace(/\//g, "");  // productListing
-
-        // This is necessary because if the user submits the page once, the url becomes 
-        // something like "http://localhost:3000/create-acct", meaning the next time user 
-        // submits form, the referer would become 'create-acct', instead of the erstwhile 
-        // url like "http://localhost:3000/productListing"
-        if (referer != "login" && referer != "create-acct") { // Combine both bcos url would retain one 
-                                                              // of them if user switches both forms
-            route = (referer) ? referer : "index"; 
-        }
-        // console.log ("route : " + route);
-
-        // Consider additional parameters to pass to depending on what route user 
-        // interacts with the form 
-        if (route == "index") {
-            addParams = {
-                title : "Home Page",
-                data : bestSeller.getFeaturedProducts(),
-                dataCat : catProduct.getCategProducts() 
-            }  
-        } else if (route == "productListing") {
-           addParams = {
-               title : "Product Listing Page",
-               data : product.getNProducts(0,9) 
-           }   
-        }
-
-        res.render(route, {
-            errors : errors.null,
-            loginVals,
-            errorClass : {active: "active"},
-            ...addParams
-        });
-    }   
-
-    // Otherwise redirect (and reload) Home page
-     else {
-        console.log ('Login successful');
-        res.redirect("dashboard");
-    }
-
 });
 
 app.use(fileUpload());
