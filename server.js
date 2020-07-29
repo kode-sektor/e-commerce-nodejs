@@ -10,6 +10,9 @@ const bestSeller = require("./models/bestSeller");
 
 const app = express();
 
+//This loads all our environment variables from the key.env
+require("dotenv").config({path:'./config/key.env'});
+
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 
@@ -177,10 +180,10 @@ app.post("/create-acct", (req, res) => {
     let email = (req.body["email"]).trim();
     let accountPassword = (req.body["account-password"]).trim();
 
-    firstName = firstName.charAt(0).toUpperCase() + firstName.slice(1);
+    firstName = firstName.charAt(0).toUpperCase() + firstName.slice(1); // K + ad
     lastName = lastName.charAt(0).toUpperCase() + lastName.slice(1)
 
-    const regexMail = new RegExp(/[a-zA-Z0-9_.+-]+@[a-zA-Z0-9]+\.[a-zA-Z0-9-.]+/);
+    const regexMail = new RegExp(/[a-zA-Z0-9_.+-]+@[a-zA-Z0-9]+\.[a-zA-Z0-9-.]+/);  // kodesektor@rocketmail.com
     const regexLettersNos = new RegExp(/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/);
 
     // Stage 1: Check for nulls
@@ -188,12 +191,13 @@ app.post("/create-acct", (req, res) => {
         if (field.length < 6 || field.length > 12) {
             errors.regex[`${key}`] = msg;
         }
-    }
+    }  
 
     const checkRegexMail = (key, field, pattern, msg) => {
         if (!pattern.test(field)) {
             errors.regex[`${key}`] = msg;
         }
+        console.log (pattern.test(field));
     }
 
     const checkRegexLettersNos = (key, field, pattern, msg) => {

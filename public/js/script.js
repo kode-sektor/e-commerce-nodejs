@@ -23,6 +23,7 @@ document.addEventListener('keydown', function(event) {
     	createAcctModal.classList.remove('active');
     }
 });
+
 // Listen to click on userAvatar icon and add a class of active to :root
 // which is responsible for sliding in the login form by virtue 
 // of contextual selection and transform property
