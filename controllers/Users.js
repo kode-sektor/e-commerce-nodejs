@@ -208,11 +208,13 @@ router.post("/create-acct", (req, res) => {
 
 	            // BEFORE SAVING TO DATABASE , ENSURE PASSWORD DOESNT EXIST IN DATABASE
 
-	        	userModel.findOne({password : accountPassword}, function(err, passwordExists) {
+	        	userModel.findOne({email}, function(err, emailExists) {
+
+	        		console.log ("EMAIL EXISTS: ", emailExists);
 	                if (err) {
 	                	return res(err);
 	                }
-	                if (passwordExists) { 
+	                if (emailExists) { 
 	                	errors.passwordExists = true;
 
 	                	res.render(route, {
