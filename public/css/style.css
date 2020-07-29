@@ -558,6 +558,38 @@ main {
     width: 100%;
     margin-bottom: .75rem;
 }
+input[type=file] {
+	width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+input[type=file] + label {
+    max-width: 80%;
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    padding: 0.625rem 1.25rem;
+    color: #f1e5e6;
+    background-color: hsla(48 95% 45% / .8);
+}
+input[type=file] + label svg {
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+    fill: currentColor;
+    margin-top: -0.25em;
+    margin-right: 0.25em;
+}
+svg:not(:root) {
+    overflow: hidden;
+}
 .user-details .form-input:last-of-type {
 	margin-bottom: 17px;
 }
