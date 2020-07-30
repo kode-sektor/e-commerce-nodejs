@@ -11,7 +11,7 @@ const dashBoardLoader = (req, res) => {
     if (req.session.userDetails.admin=="true") {
         res.redirect("/admin/admin-dashboard");
     } else  /*If loggedin but not regular user redirect to userDashboard*/ {
-        res.redirect("/user/profile");
+        res.redirect("/user/login");
     }
 }
 

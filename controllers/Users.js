@@ -11,7 +11,6 @@ const session = require('express-session');
 
 const authHome = require("../auth/authHome");
 const isAuth = require("../auth/auth");	// Fetch auth
-const dashBoardLoader = require("../auth/authorisation");
 
 // Object to hold parameters to be sent to existing pages 
 // so user is not left hanging after submitting a form 
@@ -54,7 +53,7 @@ let formValid = true;
 /*router.get("/profile", isAuth, dashBoardLoader);
 */
 // This is the route of the next page after filling the form. 
-router.get("/profile", isAuth, dashBoardLoader, (req, res) => {
+router.get("/profile", isAuth, (req, res) => {
 	res.render("User/profile", {
 		title : "Dashboard"
 	})
