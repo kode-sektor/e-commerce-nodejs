@@ -28,7 +28,14 @@ const productSchema = new Schema({
     category : {
         type : String,
         required : true
-    }
+    },
+    quantity : {
+        type: String,
+        require : true
+    },
+    profilePic : {
+        type : String 
+    },
     
 });
 
