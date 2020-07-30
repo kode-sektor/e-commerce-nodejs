@@ -45,6 +45,7 @@ let errors = {
 let loginVals = {};
 let formValid = true;
 
+
 router.get("/dashboard", (req, res) => {    
     res.render("dashboard", {
         title : "Dashboard"
@@ -72,12 +73,6 @@ router.get("/login", (req,res) => {
 // This is the route of the next page after filling the form. 
 router.get("/create-acct", (req,res) => {
 	res.render("User/index");
-});
-
-// LOGOUT ROUTE
-router.get("/logout", (req, res) => {
-	req.session.destroy();
-	res.redirect("/user/login");
 });
 
 

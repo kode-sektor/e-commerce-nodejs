@@ -75,7 +75,12 @@
                         <li class="nav-search">
                             <span class="fa fa-search"></span>
                         </li>
-                        <li> <a id="login-create-account" href="/login"><span class="fa fa-user"></span></a></li>
+                        <li> 
+                            {{#if user}}
+                                <a id="logout-btn" href="/logout">Logout</a>
+                                {{else}}
+                                <a id="login-create-account" href="/login"><span class="fa fa-user"></span></a>
+                            {{/if}}
                         <li><a href="/cart"><span class="fa fa-shopping-cart"></span></a></li>
 
                         <li><button type="button" id="toggle-btn-nav" class="toggle-btn-nav"><span class="fa fa-bars"></span></button></li>

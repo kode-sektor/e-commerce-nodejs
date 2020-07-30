@@ -37,6 +37,8 @@ require("dotenv").config({path:'./config/key.env'});
 //import your router objects
 const userRoutes = require("./controllers/Users");
 const productRoutes = require("./controllers/Products");
+const generalRoutes = require("./controllers/Generals");
+
 
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
@@ -64,14 +66,6 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.urlencoded({extended: false}));
 
-app.get('/', (req, res) => {
-    res.render("User/index", {
-        title : "Home Page",
-        data : bestSeller.getFeaturedProducts(),
-        dataCat : catProduct.getCategProducts()
-    });
-});
-
 app.get("/productListing", (req, res) => {
     
     res.render("productListing", {
@@ -87,6 +81,8 @@ app.get("/productListing", (req, res) => {
     });
 });
 */
+
+
 app.use(fileUpload());
 
 // Session middleware
@@ -97,7 +93,7 @@ app.use(session({
     saveUninitialized: true,
 }));
 
-app.use((req,res,next)=>{
+app.use((req, res, next)=>{
 
     // user object made to be available in .handlebars 
     // With this instead of always using .render (in the controller) just to pass in extra
@@ -108,6 +104,7 @@ app.use((req,res,next)=>{
     next();
 });
 
+app.use("/", generalRoutes);
 app.use("/user", userRoutes);   // The meaning of this is, in the URL, '/user' must come first /user/register, /user/login etc.
 
 // Pass in the connection string variable from the env variable as 1st argument
