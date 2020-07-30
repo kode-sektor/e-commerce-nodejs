@@ -36,8 +36,8 @@ require("dotenv").config({path:'./config/key.env'});
 
 //import your router objects
 const userRoutes = require("./controllers/Users");
-const productRoutes = require("./controllers/Products");
 const generalRoutes = require("./controllers/Generals");
+const adminRoutes = require("./controllers/Admin");
 
 
 app.engine('handlebars', exphbs());
@@ -106,6 +106,7 @@ app.use((req, res, next)=>{
 
 app.use("/", generalRoutes);
 app.use("/user", userRoutes);   // The meaning of this is, in the URL, '/user' must come first /user/register, /user/login etc.
+app.use("/admin", adminRoutes);
 
 // Pass in the connection string variable from the env variable as 1st argument
 mongoose.connect(process.env.MONGO_DB_CONNECTION_STRING, {useNewUrlParser: true, useUnifiedTopology: true}

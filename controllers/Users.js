@@ -30,6 +30,10 @@ const checkNull = (key, field, errors, loginVals) => {
     (field == "") ? errors.null[`${key}`] = ' should not be empty' : loginVals[`${key}`] = field;
 };
 
+const loadProducts = () => {
+
+}
+
 // Create object to hold errors
 /*
 What errors object will eventually look like: 
@@ -46,20 +50,9 @@ let loginVals = {};
 let formValid = true;
 
 
-router.get("/dashboard", (req, res) => {    
-    res.render("dashboard", {
-        title : "Dashboard"
-    });
-});
-
 // This is the route of the next page after filling the form. 
 router.get("/profile", isAuth, dashBoardLoader, (req, res) => {
 	res.render("User/profile");
-});
-
-// This is the route of the next page after filling the form. 
-router.get("/admin-dashboard", authHome, (req, res) => {
-	res.render("User/dashboard");
 });
 
 // COVER FOR TRAILING URL WHEN POST IS SUBMITTED. 
@@ -263,12 +256,12 @@ router.post("/create-acct", (req, res) => {
 	                				req.files["profile-pic"].mv(`public/uploads/${req.files["profile-pic"].name}`)
 	                					.then(()=> {
 	                						userModel.updateOne({_id : user._id}, {
-	                							profilePic :req.files["profile-pic"].name
+	                							profilePic : req.files["profile-pic"].name
 	                						}).then(()=> {
 	                							// STILL LATER AUTH THIS
 
 	                							// Redirect to dashboard after updating record with image
-	                							res.redirect("/user/admin-dashboard");
+	                							res.redirect("/admin/admin-dashboard");
 	                						});
 	                					});
 	                			}
@@ -276,7 +269,7 @@ router.post("/create-acct", (req, res) => {
 
 	                			// Cache user object in session
 	                			req.session.userDetails = user;
-	                			res.redirect("/user/admin-dashboard");
+	                			res.redirect("/admin/admin-dashboard");
 	                		}
 
 	                	}).catch(err => console.log(`Error while inserting into the data ${err}`));	
@@ -389,7 +382,7 @@ router.post("/login", (req, res) => {
  							// Cache user object in session
                 			req.session.userDetails = user;
                 			console.log("SESSION AFTER SUCCESSFUL LOGIN: ", req.session);
-                			res.redirect("/user/admin-dashboard");
+                			res.redirect("/admin/admin-dashboard");
  						} else { 							
  							errors.matchFail = true;
 

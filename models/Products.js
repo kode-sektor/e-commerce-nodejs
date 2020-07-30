@@ -18,7 +18,7 @@ const productSchema = new Schema({
         required : Date.now()
     },
     featured : {
-        type : String,
+        type : Boolean,
         required : true
     },
     imgPath : {
@@ -32,11 +32,7 @@ const productSchema = new Schema({
     quantity : {
         type: String,
         require : true
-    },
-    profilePic : {
-        type : String 
-    },
-    
+    }    
 });
 
 /*For every Schema you create (create a schema per collection), you must also create a model
