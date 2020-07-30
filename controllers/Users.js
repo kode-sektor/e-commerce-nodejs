@@ -7,8 +7,11 @@ const userModel = require("../models/Users");
 const path = require("path");	// For easy filename dismembering
 
 const bcrypt = require("bcryptjs");
+const session = require('express-session');
 
-/*const isAuthenticated = require("../middleware/auth");	// Fetch auth*/
+const authHome = require("../auth/authHome");
+const isAuth = require("../auth/auth");	// Fetch auth
+const dashBoardLoader = require("../auth/authorisation");
 
 // Object to hold parameters to be sent to existing pages 
 // so user is not left hanging after submitting a form 
@@ -46,6 +49,35 @@ router.get("/dashboard", (req, res) => {
     res.render("dashboard", {
         title : "Dashboard"
     });
+});
+
+// This is the route of the next page after filling the form. 
+router.get("/profile", isAuth, dashBoardLoader, (req, res) => {
+	res.render("User/profile");
+});
+
+// This is the route of the next page after filling the form. 
+router.get("/admin-dashboard", authHome, (req, res) => {
+	res.render("User/dashboard");
+});
+
+// COVER FOR TRAILING URL WHEN POST IS SUBMITTED. 
+// After rendering, the URL sometimes becomes http://localhost:3000/user/login, 
+// but thats not a problem but sometimes user may refresh page with that URL, that is 
+// when the page breaks
+router.get("/login", (req,res) => {
+	res.render("User/index");
+});
+
+// This is the route of the next page after filling the form. 
+router.get("/create-acct", (req,res) => {
+	res.render("User/index");
+});
+
+// LOGOUT ROUTE
+router.get("/logout", (req, res) => {
+	req.session.destroy();
+	res.redirect("/user/login");
 });
 
 
@@ -241,13 +273,15 @@ router.post("/create-acct", (req, res) => {
 	                							// STILL LATER AUTH THIS
 
 	                							// Redirect to dashboard after updating record with image
-	                							res.redirect("/user/dashboard");
+	                							res.redirect("/user/admin-dashboard");
 	                						});
 	                					});
-
 	                			}
 	                		} else {	// Redirect to dashboard after saving
-	                			res.redirect("/user/dashboard");
+
+	                			// Cache user object in session
+	                			req.session.userDetails = user;
+	                			res.redirect("/user/admin-dashboard");
 	                		}
 
 	                	}).catch(err => console.log(`Error while inserting into the data ${err}`));	
@@ -354,13 +388,13 @@ router.post("/login", (req, res) => {
 
 	 		console.log("CONFIRMING IF USER'S LOGIN DETAILS EXIST IN DB: ", user);
  			if (user) {
- 				console.log (password); console.log(user.password);
  				// OK email is found but it can only be compared when decrypted
  				bcrypt.compare(password, user.password).then(isMatched => {
  						if (isMatched) {	// password and email matches
- 							// req.session.userInfo = user;	// assign entire 'user' response
- 							res.redirect("/user/dashboard");
-
+ 							// Cache user object in session
+                			req.session.userDetails = user;
+                			console.log("SESSION AFTER SUCCESSFUL LOGIN: ", req.session);
+                			res.redirect("/user/admin-dashboard");
  						} else { 							
  							errors.matchFail = true;
 
@@ -388,29 +422,6 @@ router.post("/login", (req, res) => {
     
 });
 
-// This is the route of the next page after filling the form. 
-router.get("/dashboard", /*isAuthenticated,*/ (req,res) => {
-	res.render("User/userDashboard");
-});
-
-// COVER FOR TRAILING URL WHEN POST IS SUBMITTED. 
-// After rendering, the URL sometimes becomes http://localhost:3000/user/login, 
-// but thats not a problem but sometimes user may refresh page with that URL, that is 
-// when the page breaks
-router.get("/login", /*isAuthenticated,*/ (req,res) => {
-	res.render("User/index");
-});
-
-// This is the route of the next page after filling the form. 
-router.get("/create-acct", /*isAuthenticated,*/ (req,res) => {
-	res.render("User/index");
-});
-
-// LOGOUT ROUTE
-router.get("/logout", (req, res) => {
-	req.session.destroy();
-	res.redirect("/user/login");
-})
 
 module.exports=router;
 

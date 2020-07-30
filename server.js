@@ -6,6 +6,8 @@ const fileUpload = require('express-fileupload');
 
 // Add body parser to process form data 
 const bodyParser = require('body-parser');
+const session = require('express-session');
+
 
 // Object to hold parameters to be sent to existing pages 
 // so user is not left hanging after submitting a form 
@@ -68,7 +70,6 @@ app.get('/', (req, res) => {
         data : bestSeller.getFeaturedProducts(),
         dataCat : catProduct.getCategProducts()
     });
-
 });
 
 app.get("/productListing", (req, res) => {
@@ -80,13 +81,32 @@ app.get("/productListing", (req, res) => {
 
 });
 
-app.get("/dashboard", (req, res) => {    
+/*app.get("/dashboard", (req, res) => {    
     res.render("User/dashboard", {
         title : "Dashboard"
     });
 });
-
+*/
 app.use(fileUpload());
+
+// Session middleware
+app.use(session({
+    name : 'sid',
+    secret: `${process.env.SECRET_KEY}`,
+    resave: false,
+    saveUninitialized: true,
+}));
+
+app.use((req,res,next)=>{
+
+    // user object made to be available in .handlebars 
+    // With this instead of always using .render (in the controller) just to pass in extra
+    // details, you could use .redirect instead. 'user' object here will hold any extra 
+    // details you pass. You could create more res.locals if you want
+    res.locals.user = req.session.userDetails;
+
+    next();
+});
 
 app.use("/user", userRoutes);   // The meaning of this is, in the URL, '/user' must come first /user/register, /user/login etc.
 
