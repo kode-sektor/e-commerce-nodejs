@@ -12,6 +12,8 @@ const session = require('express-session');
 const authHome = require("../auth/authHome");
 const isAuth = require("../auth/auth");	// Fetch auth
 const dashBoardLoader = require("../auth/authorisation");
+const dashBoard = require("../auth/dashboard");
+
 
 // Object to hold parameters to be sent to existing pages 
 // so user is not left hanging after submitting a form 
@@ -27,7 +29,7 @@ const loadProducts = () => {
 }
 
 // This is the route of the next page after filling the form. 
-router.get("/admin-dashboard", authHome, (req, res) => {
+router.get("/admin-dashboard", isAuth, dashBoardLoader, (req, res) => {
 	res.render("Admin/dashboard", {
 		title : "Dashboard"
 	});

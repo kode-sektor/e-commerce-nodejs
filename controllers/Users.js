@@ -51,8 +51,13 @@ let formValid = true;
 
 
 // This is the route of the next page after filling the form. 
+/*router.get("/profile", isAuth, dashBoardLoader);
+*/
+// This is the route of the next page after filling the form. 
 router.get("/profile", isAuth, dashBoardLoader, (req, res) => {
-	res.render("User/profile");
+	res.render("User/profile", {
+		title : "Dashboard"
+	})
 });
 
 // COVER FOR TRAILING URL WHEN POST IS SUBMITTED. 
@@ -258,10 +263,9 @@ router.post("/create-acct", (req, res) => {
 	                						userModel.updateOne({_id : user._id}, {
 	                							profilePic : req.files["profile-pic"].name
 	                						}).then(()=> {
-	                							// STILL LATER AUTH THIS
 
 	                							// Redirect to dashboard after updating record with image
-	                							res.redirect("/admin/admin-dashboard");
+	                							res.redirect("/user/profile");
 	                						});
 	                					});
 	                			}
@@ -269,7 +273,7 @@ router.post("/create-acct", (req, res) => {
 
 	                			// Cache user object in session
 	                			req.session.userDetails = user;
-	                			res.redirect("/admin/admin-dashboard");
+	                			res.redirect("/user/profile");
 	                		}
 
 	                	}).catch(err => console.log(`Error while inserting into the data ${err}`));	
@@ -382,7 +386,7 @@ router.post("/login", (req, res) => {
  							// Cache user object in session
                 			req.session.userDetails = user;
                 			console.log("SESSION AFTER SUCCESSFUL LOGIN: ", req.session);
-                			res.redirect("/admin/admin-dashboard");
+                			res.redirect("/user/profile");
  						} else { 							
  							errors.matchFail = true;
 
