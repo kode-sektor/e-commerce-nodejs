@@ -1,6 +1,6 @@
 
 
-const dashBoardLoader = (req, res) => {
+const dashBoardLoader = (req, res, next) => {
 
 	/*If loggedin and admin, redirect to adminDashboard*/
 
@@ -8,10 +8,10 @@ const dashBoardLoader = (req, res) => {
 
 	console.log("STATE OF SESSION IN AUTHORISATION.JS", req.session);
 
-    if (req.session.userDetails.admin=="true") {
-        res.redirect("/admin/admin-dashboard");
-    } else  /*If loggedin but not regular user redirect to userDashboard*/ {
+    if (req.session.userDetails.admin!=="true") {
         res.redirect("/user/login");
+    } else {
+    	next();
     }
 }
 

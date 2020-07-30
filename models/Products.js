@@ -32,7 +32,11 @@ const productSchema = new Schema({
     quantity : {
         type: String,
         require : true
-    }    
+    },
+    dateCreated : {
+        type : Date,
+        default : Date.now()
+    }, 
 });
 
 /*For every Schema you create (create a schema per collection), you must also create a model
