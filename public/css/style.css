@@ -214,6 +214,14 @@ label {
     text-transform: uppercase;
     transition: all .3s ease-out 0s;
 }
+a.profile {
+	color: var(--blue) !important;
+	opacity: 1 !important;
+	text-shadow: 1px 0 1px rgba(0,0,0,.3);
+}
+.logout-btn {
+	font-size: 1em !important;
+}
 .user-related-links li a, .user-related-links .fa-search {
 	font-weight: lighter !important;
 	opacity: .4;

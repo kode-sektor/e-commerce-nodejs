@@ -36,10 +36,10 @@ router.get("/admin-dashboard", authHome, dashBoardLoader, (req, res) => {
 			}
 		});
 
-		console.log (loadedProducts);
+		console.log ("LOADED PRODUCTS: ", loadedProducts);
 
 		res.render("Admin/dashboard", {
-			title : "Dashboard",
+			title : "Admin-Dashboard",
 			data : loadedProducts
 		});
 	});

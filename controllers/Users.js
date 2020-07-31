@@ -17,8 +17,6 @@ const isAuth = require("../auth/auth");	// Fetch auth
 // because the form lives on every page
 
 const app = express();
-//This loads all our environment variables from the key.env
-//require("dotenv").config({path:'./config/key.env'});
 
 
 let addParams = {}; 
@@ -29,9 +27,6 @@ const checkNull = (key, field, errors, loginVals) => {
     (field == "") ? errors.null[`${key}`] = ' should not be empty' : loginVals[`${key}`] = field;
 };
 
-const loadProducts = () => {
-
-}
 
 // Create object to hold errors
 /*

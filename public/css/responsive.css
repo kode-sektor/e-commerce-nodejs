@@ -162,7 +162,7 @@ So better to set left at 50% in style.css so browser always meets that first*/
 	.main-menu-nav li a {
 		color: var(--text-grey);
 		font-size: 16px;
-		text-transform: capitalize;
+		text-transform: uppercase;
 		padding: 0;
 	}
 	.main-menu-nav > .categories-first {

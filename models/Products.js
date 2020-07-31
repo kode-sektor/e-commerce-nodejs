@@ -14,8 +14,8 @@ const productSchema = new Schema({
         required : true
     },
     price : {
-        type : Date,
-        required : Date.now()
+        type : String,
+        required :true
     },
     featured : {
         type : Boolean,

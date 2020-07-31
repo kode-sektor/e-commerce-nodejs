@@ -15,35 +15,27 @@ const session = require('express-session');
 
 const app = express();
 
+// This loads all our environment variables from the key.env
+require("dotenv").config({path:'./config/key.env'});
 
-/*let addParams = {}; 
-let route = '';
-const senderMail = 'kayodeibiyemi92@gmail.com';
-
-const checkNull = (key, field, errors, loginVals) => {
-    (field == "") ? errors.null[`${key}`] = ' should not be empty' : loginVals[`${key}`] = field;
-};*/
-
-
+// Handlebars middlware
+app.engine("handlebars", exphbs({
+    extname : '.handlebars',
+    helpers : require('./config/handlebars-helpers')
+}));
 
 const product = require("./models/product");
 const catProduct = require("./models/productCategory");
 const bestSeller = require("./models/bestSeller");
 
 
-//This loads all our environment variables from the key.env
-require("dotenv").config({path:'./config/key.env'});
-
-//import your router objects
+// Import your router objects
 const userRoutes = require("./controllers/Users");
 const generalRoutes = require("./controllers/Generals");
 const adminRoutes = require("./controllers/Admin");
 
 
-app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
-
-app.use(express.static("public"));
 
 
 app.use((req, res, next) => {
@@ -66,6 +58,10 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.urlencoded({extended: false}));
 
+//express static middleware
+app.use(express.static("public"));
+
+
 app.get("/productListing", (req, res) => {
     
     res.render("productListing", {
@@ -74,13 +70,6 @@ app.get("/productListing", (req, res) => {
     });
 
 });
-
-/*app.get("/dashboard", (req, res) => {    
-    res.render("User/dashboard", {
-        title : "Dashboard"
-    });
-});
-*/
 
 
 app.use(fileUpload());
@@ -93,7 +82,7 @@ app.use(session({
     saveUninitialized: true,
 }));
 
-app.use((req, res, next)=>{
+app.use((req, res, next) => {
 
     // user object made to be available in .handlebars 
     // With this instead of always using .render (in the controller) just to pass in extra
