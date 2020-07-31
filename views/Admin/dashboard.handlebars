@@ -35,7 +35,10 @@
 	                    <span>{{this.price}}</span>
 	                </td>
 	                <td>
-	                    <span>{{this.featured}}</span>
+	                    <span>
+	                    	<input id="featured" class="featured" type="checkbox" id="switch" {{#ifeq this.featured true}} checked {{/ifeq}}/>
+	                    	<label for="featured" class="switch-featured" for="switch">Toggle</label>
+	                    </span>
 	                </td>
 	                <td>
 	                   <span class="thumb-img-"><img class="thumb-img" src="/uploads/{{this.imgPath}}" alt="{{this.imgPath}}"></span>
