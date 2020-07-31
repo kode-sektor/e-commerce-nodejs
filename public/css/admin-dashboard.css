@@ -6,15 +6,31 @@
     font-family: sans-serif;
     font-weight: 100;
 }
+.dashboard > div {
+  position: relative;
+  width: 80%;
+  margin: 0 auto;
+}
+.product-add {
+  position: absolute;
+  right: 10px;
+  bottom: 15px;
+  background: none;
+  padding: 15px 20px;
+  text-transform: uppercase;
+  border: none;
+  outline: none;
+  font-size: 1em;
+  color: white;
+  font-family: var(--font-secondary);
+  background: rgba(0,0,0,.2);
+  transition: all .2s;
+}
+.product-add:hover, .product-add:focus {
+  background:  rgba(0,0,0,.5);
+}
 .dashboard-list td span {
     text-transform: capitalize;
-}
-.container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
 }
 table {
     width: 80%;
