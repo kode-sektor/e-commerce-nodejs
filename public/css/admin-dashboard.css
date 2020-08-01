@@ -254,3 +254,6 @@ select,
     display: block;
     text-align: left;
 }
+option.product-category {
+  text-transform: uppercase;
+}

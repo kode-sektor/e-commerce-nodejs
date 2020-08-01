@@ -4,9 +4,8 @@ const router = express.Router();
 
 // Import schema
 const productModel = require("../models/Products");
-const path = require("path");	// For easy filename dismembering
+const categoryModel = require("../models/Categories");
 
-const bcrypt = require("bcryptjs");
 const session = require('express-session');
 
 const authHome = require("../auth/authHome");
@@ -38,9 +37,17 @@ router.get("/admin-dashboard", authHome, dashBoardLoader, (req, res) => {
 
 		console.log ("LOADED PRODUCTS: ", loadedProducts);
 
-		res.render("Admin/dashboard", {
-			title : "Admin-Dashboard",
-			data : loadedProducts
+		categoryModel.find().then((categories) => {
+			const loadedCategories = categories.map(category => {
+				return { title : category.title};
+			});
+
+			res.render("Admin/dashboard", {
+				title : "Admin-Dashboard",
+				data : loadedProducts,
+				categories : loadedCategories
+			});
+			
 		});
 	});
 });

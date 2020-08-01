@@ -92,8 +92,9 @@
             <div class="form-input product-category">
             	<label for="product-category">Category: </span></label>
             	<select class="form-input product-category" id="product-category" name="product-category">
-            	    <option>
-            	    </option>
+            		{{#each categories}}
+            	    	<option class="product-category" value="{{this.title}}">{{this.title}}</option>
+            	    {{/each}}
             	</select>
             </div>
             <div class="form-input">
