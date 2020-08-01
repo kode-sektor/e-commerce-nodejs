@@ -30,7 +30,7 @@
 	                <td>
 	                   <span>{{this.description}}</span>		                  
 	                </td>
-	                <td>
+	                <td>productData
 	                    <span>{{this.price}}</span>
 	                </td>
 	                <td>
@@ -51,10 +51,10 @@
 	                   <span>{{this.quantity}}</span>
 	                </td>
 	                <td>
-	                    <a id="edit-ctrl" class="edit-ctrl" href="/product/edit/{{this.id}}" class="edit-delete-button"><span class="fa fa-pencil"></span></a>
+	                    <a id="edit-ctrl" class="edit-ctrl" href="/admin/edit/{{this.id}}" class="edit-delete-button"><span class="fa fa-pencil"></span></a>
 	                </td>
 	                <td>
-	                    <a id="trash-ctrl" class="trash-ctrl" href="/product/delete/{{this.id}}?method=DELETE" class="edit-delete-button"><span class="fa fa-trash"></span></a>
+	                    <a id="trash-ctrl" class="trash-ctrl" href="/admin/delete/{{this.id}}?method=DELETE" class="edit-delete-button"><span class="fa fa-trash"></span></a>
 	                </td> 
 	            </tr>
 
@@ -74,35 +74,50 @@
 		   <img src="/img/cross.png" alt="close product form"/>
 		</button>
 
-		<form id="form-product-add" class="form-product-add" action="/admin/add-product" method="post" enctype="multipart/form-data" novalidate="novalidate">
+		<form id="form-product-add" class="form-product-add" action="/admin/{{#if product_title}}edit-product{{else}}add-product{{/if}}" method="post" enctype="multipart/form-data" novalidate="novalidate">
+
 			<div class="box-login-tab"></div>
+
 			<legend>PRODUCT DOCUMENT</legend>
 		    <div class="form-input">
-		        <input type="text" class="form-control" id="product-title" name="product-title" placeholder="Product Title">
+		        <input type="text" class="form-control" id="product-title" name="product-title" value="{{#if product_title}}{{product_title}}{{/if}}" placeholder="Product Title">
 		    </div>
 		    <div class="form-input">
-		        <input type="text" class="form-control" id="product-description" name="product-description" placeholder="Product Description">
+		        <input type="text" class="form-control" id="product-description" name="product-description" value="{{#if product_description}}{{product_description}}{{/if}}" placeholder="Product Description">
 		    </div>
 		    <div class="form-input">
-		        <input type="number" class="form-control" id="product-cost" name="product-cost" placeholder="Product Cost ($CAD)" step="5">
+		        <input type="number" class="form-control" id="product-cost" name="product-cost" value="{{#if product_price}}{{product_price}}{{/if}}" placeholder="Product Cost ($CAD)" step="5">
 		    </div>
 		    <div class="form-input register-switch">
-                <input type="radio" name="featured" id="feature" value="feature" class="register-switch-input" checked="">
+                <input type="radio" name="featured" id="feature" value="feature" class="register-switch-input" 
+                {{#if product_featured}}
+                	{{#ifeq product_featured true}}
+                		checked
+                	{{/ifeq}}
+                	{{else}}
+                		checked    {{!this 'checked' is here stands as the default if the form is for add-product, not edit-product}}
+                {{/if}}>
                 <label for="feature" class="register-switch-label">Feature <span class="fa fa-check"></span></label>
 
-                <input type="radio" name="featured" id="do-not-feature" value="do-not-feature" class="register-switch-input">
+                <input type="radio" name="featured" id="do-not-feature" value="do-not-feature" class="register-switch-input" 
+                {{#if product_featured}}
+                	{{#ifeq product_featured true}}
+                		checked
+                	{{/ifeq}}
+                	{{else}}
+                {{/if}}>
                 <label for="do-not-feature" class="register-switch-label">Do not Feature <span class="fa fa-window-close"></span></label>
             </div>
             <div class="form-input product-category">
             	<label for="product-category">Category: </span></label>
             	<select class="form-input product-category" id="product-category" name="product-category">
-            		{{#each categories}}
-            	    	<option class="product-category" value="{{this.title}}">{{this.title}}</option>
-            	    {{/each}}
+        		{{#each categories}}
+        	    	<option class="product-category" value="{{this.title}}">{{this.title}}</option>
+        	    {{/each}}
             	</select>
             </div>
             <div class="form-input">
-                <input type="number" class="form-control" id="product-qty" name="product-qty" placeholder="Product Quantity" step="1">
+                <input type="number" class="form-control" id="product-qty" name="product-qty" placeholder="Product Quantity" step="1" value="{{#if product_quantity}}{{product_quantity}}{{/if}}">
             </div>
 		    <div class="form-input file"> 
 		        <input type="file" class="form-control" id="profile-pic" name="profile-pic">
@@ -111,7 +126,7 @@
 
 		    <div class="form-input-final">
 		        <button class="login-btn cta-btn" type="submit" value="submit" class="submit">
-		            ADD PRODUCT
+		            {{#if product_title}}EDIT{{else}}ADD{{/if}} PRODUCT
 		        </button>
 		    </div>
 

@@ -271,3 +271,6 @@ option.product-category {
     height: 40px;
     opacity: .6;
 }
+.close-product-form:hover, .close-product-form:focus {
+    opacity: 1;
+}

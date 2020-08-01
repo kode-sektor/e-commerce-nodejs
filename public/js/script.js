@@ -31,26 +31,28 @@ document.addEventListener('keydown', function(event) {
 // which is responsible for sliding in the login form by virtue 
 // of contextual selection and transform property
 
-userAvatar.addEventListener('click', (e) => {
-	  e.preventDefault();
-  	loginForm.querySelector('input:first-of-type').focus();
+if (userAvatar) {
+    userAvatar.addEventListener('click', (e) => {
+        e.preventDefault();
+        loginForm.querySelector('input:first-of-type').focus();
 
-  	html.classList.toggle('active');	// toggle the first panel 
+        html.classList.toggle('active');  // toggle the first panel 
 
-  	// Toggling the second panel (Create Account form) will be out of sync if 
-  	// its currently hidden while the Login form is on display. You should only
-  	// toggle it when it's on display while the Login form is on display or if 
-  	// both are hidden 
+        // Toggling the second panel (Create Account form) will be out of sync if 
+        // its currently hidden while the Login form is on display. You should only
+        // toggle it when it's on display while the Login form is on display or if 
+        // both are hidden 
 
-  	// And at the same time, it should not be toggled right from page load 
-  	// because user is to first interact with login form. Hence only determine to 
-  	// toggle it when the user as interacted with it by clicking the 'Create Account'
-  	// button
+        // And at the same time, it should not be toggled right from page load 
+        // because user is to first interact with login form. Hence only determine to 
+        // toggle it when the user as interacted with it by clicking the 'Create Account'
+        // button
 
-  	if ((createAcctBtn.textContent).toLowerCase() == "back to login") {
-  		createAcctModal.classList.toggle('active');
-  	}	
-});
+        if ((createAcctBtn.textContent).toLowerCase() == "back to login") {
+          createAcctModal.classList.toggle('active');
+        } 
+    });
+}
 
 // On (re-)load event that arises from the user submitting login form, the same class
 // 'active' used to slide out the form on click is the same class passed in through
