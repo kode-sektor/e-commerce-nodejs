@@ -27,6 +27,14 @@
     font-weight: lighter;
     font-family: var(--font-secondary);
 }
+::-webkit-input-placeholder,
+::-moz-placeholder,
+:-ms-input-placeholder,
+:-moz-placeholder {
+
+}
+
+
 .dashboard {
     width: 100%;
     margin: 0;
@@ -103,26 +111,47 @@ tbody td:hover:before {
     align-items: center;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,.8);
+    background: rgba(0,0,0,.85);
     z-index: 9;
 }
 .form-product-add {
+    position: relative;
     width: 50%;
-    max-width: 650px;
+    max-width: 550px;
     margin: auto;
     background: none;
     padding: 15px 20px;
     text-transform: uppercase;
     border: thin outset var(--blue);
+    border-top: none;
     outline: none;
     font-size: 1em;
     color: white;
     font-family: var(--font-secondary);
-    background: rgba(0,0,0,.2);
+    background: rgba(0,0,51,.4);
     transition: all .2s;
 }
 .product-add:hover, .product-add:focus {
     background:  rgba(0,0,0,.5);
+}
+.box-login-tab {
+    position: absolute;
+    left: -1px;
+    width: 50%;
+    height: 40px;
+    background: rgba(0,0,51,.4);
+    top: -37px;
+    float: left;
+    z-index: 1;
+    border-radius: 6px 6px 0 0;
+    transform: perspective(5px) rotateX(0.93deg) translateZ(-1px);
+    transform-origin: 0 0;
+    backface-visibility: hidden;
+    box-shadow: 15px -15px 30px rgba(0,0,0,0.32);
+}
+.product-upload legend {
+    position: absolute;
+    top: -35px; 
 }
 .product-title {
     text-transform: uppercase;
@@ -199,9 +228,6 @@ select,
     height: calc(2.25rem + 10px);
     color: #fff;
 }
-select {
-    max-width: 350px;
-}
 .product-category {
     display: block;
 }
@@ -222,5 +248,9 @@ select {
     box-sizing: border-box;
 }
 .form-input.file {
-    
+    text-align: left;
+}
+.form-input.product-category {
+    display: block;
+    text-align: left;
 }

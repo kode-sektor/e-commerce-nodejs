@@ -573,6 +573,9 @@ input[type=file] {
     position: absolute;
     z-index: -1;
 }
+input[type=number], select {
+	max-width: 300px;
+}
 input[type=file] + label {
     max-width: 80%;
     font-size: 1rem;
@@ -621,6 +624,13 @@ select,
     border-bottom: 1px solid #ddd;
     border-radius: 0;
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+select:focus,
+.form-input input[type=text]:focus, 
+.form-input input[type=password]:focus, 
+.form-input input[type=email]:focus,
+.form-input input[type=number]:focus {
+	background-color: var(--link) !important;
 }
 .login-action {
 	display: flex;
