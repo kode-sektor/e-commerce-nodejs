@@ -11,6 +11,9 @@ const session = require('express-session');
 const authHome = require("../auth/authHome");
 const dashBoardLoader = require("../auth/authorisation");
 
+// Import functions
+const functions = require("../public/js/functions.js");
+
 
 // Object to hold parameters to be sent to existing pages 
 // so user is not left hanging after submitting a form 
@@ -18,7 +21,9 @@ const dashBoardLoader = require("../auth/authorisation");
 
 
 // This is the route of the next page after filling the form. 
-router.get("/admin-dashboard", authHome, dashBoardLoader, (req, res) => {
+router.get("/admin-dashboard", /*authHome, dashBoardLoader,*/ (req, res) => {
+
+	// Fetch the products from the products database
 
 	productModel.find().then((products) => {
 
@@ -37,9 +42,11 @@ router.get("/admin-dashboard", authHome, dashBoardLoader, (req, res) => {
 
 		console.log ("LOADED PRODUCTS: ", loadedProducts);
 
+		// And also fetch the categories to be inputted in the dropdown 
+
 		categoryModel.find().then((categories) => {
 			const loadedCategories = categories.map(category => {
-				return { title : category.title};
+				return { title : functions.capitalise(category.title) };
 			});
 
 			res.render("Admin/dashboard", {
@@ -47,7 +54,7 @@ router.get("/admin-dashboard", authHome, dashBoardLoader, (req, res) => {
 				data : loadedProducts,
 				categories : loadedCategories
 			});
-			
+
 		});
 	});
 });

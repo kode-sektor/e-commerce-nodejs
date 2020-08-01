@@ -1,5 +1,9 @@
 
+
+
 const html = document.documentElement; 
+
+const adminDashboard = document.querySelector(".Admin-Dashboard");
 
 const loginClose = document.getElementById('login-close');
 const accountClose = document.getElementById('account-close');
@@ -15,7 +19,6 @@ const signUp = document.getElementById('signup');
 const backToLogin = document.getElementById('backToLogin');
 
 // Hide all modals once with 'Esc'. 
-
 document.addEventListener('keydown', function(event) {
     let escKey = event.key; // Or const {key} = event; in ES6+
     if (escKey === "Escape") {
@@ -29,7 +32,7 @@ document.addEventListener('keydown', function(event) {
 // of contextual selection and transform property
 
 userAvatar.addEventListener('click', (e) => {
-	e.preventDefault();
+	  e.preventDefault();
   	loginForm.querySelector('input:first-of-type').focus();
 
   	html.classList.toggle('active');	// toggle the first panel 
@@ -55,21 +58,21 @@ userAvatar.addEventListener('click', (e) => {
 // responsible for toggling it should have it's text correspond to the panel's visibility
 
 window.addEventListener('DOMContentLoaded', (event) => {
-	if (createAcctModal.classList.contains('active')) {
-		if (createAcctBtn.textContent.toLowerCase() != "back to login") {
-			open = true; // first-time click (true)
-			createAcctBtn.textContent = "Back to Login";			
-		}
-	} else {
-		createAcctBtn.textContent = "Create an Account";
-	}  
+	  if (createAcctModal.classList.contains('active')) {
+		  if (createAcctBtn.textContent.toLowerCase() != "back to login") {
+  		    open = true; // first-time click (true)
+  			  createAcctBtn.textContent = "Back to Login";			
+  		}
+  	} else {
+  		  createAcctBtn.textContent = "Create an Account";
+  	}  
 });
 
 // Listen to click of 'X' icon and remove the helper class responsible
 // for sliding in the LOGIN form
 
 loginClose.addEventListener('click', (e) => {
-	e.preventDefault();
+	  e.preventDefault();
   	html.classList.remove('active');
 });
 
@@ -77,8 +80,8 @@ let open = false;
 
 // Listen to click of 'Create Account' button and slide in Account Form
 createAcctBtn.addEventListener('click', (e) => {
-	e.preventDefault();
-	open = !open;
+	  e.preventDefault();
+	  open = !open;
   	createAcctModal.classList.toggle('active');
 
   	if (open) {	// first-time click (true) made true by 3 lines up
@@ -94,8 +97,8 @@ createAcctBtn.addEventListener('click', (e) => {
 // Just simply make it act like the 'Create Account' button so there's no 
 // conflict in all the modal relationships at any screen width
 signUp.addEventListener('click', (e) => {
-	e.preventDefault();
-	open = !open;
+	  e.preventDefault();
+	  open = !open;
   	createAcctModal.classList.toggle('active');
 
   	if (open) {	// first-time click (true) made true by 3 lines up
@@ -106,30 +109,48 @@ signUp.addEventListener('click', (e) => {
 });
 
 backToLogin.addEventListener('click', (e) => {
-	e.preventDefault();
-	open = !open;
+    e.preventDefault();
+    open = !open;
   	createAcctModal.classList.toggle('active');
 
   	if (open) {	// first-time click (true) made true by 3 lines up
-  		(createAcctBtn).textContent = "Back to Login";
+  		  (createAcctBtn).textContent = "Back to Login";
   	} else {	// second-time click (false)
-  		(createAcctBtn).textContent = "Create an Account";
+  		  (createAcctBtn).textContent = "Create an Account";
   	}
 });
 
 // Listen to click of 'fa-close' button on ACCOUNT form and slide out Account Form
 accountClose.addEventListener('click', (e) => {
-	e.preventDefault();
+	  e.preventDefault();
   	createAcctModal.classList.remove('active');
 
-	open = false; // should be set to false so that first-time click would set it to true
-	createAcctBtn.textContent = "Create an Account";			
+	  open = false; // should be set to false so that first-time click would set it to true
+	  createAcctBtn.textContent = "Create an Account";			
 });
 
 // Listen to click of 'toggle' button and add class that toggles nav opacity
 toggleBtn.addEventListener('click', (e) => {
-	nav.classList.toggle('reveal');
+	  nav.classList.toggle('reveal');
 });
 
 
 
+// ADDRESS ADMIN DASHBOARD
+
+if (adminDashboard) {
+
+    const closeBtn = document.getElementById("close-product-form");
+    const form = document.getElementById("product-upload");
+    const productAddBtn = document.getElementById("product-add");
+
+    // On click of 'Add Product' button, slide form down
+    productAddBtn.addEventListener('click', (e) => {
+        form.classList.add("open");
+    });
+
+    // On 'close button' click, slide form up
+    closeBtn.addEventListener('click', (e) => {
+        form.classList.remove("open");
+    });
+}

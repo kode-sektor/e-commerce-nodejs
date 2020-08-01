@@ -77,10 +77,18 @@ a {
 }
 button {
 	cursor: pointer;
+	-webkit-appearance: none;
+	appearance: none;
+	background: none;
+	outline: none;
+	border: none;
 }
 input[type=checkbox], input[type=radio] {
     box-sizing: border-box;
     padding: 0;
+}
+select, option {
+    cursor: pointer;
 }
 h1, h2 {
 	font-size: 1.3em;

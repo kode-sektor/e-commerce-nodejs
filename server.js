@@ -62,16 +62,6 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static("public"));
 
 
-app.get("/productListing", (req, res) => {
-    
-    res.render("productListing", {
-        title : "Product Listing Page",
-        data : product.getNProducts(0,9)
-    });
-
-});
-
-
 app.use(fileUpload());
 
 // Session middleware

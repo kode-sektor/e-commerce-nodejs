@@ -12,6 +12,9 @@ const session = require('express-session');
 const authHome = require("../auth/authHome");
 const isAuth = require("../auth/auth");	// Fetch auth
 
+// Import functions
+const functions = require("../public/js/functions.js");
+
 // Object to hold parameters to be sent to existing pages 
 // so user is not left hanging after submitting a form 
 // because the form lives on every page
@@ -22,10 +25,6 @@ const app = express();
 let addParams = {}; 
 let route = '';
 const senderMail = 'kayodeibiyemi92@gmail.com';
-
-const checkNull = (key, field, errors, loginVals) => {
-    (field == "") ? errors.null[`${key}`] = ' should not be empty' : loginVals[`${key}`] = field;
-};
 
 
 // Create object to hold errors
@@ -48,7 +47,7 @@ let formValid = true;
 /*router.get("/profile", isAuth, dashBoardLoader);
 */
 // This is the route of the next page after filling the form. 
-router.get("/profile", isAuth, (req, res) => {
+router.get("/profile",/* isAuth,*/ (req, res) => {
 	res.render("User/profile", {
 		title : "Dashboard"
 	})
@@ -101,10 +100,10 @@ router.post("/create-acct", (req, res) => {
         }
     }
 
-    checkNull ("firstName", firstName, errors, loginVals);
-    checkNull ("lastName", lastName, errors, loginVals);
-    checkNull ("email", email, errors, loginVals);
-    checkNull ("accountPassword", accountPassword, errors, loginVals);
+    functions.checkNull ("firstName", firstName, errors, loginVals);
+    functions.checkNull ("lastName", lastName, errors, loginVals);
+    functions.checkNull ("email", email, errors, loginVals);
+    functions.checkNull ("accountPassword", accountPassword, errors, loginVals);
 
     // Consider referring page to send back to in case of errors
     let referer = req.headers.referer;  // http://localhost:3000/productListing
@@ -313,8 +312,8 @@ router.post("/login", (req, res) => {
 	let formValid = false;
 
 	// Check if user enters nothing
-	checkNull ("loginMail", loginMail, errors, loginVals);
-	checkNull ("password", password, errors, loginVals);
+	functions.checkNull ("loginMail", loginMail, errors, loginVals);
+	functions.checkNull ("password", password, errors, loginVals);
 
 	// Check Object length to see if errors
 
