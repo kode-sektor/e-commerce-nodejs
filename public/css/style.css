@@ -82,6 +82,11 @@ button {
 	background: none;
 	outline: none;
 	border: none;
+	font-family: var(--font-tertiary);
+	transition: all .2s;
+}
+button:hover, button:focus {
+	opacity: .7;
 }
 input[type=checkbox], input[type=radio] {
     box-sizing: border-box;

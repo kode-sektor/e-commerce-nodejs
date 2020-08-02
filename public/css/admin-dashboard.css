@@ -139,7 +139,41 @@ tbody td:hover:before {
     transition: all .2s;
 }
 .deleteRec {
-    border: 2px solid turquoise;
+    padding-top: 2em;
+    padding-bottom: 5em;
+    background: rgb(255 0 0 / 33%);
+}
+.deleteRec h4 {
+    font-size: 1.3em;
+    margin-bottom: 1em;
+}
+.deleteRec .button-set {
+    position: absolute;
+    display: flex;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background-color: #FFF;
+}
+.deleteRec .button-set button {
+    width: 50%;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background-color: #EEE;
+    color: #4d5c6e;
+    transition: 0.3s;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1em;
+}
+.deleteOK {
+    background-color: red !important;
+    color: var(--light-grey) !important;
+}
+.trash img {
+    height: 300px;
 }
 .product-add:hover, .product-add:focus {
     background:  rgba(0,0,0,.5);
