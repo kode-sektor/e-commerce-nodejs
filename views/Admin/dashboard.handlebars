@@ -63,7 +63,6 @@
 	                <p>No products in the database yet</p>
 	            </td>
 	        {{/each}}
-
 		    </tbody>
 		</table>
 	</section>
@@ -74,7 +73,7 @@
 		   <img src="/img/cross.png" alt="close product form"/>
 		</button>
 
-		<form id="form-product" class="form-product" action="/admin/{{#if product_title}}edit-product{{else}}add-product{{/if}}" method="post" enctype="multipart/form-data" novalidate="novalidate">
+		<form id="form-product" class="form-product" action="/admin/{{#if product_title}}edit-product/{{product_id}}?method=PUT{{else}}add-product{{/if}}" method="post" enctype="multipart/form-data" novalidate="novalidate">
 
 			<div class="box-login-tab"></div>
 
@@ -131,6 +130,20 @@
 		    </div>
 
 		</form> 
+
+	</section>
+
+	<section id="confirm-delete" class="confirm-delete open">
+
+		<button type="button" id="close-confirm-delete" class="close-product-form">
+		   <img src="/img/cross.png" alt="close product form"/>
+		</button>
+
+		<form id="deleteRec" class="deleteRec" action="/admin/del/{{_id}}?method=DELETE">
+			<h4>Are you sure you want to delete this record?</h4>
+			<button id="deleteCancel">GO BACK</button>
+			<button id="deleteOK" type="submit">DELETE</button>
+		</form>
 
 	</section>
 

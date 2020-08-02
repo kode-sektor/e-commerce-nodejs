@@ -102,7 +102,7 @@ tbody td:hover:before {
 }
 
 /*PRODUCT UPLOAD*/
-.product-upload {
+.product-upload, .confirm-delete {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -117,11 +117,11 @@ tbody td:hover:before {
     transform: translateY(-100%);
     transition: all .4s ease-in;
 }
-.product-upload.open {
+.product-upload.open, .confirm-delete.open {
     transform: translateY(0);
 }
 
-.form-product {
+.form-product, .deleteRec {
     position: relative;
     width: 50%;
     max-width: 550px;
@@ -137,6 +137,9 @@ tbody td:hover:before {
     font-family: var(--font-secondary);
     background: rgba(0,0,51,.4);
     transition: all .2s;
+}
+.deleteRec {
+    border: 2px solid turquoise;
 }
 .product-add:hover, .product-add:focus {
     background:  rgba(0,0,0,.5);

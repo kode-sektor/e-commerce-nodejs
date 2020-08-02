@@ -108,7 +108,7 @@ router.get("/edit/:id", (req, res) => {
 
 	productModel.findById(req.params.id).then((product) => {
 
-		// You're fetching only 1 record which is why you can destructure
+		// You're fetching only 1 record which is why you can destructure directly
 		const {
 			_id : product_id,
 			title : product_title,
@@ -121,6 +121,9 @@ router.get("/edit/:id", (req, res) => {
 		} = product;
 
 		console.log ("LOADED CATEGORIES: ", loadedCategories);
+
+		// Note that you simply can't pass in 'product' into render. It won't work. 
+		// There's always need to destructure into variables 
 
 		res.render("Admin/dashboard", {
 			title : "Admin-Dashboard",
