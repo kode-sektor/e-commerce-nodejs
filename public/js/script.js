@@ -156,6 +156,13 @@ if (adminDashboard) {
     });
 
     // On 'close button' click, slide form up
+    document.addEventListener('keydown', function(event) {
+        const key = event.key; // Or const {key} = event; in ES6+
+        if (key === "Escape") {
+            formBg.classList.remove("open");
+        }
+    });
+
     closeBtn.addEventListener('click', (e) => {
         formBg.classList.remove("open");
     });
