@@ -143,16 +143,20 @@ toggleBtn.addEventListener('click', (e) => {
 if (adminDashboard) {
 
     const closeBtn = document.getElementById("close-product-form");
-    const form = document.getElementById("product-upload");
+    const formBg = document.getElementById("product-upload");
+    const form = document.getElementById("form-product");
     const productAddBtn = document.getElementById("product-add");
 
     // On click of 'Add Product' button, slide form down
     productAddBtn.addEventListener('click', (e) => {
-        form.classList.add("open");
+        formBg.classList.add("open");
+        form.querySelectorAll('input').forEach((elm) => {
+          elm.value = "";
+        });
     });
 
     // On 'close button' click, slide form up
     closeBtn.addEventListener('click', (e) => {
-        form.classList.remove("open");
+        formBg.classList.remove("open");
     });
 }

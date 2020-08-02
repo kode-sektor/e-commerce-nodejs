@@ -120,7 +120,7 @@ tbody td:hover:before {
     transform: translateY(0);
 }
 
-.form-product-add {
+.form-product {
     position: relative;
     width: 50%;
     max-width: 550px;
@@ -246,7 +246,7 @@ select,
     box-shadow: inset 0 1px rgba(0, 0, 0, 0.05), inset 1px 0 rgba(0, 0, 0, 0.02), inset -1px 0 rgba(0, 0, 0, 0.02);
     border: none;
 }
-.form-product-add input, .form-product-add select {
+.form-product input, .form-product select {
     padding-left: .2in;
     font-family: inherit;
     font-size: inherit;

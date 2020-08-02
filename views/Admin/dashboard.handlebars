@@ -11,14 +11,14 @@
 		<table class="dashboard-list">
 
 		    <thead>
-		            <th>Title</th>
-		            <th>Description</th>
-		            <th>Price</th>
-		            <th title="Best Seller">Featured</th>
-		            <th>Image</th>
-		            <th>Category</th>
-		            <th>Quantity</th>
-		            <th colspan="2"></th>
+	            <th>Title</th>
+	            <th>Description</th>
+	            <th>Price</th>
+	            <th title="Best Seller">Featured</th>
+	            <th>Image</th>
+	            <th>Category</th>
+	            <th>Quantity</th>
+	            <th colspan="2"></th>
 		    </thead>
 
 		    <tbody>
@@ -30,7 +30,7 @@
 	                <td>
 	                   <span>{{this.description}}</span>		                  
 	                </td>
-	                <td>productData
+	                <td>
 	                    <span>{{this.price}}</span>
 	                </td>
 	                <td>
@@ -51,30 +51,30 @@
 	                   <span>{{this.quantity}}</span>
 	                </td>
 	                <td>
-	                    <a id="edit-ctrl" class="edit-ctrl" href="/admin/edit/{{this.id}}" class="edit-delete-button"><span class="fa fa-pencil"></span></a>
+	                    <a data-id="edit-ctrl-{{this.id}}" class="edit-ctrl" href="/admin/edit/{{this.id}}"><span class="fa fa-pencil"></span></a>
 	                </td>
 	                <td>
-	                    <a id="trash-ctrl" class="trash-ctrl" href="/admin/delete/{{this.id}}?method=DELETE" class="edit-delete-button"><span class="fa fa-trash"></span></a>
+	                    <a data-id="trash-ctrl-{{this.id}}" class="trash-ctrl" href="/admin/delete/{{this.id}}?method=DELETE"><span class="fa fa-trash"></span></a>
 	                </td> 
 	            </tr>
 
-	            {{else}}
-	              <td colspan="5">
-	                  <p>No products in the database yet</p>
-	              </td>
+	        	{{else}}
+	            <td colspan="5">
+	                <p>No products in the database yet</p>
+	            </td>
 	        {{/each}}
 
 		    </tbody>
 		</table>
 	</section>
 
-	<section id="product-upload" class="product-upload">
+	<section id="product-upload" class="product-upload {{#if product_title}}open{{/if}}">
 
 		<button type="button" id="close-product-form" class="close-product-form">
 		   <img src="/img/cross.png" alt="close product form"/>
 		</button>
 
-		<form id="form-product-add" class="form-product-add" action="/admin/{{#if product_title}}edit-product{{else}}add-product{{/if}}" method="post" enctype="multipart/form-data" novalidate="novalidate">
+		<form id="form-product" class="form-product" action="/admin/{{#if product_title}}edit-product{{else}}add-product{{/if}}" method="post" enctype="multipart/form-data" novalidate="novalidate">
 
 			<div class="box-login-tab"></div>
 
@@ -120,8 +120,8 @@
                 <input type="number" class="form-control" id="product-qty" name="product-qty" placeholder="Product Quantity" step="1" value="{{#if product_quantity}}{{product_quantity}}{{/if}}">
             </div>
 		    <div class="form-input file"> 
-		        <input type="file" class="form-control" id="profile-pic" name="profile-pic">
-		        <label for="profile-pic"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"></path></svg> <span>Choose a file…</span></label>
+		        <input type="file" class="form-control" id="product-pic" name="product-pic">
+		        <label for="product-pic"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"></path></svg> <span>Choose a file…</span></label>
 		    </div>
 
 		    <div class="form-input-final">

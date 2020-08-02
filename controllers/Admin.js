@@ -130,9 +130,8 @@ router.get("/edit/:id", (req, res) => {
 			product_featured, product_imgPath, product_category, product_quantity
 		});
 
-	})
+	});
 
 });
-
 
 module.exports=router;
