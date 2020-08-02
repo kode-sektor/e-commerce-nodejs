@@ -144,8 +144,15 @@ if (adminDashboard) {
 
     const closeBtn = document.getElementById("close-product-form");
     const formBg = document.getElementById("product-upload");
+    const confirmDelete = document.getElementById("confirm-delete");
+    const trashForm = document.getElementById("deleteRec");
     const form = document.getElementById("form-product");
     const productAddBtn = document.getElementById("product-add");
+
+    const deleteCancel = document.querySelector(".deleteCancel");
+    const closeForm = document.querySelector("#close-confirm-delete");
+
+    const trashBtns = document.querySelectorAll(".trash-ctrl");
 
     // On click of 'Add Product' button, slide form down
     productAddBtn.addEventListener('click', (e) => {
@@ -155,7 +162,7 @@ if (adminDashboard) {
         form.querySelectorAll('input').forEach((elm) => {
             elm.value = "";
         });
-        
+
         // Change text on submit button
         form.querySelector('.login-btn').textContent = "Add Product";
 
@@ -169,10 +176,32 @@ if (adminDashboard) {
         const key = event.key; // Or const {key} = event; in ES6+
         if (key === "Escape") {
             formBg.classList.remove("open");
+            confirmDelete.classList.remove("open");
         }
     });
 
     closeBtn.addEventListener('click', (e) => {
         formBg.classList.remove("open");
     });
+
+    // Handle 'Confirm' modal
+    [deleteCancel, closeForm].forEach((item)=> {
+        item.addEventListener('click', e => {
+            e.preventDefault();
+            confirmDelete.classList.remove("open");
+        });
+    });
+
+    // Handle click on 'Trash' icon
+    // On click of 'Trash', get id of record and insert into Form's method
+    trashBtns.forEach((trash) => {
+        trash.addEventListener('click', (e) => {
+            confirmDelete.classList.add("open");    // Show form
+
+            let dataId = (e.target).getAttribute("data-id");
+            console.log (dataId);
+            trashForm.setAttribute('action', `/admin/del/${dataId}?method=DELETE`)
+        });
+    });
+
 }

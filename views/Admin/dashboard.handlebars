@@ -51,10 +51,10 @@
 	                   <span>{{this.quantity}}</span>
 	                </td>
 	                <td>
-	                    <button data-id="{{this.id}}" class="edit-ctrl"><span class="fa fa-pencil" title="edit"></span></button>
+	                    <a href="/admin/edit/{{this.id}}" data-id="{{this.id}}" class="edit-ctrl"><span data-id="{{this.id}}" class="fa fa-pencil" title="edit"></span></a>
 	                </td>
 	                <td>
-	                    <button data-id="{{this.id}}" class="trash-ctrl"><span class="fa fa-trash" title="delete"></span></button>
+	                    <button data-id="{{this.id}}" class="trash-ctrl"><span data-id="{{this.id}}" class="fa fa-trash" title="delete"></span></button>
 	                </td> 
 	            </tr>
 
@@ -133,7 +133,7 @@
 
 	</section>
 
-	<section id="confirm-delete" class="confirm-delete open">
+	<section id="confirm-delete" class="confirm-delete">
 
 		<button type="button" id="close-confirm-delete" class="close-product-form">
 		   <img src="/img/cross.png" alt="close product form"/>
@@ -148,7 +148,7 @@
 				<img src="/img/trash.gif" src="trash">
 			</figure>
 			<div class="button-set">
-				<button type="button" id="deleteCancel">GO BACK</button>
+				<button type="button" id="deleteCancel" class="deleteCancel">GO BACK</button>
 				<button type="submit" id="deleteOK" class="deleteOK">DELETE</button>
 			</div>
 		</form>

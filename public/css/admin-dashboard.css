@@ -205,17 +205,16 @@ tbody td:hover:before {
     font-size: 1.1em;
     letter-spacing: 1px;
 }
-.edit-ctrl a, .trash-ctrl a {
+.edit-ctrl button, .trash-ctrl button {
     padding: 5px;
 }
-.edit-ctrl .fa {
+.edit-ctrl .fa, .trash-ctrl .fa {
     display: block;
     padding: 10px 20px;
     color: var(--yellow);
+    font-size: 1.3em;
 }
 .trash-ctrl .fa {
-    display: block;
-    padding: 10px 20px;
     color: #ff0000;
 }
 .edit-ctrl .fa:hover, .trash-ctrl .fa:hover, .trash-ctrl .fa:focus, .edit-ctrl .fa:focus {
