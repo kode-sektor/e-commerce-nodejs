@@ -53,12 +53,13 @@
     bottom: 20px;
     padding: 15px 20px;
     text-transform: uppercase;
-    border: thin outset var(--blue);
+    border: thin outset rgb(0 0 51 / 14%);
     outline: none;
     font-size: 1em;
     color: white;
     font-family: var(--font-secondary);
     background: rgba(0,0,0,.2);
+    box-shadow: 4px 3px 2px rgba(0,0,0,.1);
     transition: all .2s;
 }
 .dashboard-list td span {

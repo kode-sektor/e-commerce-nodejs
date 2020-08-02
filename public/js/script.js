@@ -138,7 +138,7 @@ toggleBtn.addEventListener('click', (e) => {
 
 
 
-// ADDRESS ADMIN DASHBOARD
+// ADDRESS ADMIN DASHBOARD PAGE (OBTAINED FROM CLASS ON BODY)
 
 if (adminDashboard) {
 
@@ -149,10 +149,19 @@ if (adminDashboard) {
 
     // On click of 'Add Product' button, slide form down
     productAddBtn.addEventListener('click', (e) => {
-        formBg.classList.add("open");
+        formBg.classList.add("open"); 
+
+        // Clear form fields
         form.querySelectorAll('input').forEach((elm) => {
-          elm.value = "";
+            elm.value = "";
         });
+        
+        // Change text on submit button
+        form.querySelector('.login-btn').textContent = "Add Product";
+
+        // Change form's action
+        form.action = "/admin/add-product";
+
     });
 
     // On 'close button' click, slide form up
