@@ -79,13 +79,13 @@
 
 			<legend>PRODUCT DOCUMENT</legend>
 		    <div class="form-input">
-		        <input type="text" class="form-control" id="product-title" name="product-title" value="{{#if product_title}}{{product_title}}{{/if}}" placeholder="Product Title" maxlength="50">
+		        <input type="text" class="form-control" id="product-title" name="product-title" value="{{#if product_title}}{{product_title}}{{/if}}" placeholder="Product Title" maxlength="50" required>
 		    </div>
 		    <div class="form-input">
-		        <input type="text" class="form-control" id="product-description" name="product-description" value="{{#if product_description}}{{product_description}}{{/if}}" placeholder="Product Description" maxlength="155">
+		        <input type="text" class="form-control" id="product-description" name="product-description" value="{{#if product_description}}{{product_description}}{{/if}}" placeholder="Product Description" maxlength="155" required>
 		    </div>
 		    <div class="form-input">
-		        <input type="number" class="form-control" id="product-cost" name="product-cost" value="{{#if product_price}}{{product_price}}{{/if}}" placeholder="Product Cost ($CAD)" step="5">
+		        <input type="number" class="form-control" id="product-cost" name="product-cost" value="{{#if product_price}}{{product_price}}{{/if}}" placeholder="Product Cost ($CAD)" step="5" required>
 		    </div>
 		    <div class="form-input register-switch">
                 <input type="radio" name="featured" id="feature" value="feature" class="register-switch-input" 
@@ -108,14 +108,14 @@
             </div>
             <div class="form-input product-category">
             	<label for="product-category">Category: </span></label>
-            	<select class="form-input product-category" id="product-category" name="product-category">
+            	<select data-category="{{#if product_category}}{{product_category}}{{/if}}" class="form-input product-category" id="product-category" name="product-category" required>
         		{{#each categories}}
         	    	<option class="product-category" value="{{this.title}}">{{this.title}}</option>
         	    {{/each}}
             	</select>
             </div>
             <div class="form-input">
-                <input type="number" class="form-control" id="product-qty" name="product-qty" placeholder="Product Quantity" step="1" value="{{#if product_quantity}}{{product_quantity}}{{/if}}">
+                <input type="number" class="form-control" id="product-qty" name="product-qty" placeholder="Product Quantity" step="1" value="{{#if product_quantity}}{{product_quantity}}{{/if}}" required>
             </div>
 		    <div class="form-input file"> 
 		        <input type="file" class="form-control" id="product-pic" name="product-pic">

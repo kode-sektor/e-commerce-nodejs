@@ -68,8 +68,9 @@ router.get("/admin-dashboard", /*authHome, dashBoardLoader,*/ (req, res) => {
 let loadedProducts = ''; 
 let loadedCategories = '';
 
-// When user clicks on 'Edit', fetch details then send to admin file to populate 
-// and show form
+// When user clicks on 'Edit', first fetch original details that list all products;
+// then fetch details of particular record clicked and send back to same referring page
+// to populate the Edit form
 
 router.get("/edit/:id", (req, res) => {
 	
@@ -106,7 +107,7 @@ router.get("/edit/:id", (req, res) => {
 		});
 	});
 
-	// THIS IS FOR 'EDIT' BUTTON CLICKED. The ID of the particular record clicked 
+	// THIS IS FOR 'EDIT' BUTTON CLICKED. It The ID of the particular record clicked 
 	// is used to fetch the record and passed to populate the values of the form
 
 	productModel.findById(req.params.id).then((product) => {
@@ -201,6 +202,8 @@ router.post("/add-product", (req, res) => {
 						productModel.updateOne({_id : product._id}, {
 							imgPath : file
 						}).then(()=> {
+							// Cache user object in session
+							req.session.productDetails = product;
 
 							// Redirect to dashboard after updating record with image
 							res.redirect("/admin/admin-dashboard");
@@ -211,7 +214,7 @@ router.post("/add-product", (req, res) => {
 		} else {	// Redirect to dashboard after saving
 
 			// Cache user object in session
-			req.session.userDetails = user;
+			req.session.productDetails = product;
 			res.redirect("/admin/admin-dashboard");
 		}
 
@@ -219,5 +222,74 @@ router.post("/add-product", (req, res) => {
 
 });
 
+
+//Route to update user data after they submit the form 
+router.put("/edit-product/:id", (req, res) => {
+
+	// First pluck out all the data 
+	const newProduct = {
+		title : ((req.body["product-title"]).trim()).toLowerCase(),
+		description : ((req.body["product-description"]).trim()).toLowerCase(),
+		price : ((req.body["product-cost"]).trim()).toLowerCase(),
+		featured : ((req.body["featured"]).trim()).toLowerCase(),
+		category : ((req.body["product-category"]).trim()).toLowerCase(),
+		quantity : ((req.body["product-qty"]).trim()).toLowerCase()
+	}
+
+
+	productModel.updateOne({_id : req.params.id}, newProduct).then((product) => {
+
+		if (req.files) {	// First check if images is uploaded, 
+
+			if (req.files["product-pic"]) {	// Then check for this particular image. Breaking it down
+												// this way avoids throwing error
+
+				console.log ("PRODUCT PICTURE : ", req.files["product-pic"]);
+
+				/*	fileOrig will contain the complete details of the image 
+
+					{ name: 'shoe-caitin.png',
+					 data:
+					  <Buffer 89 50 4e 47 0d 0a 1a 0a 00 00 00 0d 49 48 44 52 00 00 01 25 00 00 00 b3 08 06 00 00 00 cf 2f 0a 9d 00 00 20 00 49 44 41 54 78 9c ec bd 09 b4 24 67 71 ... >,
+					 size: 62634,
+					 encoding: '7bit',
+					 tempFilePath: '',
+					 truncated: false,
+					 mimetype: 'image/png',
+					 md5: '5ddfb5d9c6705d4c9ab0e27d8c2d9d39',
+				*/
+				let fileOrig = req.files["product-pic"];
+
+				let ext = (path.parse(fileOrig.name).ext).toLowerCase();	// .png, .jpg, .jfif
+
+				console.log ("EXT: " , ext);
+
+				// Rename image to prevent overriding image in DB. So user does not meet a different image to what he uploaded
+				let file = `product-img-${product._id}.${ext}`;
+
+				fileOrig.mv(`public/uploads/products/${file}`)
+					.then(()=> {
+						productModel.updateOne({_id : product._id}, {
+							imgPath : file
+						}).then(()=> {
+							// Cache user object in session
+							req.session.productDetails = product;
+
+							// Redirect to dashboard after updating record with image
+							res.redirect("/admin/admin-dashboard");
+						});
+					});
+			}
+
+		} else {	// Redirect to dashboard after saving
+
+			// Cache user object in session
+			req.session.productDetails = product;
+			res.redirect("/admin/admin-dashboard");
+		}
+
+	}).catch(err => console.log(`Error happened when updating data from the database : ${err}`));
+
+});
 
 module.exports=router;

@@ -1,4 +1,7 @@
 
+const capitalise = (word) => {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+}
 
 
 const html = document.documentElement; 
@@ -154,10 +157,12 @@ if (adminDashboard) {
 
     const trashBtns = document.querySelectorAll(".trash-ctrl");
 
+    const productCat = document.getElementById("product-category");
+
     // On click of 'Add Product' button, slide form down
     productAddBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        
+
         formBg.classList.add("open"); 
 
         // Clear form fields
@@ -204,5 +209,20 @@ if (adminDashboard) {
             trashForm.setAttribute('action', `/admin/del/${dataId}?method=DELETE`)
         });
     });
+
+
+    // This handles the preselection of the select options when user clicks edit. 
+    // (When user clicks the 'Edit' button, data is fetched from the DB and loaded into both
+    // the table/list of all product records and then the form that will hold the details of 
+    // that particular record.) But preloading for select is difficult because the option 
+    // elements are built with a loop. 
+
+    // Hence the idea is to still pass in the category for the individual record clicked in a 
+    // data-id on the select container, and then use JavaScript here to find the matching 
+    // option and preselect it
+    
+    let dataCategProductCat = productCat.getAttribute("data-category");
+    dataCategProductCat = capitalise(dataCategProductCat);
+    productCat.querySelector(`option[value=${dataCategProductCat}]`).setAttribute("selected", "selected");
 
 }

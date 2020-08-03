@@ -32,24 +32,15 @@ const adminRoutes = require("./controllers/Admin");
 
 app.set('view engine', 'handlebars');
 
-
+// Handle  UPDATE and DEL requests
 app.use((req, res, next) => {
-    
-    // req holds data about a request (akin to a form's data on submission)
-    // res loads a template file like from a template engine to send back
-    // an HTML page etc.
-
-    next(); // next() move on to the next middleware function
-    // you dont use next() if you send back a response to the client
-
-    // HENCE, THE ORDER IN WHICH YOU WRITE YOUR MIDDLEWARE MATTERS
-
-    // app.use() is the priority
-
-    // if you don't call next(), the subsequent app.get() routes will not run.
-
-    // Just call next() to be safe
-})
+    if (req.query.method == "PUT") {
+        req.method = "PUT"
+    } else if (req.query.method == "DELETE") {
+        req.method = "DELETE"
+    }
+    next();
+});
 
 app.use(bodyParser.urlencoded({extended: false}));
 
@@ -74,6 +65,7 @@ app.use((req, res, next) => {
     // details, you could use .redirect instead. 'user' object here will hold any extra 
     // details you pass. You could create more res.locals if you want
     res.locals.user = req.session.userDetails;
+    res.locals.product = req.session.productDetails;
 
     next();
 });

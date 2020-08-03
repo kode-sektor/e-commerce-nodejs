@@ -272,6 +272,7 @@ select,
     background-color: transparent;
     height: calc(2.25rem + 10px);
     color: #fff;
+    text-transform: capitalize;
 }
 .product-category {
     display: block;
