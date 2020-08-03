@@ -194,21 +194,26 @@ router.post("/add-product", (req, res) => {
 
 				console.log ("EXT: " , ext);
 
-				// Rename image to prevent overriding image in DB. So user does not meet a different image to what he uploaded
-				let file = `product-img-${product._id}.${ext}`;
+				if (imgExt.indexOf(ext) !== -1) {	// Check for allowable file ext type
 
-				fileOrig.mv(`public/uploads/products/${file}`)
-					.then(()=> {
-						productModel.updateOne({_id : product._id}, {
-							imgPath : file
-						}).then(()=> {
-							// Cache user object in session
-							req.session.productDetails = product;
+					// Rename image to prevent overriding image in DB. So user does not meet a different image to what he uploaded
+					let file = `product-img-${product._id}.${ext}`;
 
-							// Redirect to dashboard after updating record with image
-							res.redirect("/admin/admin-dashboard");
+					fileOrig.mv(`public/uploads/products/${file}`)
+						.then(()=> {
+							productModel.updateOne({_id : product._id}, {
+								imgPath : file
+							}).then(()=> {
+								// Cache user object in session
+								req.session.productDetails = product;
+
+								// Redirect to dashboard after updating record with image
+								res.redirect("/admin/admin-dashboard");
+							});
 						});
-					});
+				} else {
+					console.log(ext + " is not an allowable file type");
+				}
 			}
 
 		} else {	// Redirect to dashboard after saving
@@ -264,21 +269,27 @@ router.put("/edit-product/:id", (req, res) => {
 
 				console.log ("EXT: " , ext);
 
-				// Rename image to prevent overriding image in DB. So user does not meet a different image to what he uploaded
-				let file = `product-img-${product._id}.${ext}`;
+				if (imgExt.indexOf(ext) !== -1) {	// Check for allowable file ext type
 
-				fileOrig.mv(`public/uploads/products/${file}`)
-					.then(()=> {
-						productModel.updateOne({_id : product._id}, {
-							imgPath : file
-						}).then(()=> {
-							// Cache user object in session
-							req.session.productDetails = product;
+					// Rename image to prevent overriding image in DB. So user does not meet a different image to what he uploaded
+					let file = `product-img-${product._id}.${ext}`;
 
-							// Redirect to dashboard after updating record with image
-							res.redirect("/admin/admin-dashboard");
+					fileOrig.mv(`public/uploads/products/${file}`)
+						.then(()=> {
+							productModel.updateOne({_id : product._id}, {
+								imgPath : file
+							}).then(()=> {
+								// Cache user object in session
+								req.session.productDetails = product;
+
+								// Redirect to dashboard after updating record with image
+								res.redirect("/admin/admin-dashboard");
+							});
 						});
-					});
+				} else {
+					console.log(ext + " is not an allowable file type");
+				}
+
 			}
 
 		} else {	// Redirect to dashboard after saving
