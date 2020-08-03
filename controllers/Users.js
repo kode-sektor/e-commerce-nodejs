@@ -1,13 +1,15 @@
 /*********************USER ROUTES***************************/
-const express = require('express')
+const express = require('express');
 const router = express.Router();
 
-// Import schema
-const userModel = require("../models/Users");
 const path = require("path");	// For easy filename dismembering
 
 const bcrypt = require("bcryptjs");
 const session = require('express-session');
+
+// Import schema
+const userModel = require("../models/Users");
+
 
 const authHome = require("../auth/authHome");
 const isAuth = require("../auth/auth");	// Fetch auth
@@ -235,7 +237,9 @@ router.post("/create-acct", (req, res) => {
 
 	                } else {
 
-	                	user.save().then((user) => {
+	                	// Image needs to be saved first because there MongoDB generates a unique ID 
+	                	// for each record and it is needed for the unique naming of the image
+	                	user.save().then((user) => {	
 
 	                		console.log("FILE IMAGE : ", req.files);
 
@@ -254,7 +258,7 @@ router.post("/create-acct", (req, res) => {
 	                				req.files["profile-pic"].mv(`public/uploads/${req.files["profile-pic"].name}`)
 	                					.then(()=> {
 	                						userModel.updateOne({_id : user._id}, {
-	                							profilePic : req.files["profile-pic"].name
+	                							profilePic : req.files["profile-pic"].name 	// pro-pic-3453454344343.png
 	                						}).then(()=> {
 
 	                							// Redirect to dashboard after updating record with image

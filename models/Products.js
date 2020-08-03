@@ -18,12 +18,17 @@ const productSchema = new Schema({
         required :true
     },
     featured : {
-        type : Boolean,
-        required : true
-    },
-    imgPath : {
         type : String,
         required : true
+    },/*imgPath needs to be part of the model if not, record will not be saved. Every form 
+    element must be defined in the model. But it should not be required because its not saved
+    immediately. The id of a particular saved record is unique and this is used in naming the 
+    images. This is done to avoid name clashes. And since ids can only be gotten only after 
+    image has been saved, then image will always be updated on the record. Thus, it should
+    not be set to "required: true"*/
+    imgPath : {   
+        type : String,
+        /*required : true*/
     },
     category : {
         type : String,

@@ -159,7 +159,7 @@ if (adminDashboard) {
         formBg.classList.add("open"); 
 
         // Clear form fields
-        form.querySelectorAll('input').forEach((elm) => {
+        form.querySelectorAll("input:not(input[type=radio]):not(input[type=checkbox]").forEach((elm) => {
             elm.value = "";
         });
 
@@ -199,7 +199,6 @@ if (adminDashboard) {
             confirmDelete.classList.add("open");    // Show form
 
             let dataId = (e.target).getAttribute("data-id");
-            console.log (dataId);
             trashForm.setAttribute('action', `/admin/del/${dataId}?method=DELETE`)
         });
     });

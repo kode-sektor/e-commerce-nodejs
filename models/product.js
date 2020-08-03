@@ -19,7 +19,7 @@ const product = {
         },
         {
             title : "IPhone X",
-            description : "Comes with a range of the latest applications ",
+            description : "Comes with a range of the latest applications",
             price : "1100",
             featured: false,
             imgPath : "3.png",
@@ -27,7 +27,7 @@ const product = {
         },
         {
             title : "Samsung S10+",
-            description : "",
+            description : "Outstanding camera and the snappy processor and how quick it handles all the apps",
             price : "900",
             featured: false,
             imgPath : "4.png",

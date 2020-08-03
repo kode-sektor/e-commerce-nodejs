@@ -36,13 +36,13 @@
 	                <td>
 	                    <span>
 	                    	<form>
-	                    		<input id="featured" class="featured" type="checkbox" id="switch" {{#ifeq this.featured true}} checked {{/ifeq}}/>
+	                    		<input id="featured" class="featured" type="checkbox" id="switch" {{#ifeq this.featured "feature"}} checked {{/ifeq}}/>
 	                    		<label for="featured" class="switch-featured" for="switch">Toggle</label>
 	                    	</form>
 	                    </span>
 	                </td>
 	                <td>
-	                   <span class="thumb-img-"><img class="thumb-img" src="/uploads/{{this.imgPath}}" alt="{{this.imgPath}}"></span>
+	                   <span class="thumb-img-"><img class="thumb-img" src="/uploads/products/{{this.imgPath}}" alt="{{this.title}} image"></span>
 	                </td>
 	                <td>
 	                   <span>{{this.category}}</span>
@@ -79,10 +79,10 @@
 
 			<legend>PRODUCT DOCUMENT</legend>
 		    <div class="form-input">
-		        <input type="text" class="form-control" id="product-title" name="product-title" value="{{#if product_title}}{{product_title}}{{/if}}" placeholder="Product Title">
+		        <input type="text" class="form-control" id="product-title" name="product-title" value="{{#if product_title}}{{product_title}}{{/if}}" placeholder="Product Title" maxlength="50">
 		    </div>
 		    <div class="form-input">
-		        <input type="text" class="form-control" id="product-description" name="product-description" value="{{#if product_description}}{{product_description}}{{/if}}" placeholder="Product Description">
+		        <input type="text" class="form-control" id="product-description" name="product-description" value="{{#if product_description}}{{product_description}}{{/if}}" placeholder="Product Description" maxlength="155">
 		    </div>
 		    <div class="form-input">
 		        <input type="number" class="form-control" id="product-cost" name="product-cost" value="{{#if product_price}}{{product_price}}{{/if}}" placeholder="Product Cost ($CAD)" step="5">
@@ -90,7 +90,7 @@
 		    <div class="form-input register-switch">
                 <input type="radio" name="featured" id="feature" value="feature" class="register-switch-input" 
                 {{#if product_featured}}
-                	{{#ifeq product_featured true}}
+                	{{#ifeq product_featured "feature"}}
                 		checked
                 	{{/ifeq}}
                 	{{else}}
@@ -98,14 +98,14 @@
                 {{/if}}>
                 <label for="feature" class="register-switch-label">Feature <span class="fa fa-check"></span></label>
 
-                <input type="radio" name="featured" id="do-not-feature" value="do-not-feature" class="register-switch-input" 
+                <input type="radio" name="featured" id="no-feature" value="no-feature" class="register-switch-input" 
                 {{#if product_featured}}
-                	{{#ifeq product_featured true}}
+                	{{#ifeq product_featured "no-feature"}}
                 		checked
                 	{{/ifeq}}
                 	{{else}}
                 {{/if}}>
-                <label for="do-not-feature" class="register-switch-label">Do not Feature <span class="fa fa-window-close"></span></label>
+                <label for="no-feature" class="register-switch-label">Do not Feature <span class="fa fa-window-close"></span></label>
             </div>
             <div class="form-input product-category">
             	<label for="product-category">Category: </span></label>

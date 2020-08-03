@@ -1,15 +1,18 @@
 /*********************USER ROUTES***************************/
-const express = require('express')
+const express = require('express');
 const router = express.Router();
+
+const session = require('express-session');
+
 
 // Import schema
 const productModel = require("../models/Products");
 const categoryModel = require("../models/Categories");
 
-const session = require('express-session');
-
 const authHome = require("../auth/authHome");
 const dashBoardLoader = require("../auth/authorisation");
+
+const path = require("path");
 
 // Import functions
 const functions = require("../public/js/functions.js");
@@ -40,7 +43,7 @@ router.get("/admin-dashboard", /*authHome, dashBoardLoader,*/ (req, res) => {
 			}
 		});
 
-		// console.log ("LOADED PRODUCTS: ", loadedProducts);
+		console.log ("LOADED PRODUCTS: ", loadedProducts);
 
 		// And also fetch the categories to be inputted in the dropdown 
 
@@ -91,7 +94,7 @@ router.get("/edit/:id", (req, res) => {
 			}
 		});
 
-		// console.log ("LOADED PRODUCTS: ", loadedProducts);
+		console.log ("LOADED PRODUCTS: ", loadedProducts);
 
 		// And also fetch the categories to be inputted in the dropdown 
 
@@ -136,5 +139,85 @@ router.get("/edit/:id", (req, res) => {
 	});
 
 });
+
+
+const imgExt = [".png", ".jpg", ".jfif", ".jpeg", ".gif"];
+
+// INSERT INTO DB
+router.post("/add-product", (req, res) => {
+
+	const newProduct = {
+		title : ((req.body["product-title"]).trim()).toLowerCase(),
+		description : ((req.body["product-description"]).trim()).toLowerCase(),
+		price : ((req.body["product-cost"]).trim()).toLowerCase(),
+		featured : ((req.body["featured"]).trim()).toLowerCase(),
+		category : ((req.body["product-category"]).trim()).toLowerCase(),
+		quantity : ((req.body["product-qty"]).trim()).toLowerCase()
+	}
+
+	//console.log (newProduct.imgPath);
+
+	// console.log ("FROM FORM : " , req.body);
+
+	const product = new productModel(newProduct);
+
+	// Image needs to be saved first because there MongoDB generates a unique ID 
+	// for each record and it is needed for the unique naming of the image
+
+	product.save().then((product) => {
+
+		console.log("FILE IMAGE : ", req.files);
+
+		if (req.files) {	// First check if images is uploaded, 
+
+			if (req.files["product-pic"]) {	// Then check for this particular image. Breaking it down
+												// this way avoids throwing error
+
+				console.log ("PRODUCT PICTURE : ", req.files["product-pic"]);
+
+				/*	fileOrig will contain the complete details of the image 
+
+					{ name: 'shoe-caitin.png',
+					 data:
+					  <Buffer 89 50 4e 47 0d 0a 1a 0a 00 00 00 0d 49 48 44 52 00 00 01 25 00 00 00 b3 08 06 00 00 00 cf 2f 0a 9d 00 00 20 00 49 44 41 54 78 9c ec bd 09 b4 24 67 71 ... >,
+					 size: 62634,
+					 encoding: '7bit',
+					 tempFilePath: '',
+					 truncated: false,
+					 mimetype: 'image/png',
+					 md5: '5ddfb5d9c6705d4c9ab0e27d8c2d9d39',
+				*/
+				let fileOrig = req.files["product-pic"];
+
+				let ext = (path.parse(fileOrig.name).ext).toLowerCase();	// .png, .jpg, .jfif
+
+				console.log ("EXT: " , ext);
+
+				// Rename image to prevent overriding image in DB. So user does not meet a different image to what he uploaded
+				let file = `product-img-${product._id}.${ext}`;
+
+				fileOrig.mv(`public/uploads/products/${file}`)
+					.then(()=> {
+						productModel.updateOne({_id : product._id}, {
+							imgPath : file
+						}).then(()=> {
+
+							// Redirect to dashboard after updating record with image
+							res.redirect("/admin/admin-dashboard");
+						});
+					});
+			}
+
+		} else {	// Redirect to dashboard after saving
+
+			// Cache user object in session
+			req.session.userDetails = user;
+			res.redirect("/admin/admin-dashboard");
+		}
+
+	}).catch(err => console.log(`Error while inserting into the data ${err}`));	
+
+});
+
 
 module.exports=router;
