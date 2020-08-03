@@ -793,6 +793,7 @@ label[for=remember-me] {
 	font-size: 1.1em;
 	color: var(--blue);
 	font-weight: bolder;
+	text-transform: capitalize;
 }
 
 /*Category Product List*/
