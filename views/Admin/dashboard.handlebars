@@ -93,8 +93,6 @@
                 	{{#ifeq product_featured "feature"}}
                 		checked
                 	{{/ifeq}}
-                	{{else}}
-                		checked    {{!this 'checked' is here stands as the default if the form is for add-product, not edit-product}}
                 {{/if}}>
                 <label for="feature" class="register-switch-label">Feature <span class="fa fa-check"></span></label>
 
@@ -104,6 +102,7 @@
                 		checked
                 	{{/ifeq}}
                 	{{else}}
+                		checked    {{!this 'checked' is here stands as the default if the form is for add-product, not edit-product}}
                 {{/if}}>
                 <label for="no-feature" class="register-switch-label">Do not Feature <span class="fa fa-window-close"></span></label>
             </div>

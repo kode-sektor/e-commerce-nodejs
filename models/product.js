@@ -27,7 +27,7 @@ const product = {
         },
         {
             title : "Samsung S10+",
-            description : "Outstanding camera and the snappy processor and how quick it handles all the apps",
+            description : "Outstanding camera; snappy processor",
             price : "900",
             featured: false,
             imgPath : "4.png",
