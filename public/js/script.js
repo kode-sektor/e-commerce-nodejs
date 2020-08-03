@@ -158,6 +158,7 @@ if (adminDashboard) {
     const trashBtns = document.querySelectorAll(".trash-ctrl");
 
     const productCat = document.getElementById("product-category");
+    const delProdTitle = document.getElementById("deleteProdTitle");
 
     // On click of 'Add Product' button, slide form down
     productAddBtn.addEventListener('click', (e) => {
@@ -205,8 +206,15 @@ if (adminDashboard) {
         trash.addEventListener('click', (e) => {
             confirmDelete.classList.add("open");    // Show form
 
-            let dataId = (e.target).getAttribute("data-id");
-            trashForm.setAttribute('action', `/admin/del/${dataId}?method=DELETE`)
+            const dataId = (e.target).getAttribute("data-id");
+            const dataTitle = (e.target).getAttribute("data-title");
+
+            const imgPath = (e.target).getAttribute("data-imgPath")
+
+            trashForm.querySelector("#deleteImg").value = imgPath;
+
+            delProdTitle.textContent = dataTitle;   // Insert name of product in modal
+            trashForm.setAttribute('action', `/admin/del/${dataId}?method=DELETE`); // Prepare form for particular record to delete
         });
     });
 
@@ -220,8 +228,9 @@ if (adminDashboard) {
     // Hence the idea is to still pass in the category for the individual record clicked in a 
     // data-id on the select container, and then use JavaScript here to find the matching 
     // option and preselect it
-    
+
     let dataCategProductCat = productCat.getAttribute("data-category");
+
     dataCategProductCat = capitalise(dataCategProductCat);
     productCat.querySelector(`option[value=${dataCategProductCat}]`).setAttribute("selected", "selected");
 

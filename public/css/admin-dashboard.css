@@ -148,6 +148,14 @@ tbody td:hover:before {
 .deleteRec h4 {
     font-size: 1.3em;
     margin-bottom: 1em;
+    text-align: center;
+}
+.deleteRec h4 strong {
+    display: block;
+    font-size: 1.2em;
+    font-weight: bolder;
+    padding: 25px 0;
+    color: var(--dark-grey);
 }
 .deleteRec .button-set {
     position: absolute;

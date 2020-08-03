@@ -54,7 +54,7 @@
 	                    <a href="/admin/edit/{{this.id}}" data-id="{{this.id}}" class="edit-ctrl"><span data-id="{{this.id}}" class="fa fa-pencil" title="edit"></span></a>
 	                </td>
 	                <td>
-	                    <button data-id="{{this.id}}" class="trash-ctrl"><span data-id="{{this.id}}" class="fa fa-trash" title="delete"></span></button>
+	                    <button data-id="{{this.id}}" class="trash-ctrl"><span data-id="{{this.id}}" data-title="{{this.title}}" data-imgPath="{{this.imgPath}}" class="fa fa-trash" title="delete"></span></button>
 	                </td> 
 	            </tr>
 
@@ -141,11 +141,12 @@
 		{{!-- For every delete clicked, the data-id holding the 'id' of the record
 		will be dynamically inserted into this form's action to manipulate the particular 
 		record --}}
-		<form id="deleteRec" class="deleteRec" action="/admin/del/{{_id}}?method=DELETE">
-			<h4>Are you sure you want to delete this record?</h4>
+		<form method="POST" id="deleteRec" class="deleteRec" action="/admin/del/{{_id}}?method=DELETE">
+			<h4>Are you sure you want to delete this record? <strong id="deleteProdTitle"></strong></h4>
 			<figure class="trash">
 				<img src="/img/trash.gif" src="trash">
 			</figure>
+			<input type="hidden" id="deleteImg" name="deleteImg" value="">
 			<div class="button-set">
 				<button type="button" id="deleteCancel" class="deleteCancel">GO BACK</button>
 				<button type="submit" id="deleteOK" class="deleteOK">DELETE</button>

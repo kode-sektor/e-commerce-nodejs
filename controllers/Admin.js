@@ -17,6 +17,8 @@ const path = require("path");
 // Import functions
 const functions = require("../public/js/functions.js");
 
+const fs = require('fs');
+
 
 // Object to hold parameters to be sent to existing pages 
 // so user is not left hanging after submitting a form 
@@ -110,7 +112,7 @@ router.get("/edit/:id", (req, res) => {
 	// THIS IS FOR 'EDIT' BUTTON CLICKED. It The ID of the particular record clicked 
 	// is used to fetch the record and passed to populate the values of the form
 
-	productModel.findById(req.params.id).then((product) => {
+	 productModel.findById(req.params.id).then((product) => {
 
 		// You're fetching only 1 record which is why you can destructure directly
 		const {
@@ -197,7 +199,7 @@ router.post("/add-product", (req, res) => {
 				if (imgExt.indexOf(ext) !== -1) {	// Check for allowable file ext type
 
 					// Rename image to prevent overriding image in DB. So user does not meet a different image to what he uploaded
-					let file = `product-img-${product._id}.${ext}`;
+					let file = `product-img-${product._id}${ext}`;
 
 					fileOrig.mv(`public/uploads/products/${file}`)
 						.then(()=> {
@@ -302,5 +304,30 @@ router.put("/edit-product/:id", (req, res) => {
 	}).catch(err => console.log(`Error happened when updating data from the database : ${err}`));
 
 });
+
+
+//router to delete user
+
+
+router.delete("/del/:id", (req, res) => {
+
+	productModel.deleteOne({_id : req.params.id}).then((product) => {	// Delete image path from DB first
+
+		const imageDel = req.body.deleteImg;
+
+		// console.log("REQ : ", req.body);
+		
+		fs.unlink(`public/uploads/products/${imageDel}`, (err) => {	// Then unlink locally
+	        if (err) {
+	            console.log("failed to delete local image: " + err);
+	        } else {
+	            console.log('successfully deleted local image');                                
+	        }
+	        res.redirect("/admin/admin-dashboard");
+		});
+	}).catch(err => console.log(`Error happened when deleting data from the database : ${err}`));
+
+});
+
 
 module.exports=router;
