@@ -156,6 +156,8 @@ if (adminDashboard) {
 
     // On click of 'Add Product' button, slide form down
     productAddBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        
         formBg.classList.add("open"); 
 
         // Clear form fields

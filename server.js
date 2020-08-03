@@ -24,11 +24,6 @@ app.engine("handlebars", exphbs({
     helpers : require('./config/handlebars-helpers')
 }));
 
-const product = require("./models/product");
-const catProduct = require("./models/productCategory");
-const bestSeller = require("./models/bestSeller");
-
-
 // Import your router objects
 const userRoutes = require("./controllers/Users");
 const generalRoutes = require("./controllers/Generals");
