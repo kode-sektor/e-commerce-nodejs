@@ -101,6 +101,9 @@ h1, h2 {
 h3 {
 	font-size: 1.1em;
 }
+header {
+	padding: 20px;
+}
 
 main form .error .fa {
 	color: red;
@@ -725,9 +728,13 @@ label[for=remember-me] {
 /*Page Product Listing*/
 .main-wrapper {
 	width: 85%;
-	padding: 25px;
+	padding: 25px 0;
 	margin: 0 auto 30px;
 	text-align: center;
+}
+.admin-dashboard .main-wrapper,
+.product-details .main-wrapper {
+	width: 100%;
 }
 .section-title {
 	font-size: 1.4em;

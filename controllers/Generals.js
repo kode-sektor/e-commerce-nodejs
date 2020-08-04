@@ -135,6 +135,7 @@ router.get('/productListing', (req, res) => {
 		// console.log ("LISTING : ", listing);
 
 	    res.render("User/productListing", {
+	    	title : "Product Listing",
 	    	listing
 	    });
 
@@ -147,22 +148,28 @@ router.get('/productListing', (req, res) => {
 
 // On details page, fetch details of particular item that was clicked
 
-router.get('/details:id', (req, res) => {
+router.get('/details', (req, res) => {
 
-	productModel.findById(req.params.id).then((product) => {
+	const id = req.query.id;
+
+	// console.log("'GET' ID : ", id);
+
+	productModel.findById(id).then((product) => {
 
 		// You're fetching only 1 record which is why you can destructure
 		const {_id, title, description, price, featured, imgPath, category, quantity} = product;
 
-		res.render("User/details", {
+		/*res.render("User/details", {
 			_id, title, description, price, featured, imgPath, category, quantity
-		})
+		})*/
 
 
 		// console.log ("LISTING : ", listing);
 
-	    res.render("User/productListing", {
-	    	listing
+	    res.render("User/details", {
+	    	title : "Product Details",
+	    	bodyClass : "product-details",
+	    	_id, title, description, price, featured, imgPath, category, quantity
 	    });
 
 	}).catch((err) => {

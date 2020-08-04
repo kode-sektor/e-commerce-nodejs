@@ -57,7 +57,8 @@ router.get("/admin-dashboard", /*authHome, dashBoardLoader,*/ (req, res) => {
 			// console.log ("LOADED CATEGORIES: ", loadedCategories);
 
 			res.render("Admin/dashboard", {
-				title : "Admin-Dashboard",
+				title : "Admin Dashboard",
+				bodyClass : "admin-dashboard",
 				data : loadedProducts,
 				categories : loadedCategories
 			});
@@ -132,7 +133,8 @@ router.get("/edit/:id", (req, res) => {
 		// There's always need to destructure into variables 
 
 		res.render("Admin/dashboard", {
-			title : "Admin-Dashboard",
+			title : "Admin Dashboard",
+			bodyClass : "admin-dashboard",
 			data : loadedProducts,
 			categories : loadedCategories,
 			product_id, product_title, product_description, product_price,
