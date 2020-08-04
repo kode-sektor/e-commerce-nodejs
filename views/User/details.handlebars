@@ -13,6 +13,13 @@
 				<header>
 					<h1 class="product-title">{{title}}</h1>
 					<span class="star-featured">
+						{{#ifeq featured "feature"}}
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+						{{/ifeq}}
 					</span>
 				</header>
 
@@ -21,15 +28,19 @@
 				</article>
 
 				<section class="cart">
-					<span class="heart fa fa-heart"></span>
-					<span class="cart fa fa-shopping-cart"></span>
+					<a href="" title="Add to Collection">
+						<span class="heart fa fa-heart"></span>
+					</a>
+					<a href="/" title="Add to Cart">
+						<span class="shopping-cart  fa fa-shopping-cart"></span>
+					</a>
 				</section>
 
 				<span class="old-price"></span>
 				<strong class="price">{{price}} $CAD</strong>
 
-				<a class="purchase-btn" href="/cart">Add to Cart</a>
-				
+				<a class="purchase-btn cta-btn" href="/cart">Add to Cart</a>
+
 			</section>
 
 		</section>

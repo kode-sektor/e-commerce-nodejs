@@ -97,6 +97,7 @@ select, option {
 }
 h1, h2 {
 	font-size: 1.3em;
+	margin-bottom: 20px;
 }
 h3 {
 	font-size: 1.1em;
@@ -424,6 +425,7 @@ main {
     color: var(--yellow);
 }
 .cta-btn {
+	display: block;
 	padding: 8px;
 	margin-top: 1em;
 	color: black;
