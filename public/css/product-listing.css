@@ -1,6 +1,7 @@
 	
 .filter-search option:not(.filter-selected) {
 	display: block;
+	color: #fff;
 	text-transform: capitalize;
 	cursor: pointer;
 }

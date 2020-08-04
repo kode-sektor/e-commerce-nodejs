@@ -10,7 +10,6 @@ const session = require('express-session');
 // Import schema
 const userModel = require("../models/Users");
 
-
 const authHome = require("../auth/authHome");
 const isAuth = require("../auth/auth");	// Fetch auth
 

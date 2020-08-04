@@ -1,18 +1,23 @@
 
-	<div class="page-product">
+	<div class="inner-wrap">
 
 		<h2 class="section-title">Product Listings</h2>
 
+		{{!-- Categories are made available through sessions and were saved
+		on first page load  --}}
 		<!-- widget for container demo only, the rest matters -->
-		<form class="product-filter" id="product-filter" method="POST" action="">
+		<form class="product-filter" id="product-filter" method="POST" action="/user/product-filter">
 		    <div class="product-filter-wrap">
-		        <select id="filter-search" class="filter-search">
-		            <option class="filter-selected" selected>Search Products Here:</option>
-		            {{#each category}}
-		            	<option value="{{this.category}}">{{this.category}}</option>
-		            {{/each}}
-		        </select>
+		    	<label>
+			        <select id="filter-search" class="filter-search" name="filter-search">
+			            <option class="filter-selected" selected>Search Products Here:</option>
+			            {{#each categories}}
+			            	<option value="{{this.category}}">{{this.category}}</option>
+			            {{/each}}
+			        </select>
+			    </label>
 		    </div>
+		    <input class="sr-only" type="submit" name="">
 		</form>
 
 		<ul class="product-list">

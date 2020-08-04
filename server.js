@@ -24,6 +24,8 @@ app.engine("handlebars", exphbs({
     helpers : require('./config/handlebars-helpers')
 }));
 
+app.use(bodyParser.urlencoded({extended: false}));
+
 // Import your router objects
 const userRoutes = require("./controllers/Users");
 const generalRoutes = require("./controllers/Generals");
@@ -42,8 +44,6 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(bodyParser.urlencoded({extended: false}));
-
 //express static middleware
 app.use(express.static("public"));
 
@@ -54,8 +54,13 @@ app.use(fileUpload());
 app.use(session({
     name : 'sid',
     secret: `${process.env.SECRET_KEY}`,
-    resave: false,
+    resave: true,
     saveUninitialized: true,
+    cookie : {
+        maxAge : 1000 * 60 * 60 * 10,
+        sameSite : true,
+        secure : false
+    }
 }));
 
 app.use((req, res, next) => {
@@ -64,8 +69,11 @@ app.use((req, res, next) => {
     // With this instead of always using .render (in the controller) just to pass in extra
     // details, you could use .redirect instead. 'user' object here will hold any extra 
     // details you pass. You could create more res.locals if you want
+    res.locals.session = req.session;
     res.locals.user = req.session.userDetails;
     res.locals.product = req.session.productDetails;
+    res.locals.categories = req.session.categories;
+    res.locals.bestSellers = req.session.bestSellers;
 
     next();
 });

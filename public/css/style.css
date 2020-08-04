@@ -47,6 +47,16 @@
 	padding: 0;
 	box-sizing: border-box;
 }	
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
 html{
 	height:100%;
 	font-smoothing: antialiased;	
@@ -119,7 +129,6 @@ main form .error .fa {
 main form .error {
 	font-family: var(--font-tertiary);
 }
-
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
     color: pink;
     font-size: .8em;
@@ -150,6 +159,8 @@ a {
 label {
 	color: var(--white);
 }
+
+
 /*Header*/
 
 .page-header {
@@ -736,14 +747,16 @@ label[for=remember-me] {
 
 /*Page Product Listing*/
 .main-wrapper {
-	width: 85%;
-	padding: 25px 0;
 	margin: 0 auto 30px;
 	text-align: center;
 }
 .admin-dashboard .main-wrapper,
 .product-details .main-wrapper {
 	width: 100%;
+}
+.inner-wrap {
+	width: 85%;
+	margin: auto;
 }
 .section-title {
 	font-size: 1.4em;

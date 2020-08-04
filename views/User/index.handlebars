@@ -1,4 +1,4 @@
-
+	
 	<section class="hero promo-section"  role="banner">
 
 		<section class="carousel-container" id="carousel-container">
@@ -56,63 +56,70 @@
 
 	</section>
 
-	<section id="best-sellers" class="best-seller product-listing">
+	<div class="inner-wrap">
 
-		<div class="page-product">
+	
+		<section id="best-sellers" class="best-seller product-listing">
 
-			<h2 class="section-title">Show of Our Products by Category</h2>
+			<div class="page-product">
 
-			<ul class="category product-list">
-				{{#each dataCat}}
-				<li>
-					<a href="/details?id={{this._id}}" style="display: block;">
-						<div class="product-listing-single">
-							<h4 class="category-title">({{this.category}})</h4>
-						    <h5>{{this.title}}</h5>
-							<h5>Price : $ CAD {{this.price}}</h5>
-						    <figure>
-						    	<img src="/uploads/products/{{this.imgPath}}">
-						    	<figcaption>
-						    		<p>{{this.description}}</p>
-						    	</figcaption>
-						    </figure>
-						</div>
-					</a>
-				</li>
-				{{/each}}
-			</ul>
+				<h2 class="section-title">Show of Our Products by Category</h2>
 
-		</div>
+				<ul class="category product-list">
+					{{#each dataCat}}
+					<li>
+						<a href="/details?id={{this._id}}" style="display: block;">
+							<div class="product-listing-single">
+								<h4 class="category-title">({{this.category}})</h4>
+							    <h5>{{this.title}}</h5>
+								<h5>Price : $ CAD {{this.price}}</h5>
+							    <figure>
+							    	<img src="/uploads/products/{{this.imgPath}}">
+							    	<figcaption>
+							    		<p>{{this.description}}</p>
+							    	</figcaption>
+							    </figure>
+							</div>
+						</a>
+					</li>
+					{{/each}}
+				</ul>
 
-	</section>
+			</div>
 
-	<section id="best-sellers" class="best-seller product-listing">
+		</section>
 
-		<div class="page-product">
+		<section id="best-sellers" class="best-seller product-listing">
 
-			<h2 class="section-title">A peek at Some of Our Best Sellers</h2>
+			<div class="page-product">
 
-			<ul class="product-list">
-				{{#each filteredBestSellers}}
-				<li>
-					<a href="/details?id={{this.id}}" style="display: block;">
-						<div class="product-listing-single">
-						    <h4>{{this.title}}</h4>
-							<h5>Price : $ CAD {{this.price}}</h5>
-						    <figure>
-						    	<img src="/uploads/products/{{this.imgPath}}">
-						    	<figcaption>
-						    		<p>{{this.description}}</p>
-						    	</figcaption>
-						    </figure>
-						</div>
-					</a>
-				</li>
-				{{/each}}
-			</ul>
+				<h2 class="section-title">A peek at Some of Our Best Sellers</h2>
 
-		</div>
+				<ul class="product-list">
+					{{#each bestSellers}}
+					<li>
+						<a href="/details?id={{this.id}}" style="display: block;">
+							<div class="product-listing-single">
+							    <h4>{{this.title}}</h4>
+								<h5>Price : $ CAD {{this.price}}</h5>
+							    <figure>
+							    	<img src="/uploads/products/{{this.imgPath}}">
+							    	<figcaption>
+							    		<p>{{this.description}}</p>
+							    	</figcaption>
+							    </figure>
+							</div>
+						</a>
+					</li>
+					{{/each}}
+				</ul>
 
-	</section>
+			</div>
 
-	<script type="text/javascript" src="/js/index.js" defer></script>
+		</section>
+
+		<script type="text/javascript" src="/js/index.js" defer></script>
+
+	</div>
+
+	

@@ -7,6 +7,7 @@ const capitalise = (word) => {
 const html = document.documentElement; 
 
 const adminDashboard = document.querySelector(".admin-dashboard");
+const productListing = document.querySelector(".product-listing");
 
 const loginClose = document.getElementById('login-close');
 const accountClose = document.getElementById('account-close');
@@ -234,4 +235,19 @@ if (adminDashboard) {
     dataCategProductCat = capitalise(dataCategProductCat);
     productCat.querySelector(`option[value=${dataCategProductCat}]`).setAttribute("selected", "selected");
 
+}
+
+
+// PRODUCT LISTING PAGE
+
+if (productListing) {
+    // Listen to change event on dropdown and fire submit event
+
+    const form = document.getElementById("product-filter");
+    const slctFilter = document.getElementById("filter-search");
+    const filterSearchOption = document.querySelectorAll("#filter-search option");
+
+    slctFilter.addEventListener("change", (e) => {
+        form.submit();
+    });
 }

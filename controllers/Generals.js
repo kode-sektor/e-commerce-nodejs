@@ -89,13 +89,20 @@ router.get('/', (req, res) => {
 						}
 					});
 
+					// Save categories and bestSellers in session: 
+
 					// console.log ("BEST SELLERS FOR EACH CATEGORY FETCHED : ", filteredBestSellers);
 					req.session.bestSellers = filteredBestSellers;
+
+					req.session.categories = filteredCategory;
+					// console.log ("CATEGORIES FETCHED : ", filteredCategory);
+
+					console.log("SESSION'S STATE AT GET.PRODUCTLISTING : ", (req.session));
 
 					res.render("User/index", {
 					    title : "Home Page",
 					    dataCat : products,
-					    filteredBestSellers
+					    /*filteredBestSellers*/
 					});
 
 				}).catch((err) => {
@@ -115,10 +122,12 @@ router.get('/', (req, res) => {
 router.get('/productListing', (req, res) => {
 
 	// First fetch categories used to populate the search filter
+	console.log("SESSION'S STATE AT GET.PRODUCTLISTING : ", (req.session));
 
 	let filteredCategory = '';
 
 	const filteredCategories = new Promise(function(resolve, reject) {
+
 		categoryModel.find().then((categories) => {
 
 			// Fetch categories
@@ -149,18 +158,22 @@ router.get('/productListing', (req, res) => {
 
 			// console.log ("LISTING : ", listing);
 
+			// console.log("SESSION'S STATE AT GET.PRODUCTLISTING : ", console.log(req.session));
+
 		    res.render("User/productListing", {
 		    	title : "Product Listing",
 		    	bodyClass : "product-listing",
 		    	listing,
-		    	category : filteredCategory
+		    	categories : filteredCategory	/*Although this has been passed in sessions but the session may 
+		    									expire and the user may still continue browsing this site
+		    									and since this is a crucial element, let it be called on every
+		    									page refresh for now*/
 		    });
 
 		}).catch((err) => {
 			console.log(`Error happened when pulling from the database : ${err}`);
 		});
 	})
-
 });
 
 
@@ -175,12 +188,7 @@ router.get('/details', (req, res) => {
 	productModel.findById(id).then((product) => {
 
 		// You're fetching only 1 record which is why you can destructure
-		const {_id, title, description, price, featured, imgPath, category, quantity} = product;
-
-		/*res.render("User/details", {
-			_id, title, description, price, featured, imgPath, category, quantity
-		})*/
-
+		const { _id, title, description, price, featured, imgPath, category, quantity } = product;
 
 		// console.log ("LISTING : ", listing);
 
@@ -201,6 +209,48 @@ router.get("/logout", (req, res) => {
 	req.session.destroy();
 /*	res.redirect("/user/login");
 */	res.redirect("/user/login");
+});
+
+router.post("/user/product-filter", (req, res) => {
+
+	const filterSearch = req.body["filter-search"];
+
+	console.log("FILTER SEARCH CRITERION : ", filterSearch);	// shoe
+
+	productModel.find({category : filterSearch}).then((products) => {	// Fetch filtered products
+
+		const filteredProducts = products.map( (product) => {
+
+			return {
+				id : product._id,
+				title : product.title, 
+				description : product.description,
+				price : product.price,
+				featured  : product.featured,
+				imgPath : product.imgPath,
+				category : product.category,
+				quantity : product.quantity
+			}			
+		});
+
+		console.log ("PRODUCTS FILTERED ", filteredProducts);
+
+		categoryModel.find().then((categories) => {		// Then fetch categories
+			// Fetch categories
+			const filteredCategory = categories.map( (category) => {
+				return { category : category.title }
+			});
+
+			res.render("User/productListing", {
+				title : "Product Listing",
+				bodyClass : "product-listing",
+				listing : filteredProducts,
+				categories : filteredCategory
+			});	
+		})
+	}).catch((err) => {
+		console.log(`Error happened when pulling from Product database : ${err}`);
+	});
 });
 
 
