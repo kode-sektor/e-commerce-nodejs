@@ -6,7 +6,7 @@ const capitalise = (word) => {
 
 const html = document.documentElement; 
 
-const adminDashboard = document.querySelector(".Admin-Dashboard");
+const adminDashboard = document.querySelector(".admin-dashboard");
 
 const loginClose = document.getElementById('login-close');
 const accountClose = document.getElementById('account-close');

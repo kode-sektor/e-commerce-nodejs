@@ -3,6 +3,16 @@
 
 		<h2 class="section-title">Product Listings</h2>
 
+		<!-- widget for container demo only, the rest matters -->
+		<form class="product-filter">
+		    <div class="product-filter-wrap">
+		        <select id="filter-search">
+		            <option selected>Search Products Here:</option>
+		            {{!-- Needs dynamic input --}}
+		        </select>
+		    </div>
+		</form>
+
 		<ul class="product-list">
 			{{#each listing}}
 			<li>

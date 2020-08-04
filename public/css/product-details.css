@@ -12,7 +12,7 @@
 	margin: 0 auto;
 	background: linear-gradient(45deg, rgb(73 160 157 / 78%), #5f2c82, var(--yellow));
 }
-.hero-img-product, .product-details {
+.hero-img-product, .product-details-container {
 	position: relative;
 	flex : 0 0 50%;
 }
@@ -63,6 +63,26 @@
 	color: var(--blue);
 	font-size: 1.9em;
 	margin-bottom: 5px;
+}
+.in-stock, .quantity-stock {
+	font-size: 1.1em;
+	margin-bottom: 15px;
+	font-family: var(--font-secondary);
+	text-transform: uppercase;
+}
+.in-stock span {
+	font-weight: bolder;
+}
+.quantity-form {
+	width: 40px;
+	height: 30px;
+	text-align: center;
+	margin-bottom: 10px;
+	background: var(--light-grey);
+	color: black;
+	border: none;
+	outline: none;
+	cursor: pointer;
 }
 .purchase-btn {
 	padding: 15px;
