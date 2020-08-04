@@ -52,11 +52,11 @@ router.get('/', (req, res) => {
 
 	         		let category = elm.category;	// 'shoe', 'phone' etc.
 
-	         		console.log ("CATEGORY : ", category);
+	         		// console.log ("CATEGORY : ", category);
 
 	         		productModel.findOne({category}, function(err, product) {
 
-	         			console.log ("PRODUCTSFOREACH CATEGORY FETCHED : ", product);
+	         			// console.log ("PRODUCTSFOREACH CATEGORY FETCHED : ", product);
 
 	         			const {_id, title, description, price, featured, imgPath, category, quantity} = product;
 
@@ -77,8 +77,7 @@ router.get('/', (req, res) => {
 			filterCategory.then(() => {
 
 				// Time to fetch best sellers 
-
-				productModel.find({featured : "feature"}).limit(20).then((bestSellers) => {
+				productModel.find({featured : "feature"}).limit(12).then((bestSellers) => {
 
 					const filteredBestSellers = bestSellers.map( bestSeller => {
 						return {
@@ -93,8 +92,8 @@ router.get('/', (req, res) => {
 						}
 					});
 
-					console.log ("PRODUCTS FOR EACH CATEGORY FETCHED : ", products);
-					req.session.productCateg = products;
+					// console.log ("BEST SELLERS FOR EACH CATEGORY FETCHED : ", filteredBestSellers);
+					req.session.bestSellers = filteredBestSellers;
 
 					res.render("User/index", {
 					    title : "Home Page",
@@ -108,6 +107,37 @@ router.get('/', (req, res) => {
 			});
 		});
  
+	}).catch((err) => {
+		console.log(`Error happened when pulling from the database : ${err}`);
+	});
+
+});
+
+
+// On shop page, list all products
+router.get('/productListing', (req, res) => {
+
+	productModel.find().then((products) => {
+
+		const listing = products.map( product => {
+			return {
+				id : product._id,
+				title : product.title, 
+				description : product.description,
+				price : product.price,
+				featured  : product.featured,
+				imgPath : product.imgPath,
+				category : product.category,
+				quantity : product.quantity
+			}
+		});
+
+		console.log ("LISTING : ", listing);
+
+	    res.render("User/productListing", {
+	    	listing
+	    });
+
 	}).catch((err) => {
 		console.log(`Error happened when pulling from the database : ${err}`);
 	});
