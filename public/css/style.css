@@ -95,6 +95,13 @@ input[type=checkbox], input[type=radio] {
 select, option {
     cursor: pointer;
 }
+input, select {
+    padding-left: .2in;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    box-sizing: border-box;
+}
 h1, h2 {
 	font-size: 1.3em;
 	margin-bottom: 20px;

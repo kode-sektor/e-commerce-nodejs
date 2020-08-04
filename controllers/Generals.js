@@ -51,11 +51,9 @@ router.get('/', (req, res) => {
 	         	filteredCategory.forEach((elm, indx, array) => {	// the loop
 
 	         		let category = elm.category;	// 'shoe', 'phone' etc.
-
 	         		// console.log ("CATEGORY : ", category);
 
 	         		productModel.findOne({category}, function(err, product) {
-
 	         			// console.log ("PRODUCTSFOREACH CATEGORY FETCHED : ", product);
 
 	         			const {_id, title, description, price, featured, imgPath, category, quantity} = product;
@@ -71,7 +69,6 @@ router.get('/', (req, res) => {
 	         	        }
 	         	    });
 	         	});
-	     	
 			});
 
 			filterCategory.then(() => {
@@ -117,31 +114,52 @@ router.get('/', (req, res) => {
 // On shop page, list all products
 router.get('/productListing', (req, res) => {
 
-	productModel.find().then((products) => {
+	// First fetch categories used to populate the search filter
 
-		const listing = products.map( product => {
-			return {
-				id : product._id,
-				title : product.title, 
-				description : product.description,
-				price : product.price,
-				featured  : product.featured,
-				imgPath : product.imgPath,
-				category : product.category,
-				quantity : product.quantity
-			}
-		});
+	let filteredCategory = '';
 
-		// console.log ("LISTING : ", listing);
+	const filteredCategories = new Promise(function(resolve, reject) {
+		categoryModel.find().then((categories) => {
 
-	    res.render("User/productListing", {
-	    	title : "Product Listing",
-	    	listing
-	    });
-
-	}).catch((err) => {
-		console.log(`Error happened when pulling from the database : ${err}`);
+			// Fetch categories
+			filteredCategory = categories.map( (category, indx) => {
+				if (indx === categories.length - 1) resolve();
+				return { category : category.title }
+			});
+		})
 	});
+
+	filteredCategories.then(() => {
+
+		// Then fetch products for the page
+		productModel.find().then((products) => {
+
+			const listing = products.map( product => {
+				return {
+					id : product._id,
+					title : product.title, 
+					description : product.description,
+					price : product.price,
+					featured  : product.featured,
+					imgPath : product.imgPath,
+					category : product.category,
+					quantity : product.quantity
+				}
+			});
+
+			// console.log ("LISTING : ", listing);
+
+		    res.render("User/productListing", {
+		    	title : "Product Listing",
+		    	bodyClass : "product-listing",
+		    	listing,
+		    	category : filteredCategory
+		    });
+
+		}).catch((err) => {
+			console.log(`Error happened when pulling from the database : ${err}`);
+		});
+	})
 
 });
 

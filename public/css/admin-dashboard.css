@@ -294,13 +294,6 @@ select,
     box-shadow: inset 0 1px rgba(0, 0, 0, 0.05), inset 1px 0 rgba(0, 0, 0, 0.02), inset -1px 0 rgba(0, 0, 0, 0.02);
     border: none;
 }
-.form-product input, .form-product select {
-    padding-left: .2in;
-    font-family: inherit;
-    font-size: inherit;
-    color: inherit;
-    box-sizing: border-box;
-}
 .form-input.file {
     text-align: left;
 }

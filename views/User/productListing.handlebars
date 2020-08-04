@@ -4,11 +4,13 @@
 		<h2 class="section-title">Product Listings</h2>
 
 		<!-- widget for container demo only, the rest matters -->
-		<form class="product-filter">
+		<form class="product-filter" id="product-filter" method="POST" action="">
 		    <div class="product-filter-wrap">
-		        <select id="filter-search">
-		            <option selected>Search Products Here:</option>
-		            {{!-- Needs dynamic input --}}
+		        <select id="filter-search" class="filter-search">
+		            <option class="filter-selected" selected>Search Products Here:</option>
+		            {{#each category}}
+		            	<option value="{{this.category}}">{{this.category}}</option>
+		            {{/each}}
 		        </select>
 		    </div>
 		</form>

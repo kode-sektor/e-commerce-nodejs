@@ -1,0 +1,22 @@
+	
+.filter-search option:not(.filter-selected) {
+	display: block;
+	text-transform: capitalize;
+	cursor: pointer;
+}
+select, 
+.product-listing .form-input input[type=text], 
+.product-listing .form-input input[type=password], 
+.product-listing .form-input input[type=email], 
+.product-listing .form-input input[type=number] {
+    background-color: transparent;
+    height: calc(2.25rem + 10px);
+    color: #fff;
+    text-transform: capitalize;
+}
+select  {
+	color: black;
+	font-weight: bolder;
+	font-family: var(--font-secondary);
+	text-transform: uppercase;
+}
