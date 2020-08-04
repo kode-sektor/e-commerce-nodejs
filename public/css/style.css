@@ -769,11 +769,13 @@ label[for=remember-me] {
 	flex-flow: row wrap;
 	padding: 25px 20px;
 }
-.product-list li {
+.product-list li, .product-listing-single li {
 	position: relative;
 	z-index: 1;
 	width: 100%;
 	overflow: hidden;
+	padding: 30px 0;
+	margin: 30px 0;
 	border: thin solid rgba(239, 239, 239, .4);
 }
 .product-list li:before {
@@ -814,7 +816,7 @@ label[for=remember-me] {
 	display: flex;
 	flex-flow: column wrap;
 	justify-content: space-around;
-	width: 80%;
+	width: 50%;
 	min-height: 300px;
 }
 .product-listing-single figcaption p {
@@ -823,6 +825,13 @@ label[for=remember-me] {
 	color: var(--blue);
 	font-weight: bolder;
 	text-transform: capitalize;
+}
+.add-to-cart {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
 }
 
 /*Category Product List*/

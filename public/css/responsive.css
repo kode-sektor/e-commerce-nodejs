@@ -224,7 +224,7 @@ So better to set left at 50% in style.css so browser always meets that first*/
 
 	.category.product-list li {
 		width: 25%;
-		padding: 0;
+		padding: 0 0 25px;
 	}
 
 
@@ -258,12 +258,12 @@ So better to set left at 50% in style.css so browser always meets that first*/
 	}
 	.product-list li:nth-child(6n+1), .product-list li:nth-child(6n+0) {
 		width: 50%;
-		padding-left: 15%;
-		padding-right: 15%;
+	}
+	.product-list li:nth-child(6n+1) figure, .product-list li:nth-child(6n+0) figure {
+		width: 30%;
 	}
 	.product-list.category li:nth-child(6n+1), .product-list.category li:nth-child(6n+0) {
 		width: 25%;
-		padding: 0;
+		padding-bottom: 25px;
 	}
-
 }

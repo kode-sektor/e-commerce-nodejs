@@ -244,8 +244,8 @@ router.post("/user/product-filter", (req, res) => {
 			res.render("User/productListing", {
 				title : "Product Listing",
 				bodyClass : "product-listing",
-				listing : filteredProducts,
-				categories : filteredCategory
+				listing : filteredProducts/*,
+				categories : filteredCategory*/
 			});	
 		})
 	}).catch((err) => {
