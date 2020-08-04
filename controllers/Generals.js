@@ -132,7 +132,34 @@ router.get('/productListing', (req, res) => {
 			}
 		});
 
-		console.log ("LISTING : ", listing);
+		// console.log ("LISTING : ", listing);
+
+	    res.render("User/productListing", {
+	    	listing
+	    });
+
+	}).catch((err) => {
+		console.log(`Error happened when pulling from the database : ${err}`);
+	});
+
+});
+
+
+// On details page, fetch details of particular item that was clicked
+
+router.get('/details:id', (req, res) => {
+
+	productModel.findById(req.params.id).then((product) => {
+
+		// You're fetching only 1 record which is why you can destructure
+		const {_id, title, description, price, featured, imgPath, category, quantity} = product;
+
+		res.render("User/details", {
+			_id, title, description, price, featured, imgPath, category, quantity
+		})
+
+
+		// console.log ("LISTING : ", listing);
 
 	    res.render("User/productListing", {
 	    	listing

@@ -723,7 +723,7 @@ label[for=remember-me] {
 }
 
 /*Page Product Listing*/
-.product-listing, .dashboard {
+.main-wrapper {
 	width: 85%;
 	padding: 25px;
 	margin: 0 auto 30px;
