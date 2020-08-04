@@ -7,5 +7,15 @@
 	border: thin solid tan;
 }
 .hero-img-product, .product-details {
+	position: relative;
 	flex : 0 0 50%;
+}
+.hero-img-product {
+}
+.hero-img-product > figure {
+	transform: scale(1.2);
+	border: 1px solid magenta;
+}
+.product-title {
+	
 }
