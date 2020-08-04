@@ -21,61 +21,93 @@ router.get('/', (req, res) => {
 
 	// Show of products by Category
 
+	let filteredCategory = '';
+
 	categoryModel.find().then((categories) => {
 
 		// First fetch categories
-		const filteredCategory = categories.map( category => {
-			return {
-				category : category.title,
-			}
+		const filteredCategories = new Promise(function(resolve, reject) {
+
+			filteredCategory = categories.map( (category, indx) => {
+
+				if (indx === categories.length - 1) resolve();
+
+				return {
+					category : category.title,
+				}
+			});
+
+		})
+
+		filteredCategories.then(() => {
+
+			// console.log ("CATEGORIES : " , filteredCategory);
+
+			let products = [];	// will hold product fetched
+
+			// Now run through all records and only fetch one record for each of the categories fetched prior
+			const filterCategory = new Promise(function(resolve, reject) { 
+
+	         	filteredCategory.forEach((elm, indx, array) => {	// the loop
+
+	         		let category = elm.category;	// 'shoe', 'phone' etc.
+
+	         		console.log ("CATEGORY : ", category);
+
+	         		productModel.findOne({category}, function(err, product) {
+
+	         			console.log ("PRODUCTSFOREACH CATEGORY FETCHED : ", product);
+
+	         			const {_id, title, description, price, featured, imgPath, category, quantity} = product;
+
+	         	        if (err) {
+	         	        	console.log("Error connecting to database : ", err);
+	         	        	return res(err);
+	         	        }
+	         	        if (product) { 
+	         	        	products.push({_id, title, description, price, featured, imgPath, category, quantity});	// Keep pushing single product item into products array
+
+	         	        	if (indx === array.length - 1) resolve();	// wait till last record (must be inside .findOne) to work
+	         	        }
+	         	    });
+	         	});
+	     	
+			});
+
+			filterCategory.then(() => {
+
+				// Time to fetch best sellers 
+
+				productModel.find({featured : "feature"}).limit(20).then((bestSellers) => {
+
+					const filteredBestSellers = bestSellers.map( bestSeller => {
+						return {
+							id : bestSeller._id,
+							title : bestSeller.title, 
+							description : bestSeller.description,
+							price : bestSeller.price,
+							featured  : bestSeller.featured,
+							imgPath : bestSeller.imgPath,
+							category : bestSeller.category,
+							quantity : bestSeller.quantity
+						}
+					});
+
+					console.log ("PRODUCTS FOR EACH CATEGORY FETCHED : ", products);
+					req.session.productCateg = products;
+
+					res.render("User/index", {
+					    title : "Home Page",
+					    dataCat : products,
+					    filteredBestSellers
+					});
+
+				}).catch((err) => {
+					console.log(`Error happened when pulling from the database : ${err}`);
+				});
+			});
 		});
-
-		// console.log ("CATEGORIES : " , filteredCategory);
-
-		let products = [];	// will hold product fetched
-
-		// Now run through all records and only fetch one record for each of the categories fetched prior
-		const filterCategory = new Promise(function(resolve, reject) { 
-
-         	filteredCategory.forEach((elm, indx, array) => {	// the loop
-
-         		let category = elm.category;	// 'shoe', 'phone' etc.
-
-         		console.log ("CATEGORY : ", category);
-
-         		productModel.findOne({category}, function(err, product) {
-
-         			console.log ("PRODUCTSFOREACH CATEGORY FETCHED : ", product);
-
-         			const {_id, title, description, price, featured, imgPath, category, quantity} = product;
-
-         	        if (err) {
-         	        	console.log("Error connecting to database : ", err);
-         	        	return res(err);
-         	        }
-         	        if (product) { 
-         	        	products.push({_id, title, description, price, featured, imgPath, category, quantity});	// Keep pushing single product item into products array
-
-         	        	if (indx === array.length - 1) resolve();	// wait till last record (must be inside .findOne) to work
-         	        }
-         	    });
-         	});
-     	
-		});
-
-		filterCategory.then(() => {
-		    console.log ("PRODUCTS FOR EACH CATEGORY FETCHED : ", products);
-		    req.session.productCateg = products;
-
-		    res.render("User/index", {
-		        title : "Home Page",
-		        dataCat : products,
-		        /*data : catProduct.getCategProducts()*/
-		    });
-		});
-
-
-
+ 
 	}).catch((err) => {
 		console.log(`Error happened when pulling from the database : ${err}`);
 	});
