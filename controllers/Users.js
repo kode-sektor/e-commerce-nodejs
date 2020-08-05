@@ -585,6 +585,10 @@ router.get("/cart/:id", (req, res) => {
 
 // SHOPPING CART PAGE
 router.get("/shopping-cart", (req, res) => {
+	res.render("User/shopping-cart", {
+		title : "Shopping-Cart", 
+		bodyClass : "shopping-cart"
+	})
 });
 
 // CATEGORY FILTER
