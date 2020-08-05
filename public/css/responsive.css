@@ -221,6 +221,9 @@ So better to set left at 50% in style.css so browser always meets that first*/
 	.section-title {
 		font-size: 2em;
 	}
+	.transaction .section-title {
+		font-size: 1.4em;
+	}
 
 	.category.product-list li {
 		width: 25%;

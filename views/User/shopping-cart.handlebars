@@ -1,98 +1,108 @@
 
 <section class="dashboard">
 
-	<div>
-		<h2 class="section-title">Your Cart</h2>
-		<h3 class="total"><output></output></h3>
-	</div>
+	<section class="cart-dashboard">
 
-	<section class="product-list">
+		<section class="cart-dashboard-list">
 
-		<table class="dashboard-list">
+			<div class="cart-title">
+				<h2 class="section-title">Your Cart</h2>
+				<p class="total"><output>3 items</output></p>
+			</div>
 
-		    <thead>
-	            <th colspan="4">Details</th>
-	            <th>Quantity</th>
-	            <th>Price</th>
-	            <th>Total</th>
-		    </thead>
+			<section class="cart-list">
 
-		    <tbody>
-	        {{#each data}}
-	            <tr>
-	                <td>
-	                    <a href="/user/details/?id={{this.id}}">
-	                    	<span class="thumb-img-"><img class="thumb-img" src="/uploads/products/{{this.imgPath}}" alt="{{this.title}} image"></span>
-	                   	</a>
-	                </td>
-	                <td>
-	                    <button class="qty-subtract"></button>
-	                    <input type="number" class="quantity-form" value="1" step="1" min="0">
-	                    <button class="qty-add"></button>
-	                </td>
-	                <td>
-	                    <span>{{this.price}}</span>
-	                </td>
-	                <td>
-	                   <span>{{!-- total goes here --}}</span>
-	                </td>
-	            </tr>
+				<table class="dashboard-list">
 
-	        	{{else}}
-	            <td colspan="4">
-	                <p>No cart in the database yet</p>
-	            </td>
-	        {{/each}}
-		    </tbody>
-		</table>
-	</section>
+				    <thead>
+			            <th colspan="4">Details</th>
+			            <th>Quantity</th>
+			            <th>Price</th>
+			            <th>Total</th>
+				    </thead>
 
-	<section id="transaction" class="transaction">
+				    <tbody>
+			        {{#each data}}
+			            <tr>
+			                <td>
+			                    <a href="/user/details/?id={{this.id}}">
+			                    	<span class="thumb-img-"><img class="thumb-img" src="/uploads/products/{{this.imgPath}}" alt="{{this.title}} image"></span>
+			                   	</a>
+			                </td>
+			                <td>
+			                    <button class="qty-subtract"></button>
+			                    <input type="number" class="quantity-form" value="1" step="1" min="0">
+			                    <button class="qty-add"></button>
+			                </td>
+			                <td>
+			                    <span>{{this.price}}</span>
+			                </td>
+			                <td>
+			                   <span>{{!-- total goes here --}}</span>
+			                </td>
+			            </tr>
 
-		<h3>Order Summary</h3>
+			        	{{else}}
+			            <td colspan="4">
+			                <p>No cart in the database yet</p>
+			            </td>
+			        {{/each}}
+				    </tbody>
+				</table>
+			</section>
 
-		<section class="transaction-details">
-			<span id="transaction-total"class="transaction-total"></span>
-			<span id="transaction-cost" class="transaction-cost" ></span>
 		</section>
 
-		<form id="form-transaction" class="form-transaction" action="" method="post">
+		<section id="transaction" class="transaction cart-transaction">
 
-            <div class="form-input product-category">
-            	<label for="select-shipping">SHIPPING: </span></label>
+			<div class="cart-title">
+				<h2 class="section-title">Order Summary</h2>
+			</div>
 
-            	<select id="select-shipping" name="select-shipping" class="form-input product-category" required>
-        	    	<option class="shipping" value="5">Standard Delivery - 10 $CAD</option>
-        	    	<option class="shipping" value="5">Local Pickup - 5 $CAD</option>
-            	</select>
-            </div>
+			<section class="transaction-details">
+				<span id="transaction-total"class="transaction-total"></span>
+				<span id="transaction-cost" class="transaction-cost" ></span>
+			</section>
 
-            <div class="form-input">
-            	<label for="select-shipping">PROMO CODE: </span></label>
+			<form id="form-transaction" class="form-transaction" action="" method="post">
 
-                <input type="number" class="form-control" id="product-qty" name="product-qty" placeholder="Product Quantity" step="1" value="{{#if product_quantity}}{{product_quantity}}{{/if}}" required>
-            </div>
+	            <div class="form-input product-category">
+	            	<label for="select-shipping">SHIPPING: </span></label>
 
-		    <div class="form-input">
-		        <button class="login-btn cta-btn">
-		            APPLY
-		        </button>
-		    </div>
+	            	<select id="select-shipping" name="select-shipping" class="form-input product-category" required>
+	        	    	<option class="shipping" value="5">Standard Delivery - 10 $CAD</option>
+	        	    	<option class="shipping" value="5">Local Pickup - 5 $CAD</option>
+	            	</select>
+	            </div>
 
-		    <hr>
+	            <div class="form-input">
+	            	<label for="select-shipping">PROMO CODE: </span></label>
 
-		    <section class="transaction-details">
-		    	<span class="transaction-total">TOTAL COST</span>
-		    	<span id="transaction-cost-grand" class="transaction-cost-grand"></span>
-		    </section>
+	                <input type="number" class="form-control" id="product-qty" name="product-qty" placeholder="Product Quantity" step="1" value="{{#if product_quantity}}{{product_quantity}}{{/if}}" required>
+	            </div>
 
-		    <div class="form-input-final">
-		        <button class="login-btn cta-btn submit" type="submit" value="submit">
-		            PLACE ORDER
-		        </button>
-		    </div>
+			    <div class="form-input">
+			        <button class="login-btn cta-btn">
+			            APPLY
+			        </button>
+			    </div>
 
-		</form> 
+			    <hr>
+
+			    <section class="transaction-details">
+			    	<span class="transaction-total">TOTAL COST</span>
+			    	<span id="transaction-cost-grand" class="transaction-cost-grand"></span>
+			    </section>
+
+			    <div class="form-input-final">
+			        <button class="login-btn cta-btn submit" type="submit" value="submit">
+			            PLACE ORDER
+			        </button>
+			    </div>
+
+			</form> 
+
+		</section>
 
 	</section>
 
