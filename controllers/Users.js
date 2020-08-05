@@ -10,6 +10,7 @@ const session = require('express-session');
 // Import schema
 const userModel = require("../models/Users");
 const productModel = require("../models/Products");
+const categoryModel = require("../models/Categories");
 const cartModel = require("../models/Cart");
 
 const authHome = require("../auth/authHome");
@@ -411,6 +412,95 @@ router.post("/login", (req, res) => {
 });
 
 
+
+// On shop page, list all products
+router.get('/productListing', (req, res) => {
+
+	// First fetch categories used to populate the search filter
+	console.log("SESSION'S STATE AT GET.PRODUCTLISTING : ", (req.session));
+
+	let filteredCategory = '';
+
+	const filteredCategories = new Promise(function(resolve, reject) {
+
+		categoryModel.find().then((categories) => {
+
+			// Fetch categories
+			filteredCategory = categories.map( (category, indx) => {
+				if (indx === categories.length - 1) resolve();
+				return { category : category.title }
+			});
+		})
+	});
+
+	filteredCategories.then(() => {
+
+		// Then fetch products for the page
+		productModel.find().then((products) => {
+
+			const listing = products.map( product => {
+				return {
+					id : product._id,
+					title : product.title, 
+					description : product.description,
+					price : product.price,
+					featured  : product.featured,
+					imgPath : product.imgPath,
+					category : product.category,
+					quantity : product.quantity
+				}
+			});
+
+			// console.log ("LISTING : ", listing);
+
+			// console.log("SESSION'S STATE AT GET.PRODUCTLISTING : ", console.log(req.session));
+
+		    res.render("User/productListing", {
+		    	title : "Product Listing",
+		    	bodyClass : "product-listing",
+		    	listing,
+		    	categories : filteredCategory	/*Although this has been passed in sessions but the session may 
+		    									expire and the user may still continue browsing this site
+		    									and since this is a crucial element, let it be called on every
+		    									page refresh for now*/
+		    });
+
+		}).catch((err) => {
+			console.log(`Error happened when pulling from the database : ${err}`);
+		});
+	})
+});
+
+
+// On details page, fetch details of particular item that was clicked
+
+router.get('/details', (req, res) => {
+
+	const id = req.query.id;
+
+	// console.log("'GET' ID : ", id);
+
+	productModel.findById(id).then((product) => {
+
+		// You're fetching only 1 record which is why you can destructure
+		const { _id, title, description, price, featured, imgPath, category, quantity, inCart } = product;
+		req.session.productDetails = product;
+
+		// console.log ("LISTING : ", listing);
+
+	    res.render("User/details", {
+	    	title : "Product Details",
+	    	bodyClass : "product-details",
+	    	_id, title, description, price, featured, imgPath, category, quantity, inCart
+	    });
+
+	}).catch((err) => {
+		console.log(`Error happened when pulling from the database : ${err}`);
+	});
+
+});
+
+
 router.get("/cart/:id", (req, res) => {
 
 	const cartID = req.params.id;
@@ -450,6 +540,53 @@ router.get("/cart/:id", (req, res) => {
 		});
 	});
 });
+
+
+// CATEGORY FILTER
+
+router.post("/product-filter", (req, res) => {
+
+	const filterSearch = req.body["filter-search"];
+
+	console.log("FILTER SEARCH CRITERION : ", filterSearch);	// shoe
+
+	productModel.find({category : filterSearch}).then((products) => {	// Fetch filtered products
+
+		const filteredProducts = products.map( (product) => {
+
+			return {
+				id : product._id,
+				title : product.title, 
+				description : product.description,
+				price : product.price,
+				featured  : product.featured,
+				imgPath : product.imgPath,
+				category : product.category,
+				quantity : product.quantity
+			}			
+		});
+
+		console.log ("PRODUCTS FILTERED ", filteredProducts);
+
+		categoryModel.find().then((categories) => {		// Then fetch categories
+			// Fetch categories
+			const filteredCategory = categories.map( (category) => {
+				return { category : category.title }
+			});
+
+			res.render("User/productListing", {
+				title : "Product Listing",
+				bodyClass : "product-listing",
+				listing : filteredProducts/*,
+				categories : filteredCategory*/
+			});	
+		})
+	}).catch((err) => {
+		console.log(`Error happened when pulling from Product database : ${err}`);
+	});
+});
+
+
 
 module.exports=router;
 

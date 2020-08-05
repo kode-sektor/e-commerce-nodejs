@@ -71,7 +71,7 @@ app.use((req, res, next) => {
     // details you pass. You could create more res.locals if you want
     res.locals.session = req.session;
     res.locals.user = req.session.userDetails;
-    res.locals.product = req.session.productDetails;
+    res.locals.product = req.session.productDetails;    // Details for a particular product clicked
     res.locals.categories = req.session.categories;
     res.locals.bestSellers = req.session.bestSellers;
 
