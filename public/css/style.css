@@ -891,7 +891,21 @@ label[for=remember-me] {
 	opacity: .8;
 	outline: 2px solid var(--link);
 }
-
+.quantity-form {
+	width: 40px;
+	height: 30px;
+	padding-left: 0;
+	text-align: center;
+	margin-bottom: 10px;
+	background: rgb(239 239 239 / 44%);
+	color: black;
+	border: none;
+	outline: none;
+	cursor: pointer;
+}
+.purchase-btn {
+	padding: 15px;
+}
 
 /*Animation*/
 

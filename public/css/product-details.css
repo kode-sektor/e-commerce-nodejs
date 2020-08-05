@@ -84,18 +84,3 @@
 .in-stock span {
 	font-weight: bolder;
 }
-.quantity-form {
-	width: 40px;
-	height: 30px;
-	padding-left: 0;
-	text-align: center;
-	margin-bottom: 10px;
-	background: var(--light-grey);
-	color: black;
-	border: none;
-	outline: none;
-	cursor: pointer;
-}
-.purchase-btn {
-	padding: 15px;
-}

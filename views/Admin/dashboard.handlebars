@@ -25,7 +25,7 @@
 	        {{#each data}}
 	            <tr>
 	                <td>
-	                    <a href="/product/{{this.id}}" class="product-title">{{this.title}}</a>
+	                    <a href="/user/details?id={{this.id}}" class="product-title">{{this.title}}</a>
 	                </td>
 	                <td>
 	                   <span>{{this.description}}</span>		                  
@@ -59,7 +59,7 @@
 	            </tr>
 
 	        	{{else}}
-	            <td colspan="5">
+	            <td colspan="7">
 	                <p>No products in the database yet</p>
 	            </td>
 	        {{/each}}
@@ -68,6 +68,8 @@
 	</section>
 
 	<section id="product-upload" class="product-upload {{#if product_title}}open{{/if}}">
+		{{!-- When this form is clicked, all the details of this product are given a different nomenclature.
+		product_title is one of them; thus it's used to check if this form should display or not --}}
 
 		<button type="button" id="close-product-form" class="close-product-form">
 		   <img src="/img/cross.png" alt="close product form"/>
@@ -123,7 +125,7 @@
 		    </div>
 
 		    <div class="form-input-final">
-		        <button class="login-btn cta-btn" type="submit" value="submit" class="submit">
+		        <button class="login-btn cta-btn submit" type="submit" value="submit">
 		            {{#if product_title}}EDIT{{else}}ADD{{/if}} PRODUCT
 		        </button>
 		    </div>
