@@ -9,6 +9,8 @@ const session = require('express-session');
 
 // Import schema
 const userModel = require("../models/Users");
+const productModel = require("../models/Products");
+const cartModel = require("../models/Cart");
 
 const authHome = require("../auth/authHome");
 const isAuth = require("../auth/auth");	// Fetch auth
@@ -410,6 +412,30 @@ router.post("/login", (req, res) => {
     
 });
 
+
+router.get("/cart/:id", (req, res) => {
+
+	const cartID = req.params.id;
+
+	// console.log ("CART ID: ", cartID);
+
+	productModel.findById(cartID).then((cartItem) => {	// First find id in list of all products
+
+		console.log ("CART ITEM: ", cartItem);
+
+		// Destructure its parts
+		const { _id, title, description, price, featured, imgPath, category, quantity } = cartItem;
+
+		// Then save this product in new collection called "Cart"
+		const cart = new cartModel({_id, title, description, price, featured, imgPath, category, quantity});
+
+		cart.save().then(() => {
+			res.redirect("/");
+		}).catch((err) => {
+			console.log(`Error happened when inserting in the database : ${err}`);
+		});
+	})
+})
 
 module.exports=router;
 

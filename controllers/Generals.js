@@ -254,4 +254,25 @@ router.post("/user/product-filter", (req, res) => {
 });
 
 
+router.get("/cart:id", (req, res) => {
+	const cartID = req.query.id;
+
+	// params.id catches the id passed from the click of 'Edit'
+	// which is the last part of the URL (http://localhost:3003/task/edit/5f083f597f2810924c9d0985)
+	productModel.findById(cartID).then((cartItem) => {
+
+		// You're fetching only 1 record which is why you can destructure
+		const {_id, title, description, dueDate, priority, status} = cartItem;
+
+		
+
+		/*res.render("Task/taskEditForm", {
+			_id, title, description, dueDate, priority, status
+		})*/
+
+	})
+
+})
+
+
 module.exports=router;
