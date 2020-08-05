@@ -112,6 +112,9 @@ tbody td:hover:before {
     transform: translateY(-100%);
     transition: all .3s ease-in;
 }
+.confirm-delete {
+    text-align: center;
+}
 .product-upload.open, .confirm-delete.open {
     opacity: 1;
     transform: translateY(0);
@@ -276,6 +279,13 @@ select,
     color: #fff;
     text-transform: capitalize;
 }
+.transaction select,
+.transaction .dashboard .form-input input[type=text], 
+.transaction .dashboard .form-input input[type=password], 
+.transaction .dashboard .form-input input[type=email],
+.transaction .dashboard .form-input input[type=number] {
+    color: var(--blue);
+}
 .product-category {
     display: block;
 }
@@ -322,17 +332,16 @@ option.product-category {
     width: 75%;
     padding: 0 20px;
 }
-.cart-title {
+.cart-title, .transaction-details {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
-    border: thin solid sienna;
 }
-.cart-title .total {
+.cart-title .total, .transaction-cost {
     font-size: 1.3em;
 }
-.cart-title .section-title {
+.cart-title .section-title, .transaction-total {
     padding: .5em 4px;
     border-bottom: none;
     margin-bottom: 0;
@@ -342,8 +351,51 @@ option.product-category {
 }
 
 .transaction {
-    width: 25%;
+    position: relative;
+    /right: -35px;
+    width: 30%;
+    margin: -25px -35px -25px 0;
+    padding: 30px 25px;
+    font-family: var(--font-tertiary);
+    background: #F5F5F6;
 }
 .transaction .section-title {
-    margin-bottom: 25px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+    text-align: left;
+    border-bottom: thin inset rgb(242 242 242 / 60%) ;
+}
+.transaction-details {
+    padding-left: 0;
+    padding-right: 0;
+    margin-bottom: 10px;
+}
+.transaction-total {
+    font-size: 1.3em;
+    font-family: var(--font-primary);
+    font-weight: 900;
+}
+.transaction-cost {
+    font-size: 1em;
+    font-weight: normal;
+}
+.transaction label, .transaction-btn {
+    color: var(--blue);
+    margin: 10px 0;
+}
+.transaction label {
+    font-family: var(--font-secondary);
+    padding-bottom: 5px;
+}
+.promo-code {
+    border: 1px solid #ced4da !important;    
+    background: #fff !important;
+}
+.transaction-btn.apply {
+    width: auto;
+}
+.transaction select {
+    font-family: var(--font-secondary);
+    font-size: .9em;
 }

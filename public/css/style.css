@@ -656,7 +656,6 @@ select,
     color: #495057;
     background-color: #000;
     background-clip: padding-box;
-    border: 1px solid #ced4da;
     border-radius: .25rem;
     border: 0px solid transparent;
     border-bottom: 1px solid #ddd;
@@ -691,7 +690,7 @@ label[for=remember-me] {
 	display: block !important;
 	margin-top: 10px;
 }
-.login-btn {
+.login-btn, .transaction-btn {
     display: inline-block;
     border: 1px solid #2577fd;
     background-color: transparent;
@@ -750,7 +749,6 @@ label[for=remember-me] {
 /*Page Product Listing*/
 .main-wrapper {
 	margin: 0 auto 30px;
-	text-align: center;
 }
 .admin-dashboard .main-wrapper,
 .product-details .main-wrapper {
@@ -759,6 +757,9 @@ label[for=remember-me] {
 .inner-wrap {
 	width: 85%;
 	margin: auto;
+}
+.best-seller {
+	text-align: center;
 }
 .section-title {
 	font-size: 1.4em;
@@ -770,6 +771,7 @@ label[for=remember-me] {
 	display: flex;
 	flex-flow: row wrap;
 	padding: 25px 20px;
+	text-align: center;
 }
 .product-list li, .product-listing-single li {
 	position: relative;

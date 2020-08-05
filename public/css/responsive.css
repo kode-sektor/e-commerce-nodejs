@@ -224,6 +224,9 @@ So better to set left at 50% in style.css so browser always meets that first*/
 	.transaction .section-title {
 		font-size: 1.4em;
 	}
+	.admin-dashboard .section-title {
+		text-align: center;
+	}
 
 	.category.product-list li {
 		width: 25%;
