@@ -63,7 +63,7 @@ router.get('/', (req, res) => {
 	         	        	return res(err);
 	         	        }
 	         	        if (product) { 
-	         	        	products.push({_id, title, description, price, featured, imgPath, category, quantity});	// Push single product item into products array
+	         	        	products.push({_id, title, description, price, featured, imgPath, category, quantity, inCart});	// Push single product item into products array
 
 	         	        	if (indx === array.length - 1) resolve();	// wait till last record (must be inside .findOne) to work
 	         	        }

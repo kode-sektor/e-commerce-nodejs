@@ -501,6 +501,46 @@ router.get('/details', (req, res) => {
 
 });
 
+router.get("/cart/:id", (req, res) => {
+
+	const cartID = req.params.id;
+
+	// console.log ("CART ID: ", cartID);
+
+	// 3 things will be done here : 
+	// 1st : Find the record of the product clicked 
+	// 2nd : Fetch details of the record and populate cart collection
+	// 3rd : Modify the original records "inCart" field (to prevent user from re-clicking and re-adding
+	// 			to the cart on client-side)
+	productModel.findById(cartID).then((cartItem) => {	// First find id in list of all products
+
+		// console.log ("CART ITEM: ", cartItem);
+
+		// Destructure its parts
+		let { _id, title, description, price, featured, imgPath, category, quantity } = cartItem;
+
+		// Let quantity be 1 for now and not the 'quantity' of the total stock as that does not 
+		// make sense. Another route will be created to handle updating the cart
+		
+		quantity = 1;
+
+		// Then save this product in new collection called "Cart"
+		const cart = new cartModel({_id, title, description, price, featured, imgPath, category, quantity});
+
+		cart.save().then(() => {
+
+			productModel.updateOne({_id}, {	// Make update of "inCart"
+				inCart : "true" 
+			}).then(()=> {
+				// Redirect to dashboard after updating record with image
+				res.redirect("/");
+			});
+		}).catch((err) => {
+			console.log(`Error happened when inserting in the database : ${err}`);
+		});
+	});
+});
+
 
 router.get("/cart/:id", (req, res) => {
 
@@ -542,6 +582,10 @@ router.get("/cart/:id", (req, res) => {
 	});
 });
 
+
+// SHOPPING CART PAGE
+router.get("/shopping-cart", (req, res) => {
+});
 
 // CATEGORY FILTER
 
