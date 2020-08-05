@@ -69,6 +69,7 @@ table {
 th, td {
     padding: 15px;
     background-color: rgba(255, 255, 255, 0.2);
+    text-align: center;
     color: #fff;
 }
 th {
@@ -231,6 +232,9 @@ tbody td:hover:before {
     width: auto;
     height: 40px;
 }
+.shopping-cart .thumb-img {
+    height: 50px;
+}
 input[type="checkbox"] {
     height: 0;
     width: 0;
@@ -349,6 +353,32 @@ option.product-category {
 .cart-list table {
     width: 100%;
 }
+.shopping-cart .quantity-form {
+    width: 50px;
+    height: 40px;
+    background: #fff;
+}
+.cart-product-name {
+    position: relative;
+    text-align: left;
+}
+.shopping-cart .related {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px 0 20px;
+    width: 70%;
+    width: 100%;
+}
+.cart-remove {
+    flex-basis: 65%;
+    margin-left: auto;
+    display: flex;
+    flex-flow: column;
+}
+.cart-price {
+    color: #696969;
+    font-family: var(--font-tertiary);
+}
 
 .transaction {
     position: relative;
@@ -372,6 +402,8 @@ option.product-category {
     margin-bottom: 10px;
 }
 .transaction-total {
+    padding-left: 0;
+    padding-right: 0;
     font-size: 1.3em;
     font-family: var(--font-primary);
     font-weight: 900;

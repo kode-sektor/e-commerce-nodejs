@@ -8,6 +8,7 @@ const html = document.documentElement;
 
 const adminDashboard = document.querySelector(".admin-dashboard");
 const productListing = document.querySelector(".product-listing");
+const shoppingCart = document.querySelector(".shopping-cart");
 
 const loginClose = document.getElementById('login-close');
 const accountClose = document.getElementById('account-close');
@@ -250,4 +251,13 @@ if (productListing) {
     slctFilter.addEventListener("change", (e) => {
         form.submit();
     });
+}
+
+// SHOPPING CART 
+
+if (shoppingCart) {
+
+    
+
+    
 }

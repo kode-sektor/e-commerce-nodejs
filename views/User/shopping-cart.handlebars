@@ -23,27 +23,31 @@
 
 				    <tbody>
 			        {{#each data}}
-			            <tr>
-			                <td>
-			                    <a href="/user/details/?id={{this.id}}">
-			                    	<span class="thumb-img-"><img class="thumb-img" src="/uploads/products/{{this.imgPath}}" alt="{{this.title}} image"></span>
-			                   	</a>
+			            <tr class="cart-record">
+			                <td class="cart-product-name" colspan="4">
+			                   	<div class="related">
+			                   		 <a href="/user/details/?id={{this.id}}">
+			                   		 	<span class="thumb-img-"><img class="thumb-img" src="/uploads/products/{{this.imgPath}}" alt="{{this.title}} image"></span>
+			                   		</a>
+			                   		<div class="cart-remove">
+			                   			<strong class="product-title">{{this.title}}</strong>
+			                   			<a href="/user/shopping-cart/{{this.id}}" data-id="{{this.id}}" class="product-remove">Remove</a>
+			                   		</div>
+			                   	</div>
 			                </td>
-			                <td>
-			                    <button class="qty-subtract"></button>
+			                <td class="cart-quantity">
 			                    <input type="number" class="quantity-form" value="1" step="1" min="0">
-			                    <button class="qty-add"></button>
 			                </td>
-			                <td>
+			                <td class="cart-price">
 			                    <span>{{this.price}}</span>
 			                </td>
-			                <td>
+			                <td class="cart-total">
 			                   <span>{{!-- total goes here --}}</span>
 			                </td>
 			            </tr>
 
 			        	{{else}}
-			            <td colspan="4">
+			            <td class="no-product" colspan="4">
 			                <p>No cart in the database yet</p>
 			            </td>
 			        {{/each}}

@@ -501,6 +501,11 @@ router.get('/details', (req, res) => {
 
 });
 
+// That means url is sth like /user/product/2424585431345dc
+
+// If url was sth like /user/product?id=343536467546af, then the route would be
+// .get("/cart") and will use "req.query.id" instead of "req.params.id"
+
 router.get("/cart/:id", (req, res) => {
 
 	const cartID = req.params.id;
@@ -585,10 +590,35 @@ router.get("/cart/:id", (req, res) => {
 
 // SHOPPING CART PAGE
 router.get("/shopping-cart", (req, res) => {
-	res.render("User/shopping-cart", {
-		title : "Shopping-Cart", 
-		bodyClass : "shopping-cart"
-	})
+
+	cartModel.find().then((cartProducts) => {	// Fetch filtered products
+
+		const cart = cartProducts.map( (cartProduct) => {
+
+			return {
+				id : cartProduct._id,
+				title : cartProduct.title, 
+				description : cartProduct.description,
+				price : cartProduct.price,
+				featured  : cartProduct.featured,
+				imgPath : cartProduct.imgPath,
+				category : cartProduct.category,
+				quantity : cartProduct.quantity
+			}			
+		});
+
+		console.log ("CART FILTERED ", cart);
+
+		res.render("User/shopping-cart", {
+			title : "Shopping Cart",
+			bodyClass : "shopping-cart",
+			data : cart/*,
+			categories : filteredCategory*/
+		});	
+
+	}).catch((err) => {
+		console.log(`Error happened when pulling from Product database : ${err}`);
+	});
 });
 
 // CATEGORY FILTER
@@ -634,7 +664,6 @@ router.post("/product-filter", (req, res) => {
 		console.log(`Error happened when pulling from Product database : ${err}`);
 	});
 });
-
 
 
 module.exports=router;
