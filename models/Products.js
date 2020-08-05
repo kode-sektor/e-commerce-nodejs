@@ -41,7 +41,11 @@ const productSchema = new Schema({
     dateCreated : {
         type : Date,
         default : Date.now()
-    }, 
+    },
+    inCart : {
+        type: String,
+        default : "false"
+    }
 });
 
 /*For every Schema you create (create a schema per collection), you must also create a model

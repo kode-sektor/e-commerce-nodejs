@@ -29,7 +29,6 @@ let addParams = {};
 let route = '';
 const senderMail = 'kayodeibiyemi92@gmail.com';
 
-
 // Create object to hold errors
 /*
 What errors object will eventually look like: 
@@ -287,7 +286,6 @@ router.post("/create-acct", (req, res) => {
 	        }
         })();
     }
-
 });
 
 
@@ -376,27 +374,28 @@ router.post("/login", (req, res) => {
 	 	// But first check email exists in DB
 	 	userModel.findOne({email : loginMail}).then(user => {
 
-	 		console.log("CONFIRMING IF USER'S LOGIN DETAILS EXIST IN DB: ", user);
+	 		// console.log("CONFIRMING IF USER'S LOGIN DETAILS EXIST IN DB: ", user);
+
  			if (user) {
  				// OK email is found but it can only be compared when decrypted
  				bcrypt.compare(password, user.password).then(isMatched => {
- 						if (isMatched) {	// password and email matches
- 							// Cache user object in session
-                			req.session.userDetails = user;
-                			console.log("SESSION AFTER SUCCESSFUL LOGIN: ", req.session);
-                			res.redirect("/user/profile");
- 						} else { 							
- 							errors.matchFail = true;
+ 					if (isMatched) {	// password and email matches
+						// Cache user object in session
+            			req.session.userDetails = user;
+            			console.log("SESSION AFTER SUCCESSFUL LOGIN: ", req.session);
+            			res.redirect("/user/profile");
+					} else { 							
+						errors.matchFail = true;
 
- 							res.render(route, {
- 							    errors,
- 							    loginVals,
- 							    errorClass : {active: "active"},
- 							    ...addParams
- 							});
- 						}
- 					})
- 					.catch(err => console.log(`Error: ${err}`))
+						res.render(route, {
+						    errors,
+						    loginVals,
+						    errorClass : {active: "active"},
+						    ...addParams
+						});
+					}
+				}).catch(err => console.log(`Error: ${err}`));
+
  			} else {
  				errors.matchFail = true;
 
@@ -408,8 +407,7 @@ router.post("/login", (req, res) => {
  				});
  			}
  		})
-	}	
-    
+	}	    
 });
 
 
@@ -419,23 +417,39 @@ router.get("/cart/:id", (req, res) => {
 
 	// console.log ("CART ID: ", cartID);
 
+	// 3 things will be done here : 
+	// 1st : Find the record of the product clicked 
+	// 2nd : Fetch details of the record and populate cart collection
+	// 3rd : Modify the original records "inCart" field (to prevent user from re-clicking and re-adding
+	// 			to the cart on client-side)
 	productModel.findById(cartID).then((cartItem) => {	// First find id in list of all products
 
-		console.log ("CART ITEM: ", cartItem);
+		// console.log ("CART ITEM: ", cartItem);
 
 		// Destructure its parts
-		const { _id, title, description, price, featured, imgPath, category, quantity } = cartItem;
+		let { _id, title, description, price, featured, imgPath, category, quantity } = cartItem;
+
+		// Let quantity be 1 for now and not the 'quantity' of the total stock as that does not 
+		// make sense. Another route will be created to handle updating the cart
+		
+		quantity = 1;
 
 		// Then save this product in new collection called "Cart"
 		const cart = new cartModel({_id, title, description, price, featured, imgPath, category, quantity});
 
 		cart.save().then(() => {
-			res.redirect("/");
+
+			productModel.updateOne({_id}, {	// Make update of "inCart"
+				inCart : "true" 
+			}).then(()=> {
+				// Redirect to dashboard after updating record with image
+				res.redirect("/");
+			});
 		}).catch((err) => {
 			console.log(`Error happened when inserting in the database : ${err}`);
 		});
-	})
-})
+	});
+});
 
 module.exports=router;
 
