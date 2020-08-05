@@ -56,14 +56,14 @@ router.get('/', (req, res) => {
 	         		productModel.findOne({category}, function(err, product) {
 	         			// console.log ("PRODUCTSFOREACH CATEGORY FETCHED : ", product);
 
-	         			const {_id, title, description, price, featured, imgPath, category, quantity} = product;
+	         			const { _id, title, description, price, featured, imgPath, category, quantity, inCart } = product;
 
 	         	        if (err) {
 	         	        	console.log("Error connecting to database : ", err);
 	         	        	return res(err);
 	         	        }
 	         	        if (product) { 
-	         	        	products.push({_id, title, description, price, featured, imgPath, category, quantity});	// Keep pushing single product item into products array
+	         	        	products.push({_id, title, description, price, featured, imgPath, category, quantity});	// Push single product item into products array
 
 	         	        	if (indx === array.length - 1) resolve();	// wait till last record (must be inside .findOne) to work
 	         	        }
@@ -85,13 +85,14 @@ router.get('/', (req, res) => {
 							featured  : bestSeller.featured,
 							imgPath : bestSeller.imgPath,
 							category : bestSeller.category,
-							quantity : bestSeller.quantity
+							quantity : bestSeller.quantity,
+							inCart : bestSeller.inCart
 						}
 					});
 
 					// Save categories and bestSellers in session: 
 
-					// console.log ("BEST SELLERS FOR EACH CATEGORY FETCHED : ", filteredBestSellers);
+					console.log ("BEST SELLERS FOR EACH CATEGORY FETCHED : ", filteredBestSellers);
 					req.session.bestSellers = filteredBestSellers;
 
 					req.session.categories = filteredCategory;

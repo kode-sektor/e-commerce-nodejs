@@ -115,9 +115,11 @@ input, select {
 h1, h2 {
 	font-size: 1.3em;
 	margin-bottom: 20px;
+	line-height: 1.3em;
 }
 h3 {
 	font-size: 1.1em;
+	line-height: 1.3em;
 }
 header {
 	padding: 20px;
@@ -832,6 +834,11 @@ label[for=remember-me] {
 	left: 0;
 	right: 0;
 	width: 100%;
+}
+.add-to-cart.in-cart, .in-cart {
+	cursor: default;
+	pointer-events: none;
+	text-decoration: none;
 }
 
 /*Category Product List*/

@@ -447,7 +447,8 @@ router.get('/productListing', (req, res) => {
 					featured  : product.featured,
 					imgPath : product.imgPath,
 					category : product.category,
-					quantity : product.quantity
+					quantity : product.quantity,
+					inCart : product.inCart 
 				}
 			});
 
