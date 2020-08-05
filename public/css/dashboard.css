@@ -375,9 +375,13 @@ option.product-category {
     display: flex;
     flex-flow: column;
 }
-.cart-price {
+.cart-price, .cart-total {
     color: #696969;
     font-family: var(--font-tertiary);
+}
+.cart-total span {
+    font-weight: bold;
+    opacity: .8;
 }
 
 .transaction {
