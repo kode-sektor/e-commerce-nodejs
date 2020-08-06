@@ -467,3 +467,6 @@ option.product-category {
     opacity: .9;
     color: #ca002a;
 }
+.grand-total.hide, .cart-title .total.hide, .transaction.hide {
+    display: none;
+}

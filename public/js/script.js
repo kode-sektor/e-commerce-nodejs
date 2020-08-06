@@ -301,17 +301,24 @@ if (shoppingCart) {
 
     let totalCost = TotalCost = totalQty = greatGrandTotal = 0;
 
-    const cartRow = document.querySelectorAll(".cart-record");
-    let grandTotal = document.querySelector("#cart-grand-total b");   // total
-    let transactionCost = document.getElementById("transaction-cost");
+    const $transaction = document.getElementById("transaction");
 
-    let qtyOutput = document.querySelector(".cart-title .total output");
-    let transactionQtyOutput = document.querySelector("#transaction-total strong");
+    const $cartRow = document.querySelectorAll(".cart-record");
+    const $grandTotalContainer = document.getElementById("cart-grand-total");
+    const $grandTotal = document.querySelector("#cart-grand-total b");   // total
+    const $transactionCost = document.getElementById("transaction-cost");
 
-    let transactionApplyBtn = document.querySelector("#transaction-btn-apply");
+    const $totalItems = document.querySelector(".cart-title .total");
+    const $qtyOutput = document.querySelector(".cart-title .total output");
 
-    let cartShipping = document.querySelector("#select-shipping");
-    let $greatGrandTotal = document.querySelector("#transaction-cost-grand");
+    const $transactionQtyOutput = document.querySelector("#transaction-total strong");
+
+    const transactionApplyBtn = document.querySelector("#transaction-btn-apply");
+
+    const $cartShipping = document.querySelector("#select-shipping");
+    const $greatGrandTotal = document.querySelector("#transaction-cost-grand");
+
+    const $noProduct = document.getElementById("no-product");
 
 
     const calcTotal = (qty, price) => {
@@ -320,9 +327,9 @@ if (shoppingCart) {
 
     const computeCart = () => {
 
-        if (cartRow) {
+        if ($cartRow) {
 
-            cartRow.forEach((cart, indx) => {
+            $cartRow.forEach((cart, indx) => {
 
                 let qty = Number((cart).querySelector(".quantity-form").value); // quantity in value (not HTML element)
                 let price = Number((cart).querySelector(".cart-price span").innerText); // price in value
@@ -337,18 +344,18 @@ if (shoppingCart) {
                 totalQty += qty;    // also add up all cart item quantity
 
                 // Insert grandtotal on last laop
-                if (indx == cartRow.length - 1) {
-                    grandTotal.textContent = (TotalCost.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,'));
+                if (indx == $cartRow.length - 1) {
+                    $grandTotal.textContent = (TotalCost.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,'));
 
                     // take cost to transaction section
-                    transactionCost.textContent = (TotalCost.toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');    
+                    $transactionCost.textContent = (TotalCost.toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');    
 
-                    qtyOutput.textContent = (totalQty);   // insert quantity
-                    transactionQtyOutput.textContent = (totalQty);  // take quantity transaction section
+                    $qtyOutput.textContent = (totalQty);   // insert quantity
+                    $transactionQtyOutput.textContent = (totalQty);  // take quantity transaction section
 
 
                     // Calculate the great grand total by adding grand total with shipping costs
-                    let cartShippingVal = Number(cartShipping.value);
+                    let cartShippingVal = Number($cartShipping.value);
                     greatGrandTotal = (TotalCost + cartShippingVal).toFixed(2);
 
                     $greatGrandTotal.textContent = greatGrandTotal;
@@ -361,5 +368,18 @@ if (shoppingCart) {
     }
 
     computeCart();
+
+    // If no cart products, hide some details on the page like grand total, items etc. 
+    // as it does not make sense
+
+    if ($noProduct)  {
+        [$totalItems, $grandTotalContainer, $transaction].forEach( item => {
+            item.classList.add("hide");
+        });
+    } else {
+        [$qtyOutput, $grandTotalContainer, $transaction].forEach( item => {
+            item.classList.remove("hide");
+        });
+    }
 }
 
