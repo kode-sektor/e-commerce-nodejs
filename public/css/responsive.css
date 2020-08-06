@@ -94,6 +94,10 @@
 
 	/*PRODUCT DETAILS PAGE*/
 
+	.inner-wrap {
+	    width: 85%;
+	}
+
 	.details-container {
 		flex-flow: row;
 		width: 80%;
@@ -101,6 +105,14 @@
 	.hero-img-product, .product-details-container {
 		position: relative;
 		flex : 0 0 50%;
+	}
+
+
+	/*DASHBOARD PAGE*/
+
+	.tab-link {
+	    margin-right: 5px;
+	    padding: 10px 20px;
 	}
 
 }

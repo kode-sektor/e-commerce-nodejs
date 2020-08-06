@@ -6,12 +6,13 @@
     padding: 0;
 }
 .tab-link {
-    margin-right: 5px;
-    padding: 10px 20px;
+    margin-right: 2px;
+    padding: 3px 5px;
     color: #fff;
     display: inline-block;
     background-color: #b3b3b3;
     text-decoration: none;
+    font-size: .9em;
     text-transform: uppercase;
 }
 .tab-link.is-active {

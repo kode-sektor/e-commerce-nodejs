@@ -206,7 +206,7 @@ label {
 	z-index: 6;
 }
 .main-menu-nav {
-	display: flex;
+	display: none;
 	flex-flow: row wrap;
 	flex: 0 0 100%;
 	background : rgba(0,0,0,.9);
@@ -221,7 +221,7 @@ label {
 .main-menu-nav > [class^=categories] {
 	/background: rgba(20, 21, 23, .1);
 }
-.main-menu-nav, .user-related-links {
+.user-related-links {
 	display: flex;
 }
 .user-related-links {
@@ -755,7 +755,7 @@ label[for=remember-me] {
 	width: 100%;
 }
 .inner-wrap {
-	width: 85%;
+	width: 100%;
 	margin: auto;
 }
 .best-seller {
