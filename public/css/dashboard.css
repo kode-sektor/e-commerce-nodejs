@@ -125,8 +125,7 @@ tbody td:hover:before {
 
 .form-product, .deleteRec {
     position: relative;
-    width: 50%;
-    max-width: 550px;
+    width: 80%;
     margin: auto;
     background: none;
     padding: 15px 20px;
@@ -316,8 +315,8 @@ option.product-category {
 }
 .close-product-form {
     position: absolute;
-    right: 50px;
-    top: 50px;
+    right: 10px;
+    top: 10px;
     width: 40px;
     height: 40px;
     opacity: .6;

@@ -9,6 +9,15 @@
 		.product-title {
 		    font-size: 1.2em;
 		}
+
+		/*Modal forms*/
+		.form-product, .deleteRec {
+		    width: 70%;
+		}
+		.close-product-form {
+		    right: 30px;
+		    top: 30px;
+		}
 	}
 	
 	@media (min-width: 992px) {
@@ -32,6 +41,16 @@
 		}
 		.product-title {
 		    font-size: 1.3em;
+		}
+
+		/*Modal forms*/
+		.form-product, .deleteRec {
+		    width: 50%;
+		    max-width: 550px;
+		}
+		.close-product-form {
+		    right: 50px;
+		    top: 50px;
 		}
 
 	}
