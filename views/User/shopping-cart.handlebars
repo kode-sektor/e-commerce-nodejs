@@ -22,7 +22,7 @@
 				    </thead>
 
 				    <tbody>
-			        {{#each data}}
+			        {{#each dataCart}}
 			            <tr class="cart-record">
 			                <td class="cart-product-name" colspan="4">
 			                   	<div class="related">
@@ -31,7 +31,7 @@
 			                   		</a>
 			                   		<div class="cart-remove">
 			                   			<strong class="product-title">{{this.title}}</strong>
-			                   			<a href="/user/shopping-cart/{{this.id}}" data-id="{{this.id}}" class="product-remove">Remove</a>
+			                   			<a href="/user/cart-del/{{this.id}}" data-id="{{this.id}}" class="product-remove">Remove</a>
 			                   		</div>
 			                   	</div>
 			                </td>
@@ -99,8 +99,8 @@
 
 			    <section class="transaction-details">
 			    	<span class="transaction-total">TOTAL COST : </span>
-			    	<strong>$ CAD
-			    		<span id="transaction-cost-grand" class="transaction-cost-grand"></span>
+			    	<strong>
+			    		<span id="transaction-cost-grand" class="transaction-cost-grand"></span> $ CAD
 			    	<strong>
 			    </section>
 

@@ -74,6 +74,7 @@ app.use((req, res, next) => {
     res.locals.product = req.session.productDetails;    // Details for a particular product clicked
     res.locals.categories = req.session.categories;
     res.locals.bestSellers = req.session.bestSellers;
+    res.locals.cartData = req.session.cart;
 
     next();
 });

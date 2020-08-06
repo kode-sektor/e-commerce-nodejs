@@ -511,7 +511,6 @@ router.get('/details', (req, res) => {
 
 // If url was sth like /user/product?id=343536467546af, then the route would be
 // .get("/cart") and will use "req.query.id" instead of "req.params.id"
-
 router.get("/cart/:id", (req, res) => {
 
 	const cartID = req.params.id;
@@ -551,48 +550,6 @@ router.get("/cart/:id", (req, res) => {
 		});
 	});
 });
-
-
-router.get("/cart/:id", (req, res) => {
-
-	const cartID = req.params.id;
-
-	// console.log ("CART ID: ", cartID);
-
-	// 3 things will be done here : 
-	// 1st : Find the record of the product clicked 
-	// 2nd : Fetch details of the record and populate cart collection
-	// 3rd : Modify the original records "inCart" field (to prevent user from re-clicking and re-adding
-	// 			to the cart on client-side)
-	productModel.findById(cartID).then((cartItem) => {	// First find id in list of all products
-
-		// console.log ("CART ITEM: ", cartItem);
-
-		// Destructure its parts
-		let { _id, title, description, price, featured, imgPath, category, quantity } = cartItem;
-
-		// Let quantity be 1 for now and not the 'quantity' of the total stock as that does not 
-		// make sense. Another route will be created to handle updating the cart
-		
-		quantity = 1;
-
-		// Then save this product in new collection called "Cart"
-		const cart = new cartModel({_id, title, description, price, featured, imgPath, category, quantity});
-
-		cart.save().then(() => {
-
-			productModel.updateOne({_id}, {	// Make update of "inCart"
-				inCart : "true" 
-			}).then(()=> {
-				// Redirect to dashboard after updating record with image
-				res.redirect("/");
-			});
-		}).catch((err) => {
-			console.log(`Error happened when inserting in the database : ${err}`);
-		});
-	});
-});
-
 
 // SHOPPING CART PAGE
 router.get("/shopping-cart", (req, res) => {
@@ -615,16 +572,36 @@ router.get("/shopping-cart", (req, res) => {
 
 		console.log ("CART FILTERED ", cart);
 
+		req.session.cart = cart;	
+
 		res.render("User/shopping-cart", {
 			title : "Shopping Cart",
 			bodyClass : "shopping-cart",
-			data : cart/*,
+			dataCart : cart/*,
 			categories : filteredCategory*/
 		});	
 
 	}).catch((err) => {
 		console.log(`Error happened when pulling from Product database : ${err}`);
 	});
+});
+
+// SHOPPING CART DELETE ITEM
+router.get("/cart-del/:id", (req, res) => {
+
+	cartModel.deleteOne({_id : req.params.id}).then(() => {	// First delete item from cart
+
+		// Then ensure to update "inCart" to false
+		const inCart = {
+			inCart : "false"
+		}
+		
+		productModel.updateOne({_id : req.params.id}, inCart).then(() => {
+			res.redirect("/user/shopping-cart");
+		}).catch(err => console.log(`Error happened when updating data from the database : ${err}`));
+
+	}).catch(err => console.log(`Error happened when deleting data from the database : ${err}`));
+
 });
 
 // CATEGORY FILTER
@@ -670,6 +647,7 @@ router.post("/product-filter", (req, res) => {
 		console.log(`Error happened when pulling from Product database : ${err}`);
 	});
 });
+
 
 
 module.exports=router;
