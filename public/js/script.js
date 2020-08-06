@@ -9,6 +9,7 @@ const html = document.documentElement;
 const adminDashboard = document.querySelector(".admin-dashboard");
 const productListing = document.querySelector(".product-listing");
 const shoppingCart = document.querySelector(".shopping-cart");
+const productDetails = document.querySelector(".details");
 
 const loginClose = document.getElementById('login-close');
 const accountClose = document.getElementById('account-close');
@@ -253,6 +254,22 @@ if (productListing) {
     });
 }
 
+// PRODUCT DETAILS PAGE
+
+if (productDetails) {
+
+    // Dynamically generate old price
+    const $price = document.querySelector(".product-details-container .price");
+    const $oldPrice = document.querySelector(".product-details-container .old-price");
+
+    const price = Number($price.innerText);
+
+    let oldPrice = (price * 1.25);  // Multiply new price by 1.25
+    $oldPrice.textContent = oldPrice + " $CAD";
+
+}
+
+
 // SHOPPING CART 
 
 if (shoppingCart) {
@@ -272,46 +289,47 @@ if (shoppingCart) {
     let $greatGrandTotal = document.querySelector("#transaction-cost-grand");
 
 
-
-
-
     const calcTotal = (qty, price) => {
         return (qty * price).toFixed(2);
     }
 
-    cartRow.forEach((cart, indx) => {
+    const computeCart = () => {
 
-        let qty = Number((cart).querySelector(".quantity-form").value); // quantity in value (not HTML element)
-        let price = Number((cart).querySelector(".cart-price span").innerText); // price in value
-        let total = (cart).querySelector(".cart-total span");   // total
+        cartRow.forEach((cart, indx) => {
 
-        totalCost = calcTotal (qty, price);    // calculate the cost (quantity * price)
-        total.textContent = totalCost;      // input cost into HTML
+            let qty = Number((cart).querySelector(".quantity-form").value); // quantity in value (not HTML element)
+            let price = Number((cart).querySelector(".cart-price span").innerText); // price in value
+            let total = (cart).querySelector(".cart-total span");   // total
 
-         // fetch newly calculated cost
-        TotalCost += Number(totalCost);   // add to it on every loop (does not work without Number?...)
+            totalCost = calcTotal (qty, price);    // calculate the cost (quantity * price)
+            total.textContent = totalCost;      // input cost into HTML
 
-        totalQty += qty;    // also add up all cart item quantity
+             // fetch newly calculated cost
+            TotalCost += Number(totalCost);   // add to it on every loop (does not work without Number?...)
 
-        // Insert grandtotal on last laop
-        if (indx == cartRow.length - 1) {
-            grandTotal.textContent = (TotalCost.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,'));
+            totalQty += qty;    // also add up all cart item quantity
 
-            // take cost to transaction section
-            transactionCost.textContent = (TotalCost.toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');    
+            // Insert grandtotal on last laop
+            if (indx == cartRow.length - 1) {
+                grandTotal.textContent = (TotalCost.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,'));
 
-            qtyOutput.textContent = (totalQty);   // insert quantity
-            transactionQtyOutput.textContent = (totalQty);  // take quantity transaction section
+                // take cost to transaction section
+                transactionCost.textContent = (TotalCost.toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');    
 
-
-            // Calculate the great grand total by adding grand total with shipping costs
-            let cartShippingVal = Number(cartShipping.value);
-            greatGrandTotal = (TotalCost + cartShippingVal).toFixed(2);
-
-            $greatGrandTotal.textContent = greatGrandTotal;
-        }
-
-    });
+                qtyOutput.textContent = (totalQty);   // insert quantity
+                transactionQtyOutput.textContent = (totalQty);  // take quantity transaction section
 
 
+                // Calculate the great grand total by adding grand total with shipping costs
+                let cartShippingVal = Number(cartShipping.value);
+                greatGrandTotal = (TotalCost + cartShippingVal).toFixed(2);
+
+                $greatGrandTotal.textContent = greatGrandTotal;
+            }
+
+        });
+
+    }
+
+    computeCart();
 }

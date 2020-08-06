@@ -431,6 +431,9 @@ option.product-category {
 .transaction-btn.apply {
     width: auto;
 }
+.transaction-btn:hover, .transaction-btn:focus {
+    opacity: 1;
+}
 .transaction select {
     font-family: var(--font-secondary);
     font-size: .9em;
