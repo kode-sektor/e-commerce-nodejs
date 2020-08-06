@@ -9,7 +9,7 @@ const dashBoardLoader = (req, res, next) => {
 	console.log("STATE OF SESSION IN AUTHORISATION.JS", req.session);
 
     if (req.session.userDetails.admin!=="true") {
-        res.redirect("/user/login");
+        res.redirect("/user/dashboard");
     } else {
     	next();
     }

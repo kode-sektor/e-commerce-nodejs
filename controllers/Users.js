@@ -388,7 +388,7 @@ router.post("/login", (req, res) => {
 					} else { 							
 						errors.matchFail = true;
 
-						res.render(route, {
+						res.render(route, {	// else redirect to homepage
 						    errors,
 						    loginVals,
 						    errorClass : {active: "active"},
@@ -412,6 +412,12 @@ router.post("/login", (req, res) => {
 });
 
 
+router.get("/dashboard", (req, res) => {
+	res.render("User/dashboard.handlebars", {
+		title : "Dashboard", 
+		bodyClass : "user-dashboard"
+	});
+});
 
 // On shop page, list all products
 router.get('/productListing', (req, res) => {
