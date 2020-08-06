@@ -37,7 +37,7 @@
 }
 .dashboard > div {
     position: relative;
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
 }
 .product-add {
@@ -59,20 +59,23 @@
     text-transform: capitalize;
 }
 table {
-    width: 80%;
+    width: 100%;
     margin: auto;
     border-collapse: collapse;
-    overflow: hidden;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(45deg, #49a09d, #5f2c82);
 }
 th, td {
-    padding: 15px;
+    padding: 5px;
     background-color: rgba(255, 255, 255, 0.2);
     text-align: center;
     color: #fff;
 }
 th {
     text-align: left;
+}
+td {
+    font-size: 13px;
 }
 thead th {
     text-align: center;

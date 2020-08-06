@@ -770,7 +770,7 @@ label[for=remember-me] {
 .product-list {
 	display: flex;
 	flex-flow: row wrap;
-	padding: 25px 20px;
+	padding: 0;
 	text-align: center;
 }
 .product-list li, .product-listing-single li {

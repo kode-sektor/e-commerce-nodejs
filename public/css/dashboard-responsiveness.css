@@ -1,0 +1,37 @@
+
+	@media (min-width: 768px) {
+		th, td {
+		    padding: 10px;
+		}
+		td {
+		    font-size: 15px;
+		}
+		.product-title {
+		    font-size: 1.2em;
+		}
+	}
+	
+	@media (min-width: 992px) {
+
+		.dashboard > div {
+		    width: 80%;
+		}
+
+		.product-list {
+			padding: 25px 20px;
+		}
+		table {
+		    width: 80%;
+		    background: none;
+		}
+		th, td {
+		    padding: 15px;
+		}
+		td {
+		    font-size: 16px;
+		}
+		.product-title {
+		    font-size: 1.3em;
+		}
+
+	}
