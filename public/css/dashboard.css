@@ -63,6 +63,8 @@ table {
     margin: auto;
     border-collapse: collapse;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+.admin-dashboard-page table {
     background: linear-gradient(45deg, #49a09d, #5f2c82);
 }
 th, td {
@@ -362,7 +364,7 @@ option.product-category {
     position: relative;
     text-align: left;
 }
-.shopping-cart .related {
+.shopping-cart-page .related {
     display: flex;
     justify-content: space-between;
     padding: 0 10px 0 20px;
@@ -460,6 +462,7 @@ option.product-category {
     font-size: 1.2em;
 }
 .transaction-cost-grand {
+    padding-left: 30px;
     font-size: 1.3em;
     opacity: .9;
     color: #ca002a;

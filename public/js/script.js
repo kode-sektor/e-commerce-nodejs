@@ -319,6 +319,18 @@ if (shoppingCart) {
 
     const $noProduct = document.getElementById("no-product");
 
+    const $hdnProducts = document.getElementById("hdn-products");
+    const $hdnTotalItems = document.getElementById("hdn-total-items");
+    const $hdnTotalCost = document.getElementById("hdn-total-cost");
+    const $hdnGrandTotalCost = document.getElementById("hdn-grand-total-cost");
+
+
+    // This will store the user's cart details and will be passed to a hidden input in stringified format
+    // When the user clicks "Place Order", the details will be sent to the server where it will be 
+    // broken down and sent as the user's order details via mail
+
+    let orderProduct = [];       // Will be in the form of "{productName : price}"
+
 
     const calcTotal = (qty, price) => {
         return (qty * price).toFixed(2);
@@ -338,6 +350,9 @@ if (shoppingCart) {
                 let price = Number((cart).querySelector(".cart-price span").innerText); // price in value
                 let total = (cart).querySelector(".cart-total span");   // total
 
+                // Product name required for passing back to form to be sent as Order details in the form of mail
+                let product = ((cart).querySelector(".product-title")).innerText;   
+
                 totalCost = calcTotal (qty, price);    // calculate the cost (quantity * price)
                 total.textContent = totalCost;      // input cost into HTML
 
@@ -346,15 +361,19 @@ if (shoppingCart) {
 
                 totalQty += qty;    // also add up all cart item quantity
 
+
+
                 // Insert grandtotal on last laop
                 if (indx == $cartRow.length - 1) {
                     $grandTotal.textContent = (TotalCost.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,'));
+                    $hdnTotalCost.value = (TotalCost.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')); // for Order details
 
                     // take cost to transaction section
                     $transactionCost.textContent = (TotalCost.toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');    
 
                     $qtyOutput.textContent = (totalQty);   // insert quantity
                     $transactionQtyOutput.textContent = (totalQty);  // take quantity transaction section
+                    $hdnTotalItems.value = (totalQty);  // Total Quantity for Order details
 
 
                     // Calculate the great grand total by adding grand total with shipping costs
@@ -362,7 +381,23 @@ if (shoppingCart) {
                     greatGrandTotal = (TotalCost + cartShippingVal).toFixed(2);
 
                     $greatGrandTotal.textContent = greatGrandTotal;
+                    $hdnGrandTotalCost.value = greatGrandTotal; // Great grand total for the Order details
+
+
+                    // For the order, if this is the last loop, then send the stringified Order details to the
+                    // hidden inputs and reset the Order object to 0
+
+                    $hdnProducts.textContent = JSON.stringify(orderProduct);;
+
                 }
+
+                // Populate the orderProduct Array
+
+                let orderProductQty = `${product} (${qty})`;
+                let orderPrice = price;
+
+               // console.log(orderProductQty, orderPrice);
+                orderProduct.push({[orderProductQty] : orderPrice});
 
             });
 

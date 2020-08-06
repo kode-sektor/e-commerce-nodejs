@@ -628,7 +628,38 @@ router.post("/place-order", (req, res) => {
 	cartModel.remove({}).then(() => {	//	clear cart collection
 
 		productModel.updateMany({inCart : "true"}, update, (err, doc) => {	// Update all "inCart" to "false"
-			res.redirect("/user/shopping-cart");
+
+	        const sgMail = require('@sendgrid/mail');
+	        console.log("SENDGRID KEY : ", process.env.SENDGRID_API_KEY);
+	        sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+	        const mail = {
+	            to: email,
+	            from: senderMail,
+	            subject: 'Thank you for registering with Humber-Zon',
+	            html: `<h1 style="border: rgba(0, 0, 51, 1); color: #000033; font-family: sans-serif; margin-bottom: 14px;">HUMBER-ZON TRULY CARES</h1>
+
+	                <section class="body" style="border: rgba(0, 0, 51, 1); color: #000033; font-family: Calibri; font-size: 18px; padding: 20px; border: 1px solid rgba(222, 180, 6, 0.4)">
+	                        <p>
+	                            Hello <b>${firstName}</b>, thank you once again for registering with us. At Humber-Zon, rest assured 
+	                            you will always get the best deals at competitive prices. Please let us serve you. 
+	                        </p>
+	                    </section>`
+	        };
+
+	        (async () => {
+	            try {
+		            await sgMail.send(mail);
+		            console.log ('Mail sent');         
+		            res.redirect("/user/shopping-cart");
+		        } catch (error) {	            
+		            console.error(error);
+		         
+		            if (error.response) {
+		              console.error(error.response.body)
+		            }
+		        }
+	        })();
+			
 		}).catch(err => console.log(`Error happened when updating data from the database : ${err}`));;
 
 	}).catch(err => console.log(`Error happened when deleting data from the database : ${err}`));

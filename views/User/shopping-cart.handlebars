@@ -76,7 +76,7 @@
 			<form id="form-transaction" class="form-transaction" action="/user/place-order" method="post">
 
 	            <div class="form-input product-category">
-	            	<label for="select-shipping">SHIPPING: </span></label>
+	            	<label for="select-shipping">SHIPPING: </label>
 
 	            	<select id="select-shipping" name="select-shipping" class="form-input product-category" required>
 	        	    	<option selected class="shipping" value="10">Standard Delivery - 10 $CAD</option>
@@ -85,7 +85,7 @@
 	            </div>
 
 	            <div class="form-input">
-	            	<label for="promo-code">PROMO CODE: </span></label>
+	            	<label for="promo-code">PROMO CODE: </label>
 	                <input type="text" class="form-control promo-code" id="promo-code" name="promo-code">
 	            </div>
 
@@ -98,11 +98,16 @@
 			    <hr>
 
 			    <section class="transaction-details">
-			    	<span class="transaction-total">TOTAL COST : </span>
+			    	<span class="transaction-total">TOTAL COST : 
 			    	<strong>
 			    		<span id="transaction-cost-grand" class="transaction-cost-grand"></span> $ CAD
 			    	</strong>
 			    </section>
+
+			    <input id="hdn-products" type="hidden"></input>
+			    <input id="hdn-total-items" type="hidden"></input>
+			    <input id="hdn-total-cost" type="hidden"></input>
+			    <input id="hdn-grand-total-cost" type="hidden"></input>
 
 			    <div class="form-input-final">
 			        <button class="transaction-btn cta-btn submit" type="submit" value="submit">
