@@ -13,11 +13,12 @@
     display: inline-block;
     background-color: #b3b3b3;
     text-decoration: none;
+    text-transform: uppercase;
 }
 
 .tab-link.is-active {
-    text-decoration: underline;
-    color: #dc446e;
+    color: black;
+    font-weight: bold;
     background-color: #e7e7e7;
 }
 
@@ -26,9 +27,8 @@
 }
 
 .tab-link:hover {
-    text-decoration: underline;
-    color: #dc446e;
-    background-color: #e7e7e7;
+    color: var(--mid-grey);
+    background-color: var(--blue);
 }
 
 

@@ -10,6 +10,7 @@ const adminDashboard = document.querySelector(".admin-dashboard");
 const productListing = document.querySelector(".product-listing");
 const shoppingCart = document.querySelector(".shopping-cart");
 const productDetails = document.querySelector(".details");
+const userDashboard = document.querySelector(".user-dashboard");
 
 const loginClose = document.getElementById('login-close');
 const accountClose = document.getElementById('account-close');
@@ -239,6 +240,12 @@ if (adminDashboard) {
 
 }
 
+// USER DASHBOARD PAGE 
+
+if (userDashboard) {
+
+
+}
 
 // PRODUCT LISTING PAGE
 
@@ -333,3 +340,4 @@ if (shoppingCart) {
 
     computeCart();
 }
+

@@ -3,40 +3,34 @@
 
 		<div>
 
-			<h2 class="section-title">Welcome to the Dashboard, {{user.firstName}} {{user.lastName}}</h2>
+			<h2 class="section-title">Welcome to yours Dashboard, {{user.firstName}} {{user.lastName}}</h2>
 
 		</div>
 
 		<section class="account">
 
 			<div>
+
 			    <div class="tab-nav">
-			        <a href="#" class="tab-link is-active">The push start</a>
-			        <a href="#" class="tab-link">Difficulties</a>
-			        <a href="#" class="tab-link">Crashes</a>
+			        <a href="#orders" class="tab-link is-active">Orders</a>
+			        <a href="#buy-again" class="tab-link">Buy Again</a>
+			        <a href="#open-orders" class="tab-link">Open Orders</a>
+			        <a href="#cancelled-orders" class="tab-link">Cancelled Orders</a>
 			    </div>
-			    <div class="tab-content is-active">
-			        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+			    <div class="tab-content is-active" id="orders">
+			    	<p>0 orders placed in past 3 months.</p>
 			    </div>
-			    <div class="tab-content">
-			        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+			    <div class="tab-content" id="buy-again">
+			    	<p>There are no recommended items for you to buy again at this time. Check Your Orders for items you previously purchased.</p>
 			    </div>
-			    <div class="tab-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+			    <div class="tab-content" id="open-orders">
+			    	<p>Looking for an order? All of your orders have shipped.</p>
+			    </div>
+
+			    <div class="tab-content" id="cancelled-orders"><p>We aren't finding any cancelled orders (for orders placed in the last 6 months). View all orders.</p>
 			    </div>
 			</div>
 
