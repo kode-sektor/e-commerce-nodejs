@@ -38,7 +38,7 @@ const userSchema = new Schema({
 // Double hashing is used 
 userSchema.pre("save", function(next) {
     // salt random generated characters or strings 
-    bcrypt.genSalt(10).then((salt) => {
+    bcrypt.genSalt(12).then((salt) => {
         // this.password refers to the password in User.js/controllers (ln 20)
         console.log("PASSWORD FROM MODEL: ", this.password)
         bcrypt.hash(this.password, salt).then((encryptPassword) => {
