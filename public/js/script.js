@@ -244,6 +244,24 @@ if (adminDashboard) {
 
 if (userDashboard) {
 
+    const tabLink = document.querySelectorAll(".tab-link"); // listen to click on tab link
+    let href = "";
+
+    tabLink.forEach((tablink) => {
+        tablink.addEventListener("click", (e) => {
+            e.preventDefault();
+            href = (e.target).href; // fetch its href
+            href = href.slice(href.lastIndexOf("#") + 1);   // strip of "#" from #orders
+
+            document.querySelector(".tab-content.is-active").classList.remove("is-active"); // remove any "is-active"
+            document.querySelector(".tab-link.is-active").classList.remove("is-active"); // remove any "is-active"
+
+            const tabPanel = document.getElementById(href); // select corresponding panel
+            tabPanel.classList.add("is-active");    // make visible
+            (e.target).classList.add("is-active");
+        }); 
+    });
+
 
 }
 
