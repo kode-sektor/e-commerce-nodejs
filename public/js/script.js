@@ -257,9 +257,14 @@ if (productListing) {
 
 if (shoppingCart) {
 
-    let totalQty = 0;
-    let cartRow = document.querySelectorAll(".cart-record");
+    let totalCost = TotalCost = totalQty = 0;
+
+    const cartRow = document.querySelectorAll(".cart-record");
     let grandTotal = document.querySelector("#cart-grand-total b");   // total
+    let transactionCost = document.getElementById("transaction-cost");
+
+    let qtyOutput = document.querySelector(".cart-title .total output");
+    let transactionQtyOutput = document.querySelector("#transaction-total strong");
 
 
     const calcTotal = (qty, price) => {
@@ -268,19 +273,30 @@ if (shoppingCart) {
 
     cartRow.forEach((cart, indx) => {
 
-        let qty = Number((cart).querySelector(".quantity-form").value); // quantity 
-        let price = Number((cart).querySelector(".cart-price span").innerText); // price 
+        let qty = Number((cart).querySelector(".quantity-form").value); // quantity in value (not HTML element)
+        let price = Number((cart).querySelector(".cart-price span").innerText); // price in value
         let total = (cart).querySelector(".cart-total span");   // total
 
-        totalCost = calcTotal (qty, price);    // calculate the cost
-        total.textContent = totalCost;
+        totalCost = calcTotal (qty, price);    // calculate the cost (quantity * price)
+        total.textContent = totalCost;      // input cost into HTML
 
          // fetch newly calculated cost
-        totalQty += Number(totalCost);   // add to it on every loop
-        console.log (grandTotal);
+        TotalCost += Number(totalCost);   // add to it on every loop (does not work without Number?...)
+
+        totalQty += qty;    // also add up all cart item quantity
 
         // Insert grandtotal on last laop
-        if (indx == cartRow.length - 1) grandTotal.textContent = (totalQty.toFixed(2));
+        if (indx == cartRow.length - 1) {
+            grandTotal.textContent = (TotalCost.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,'));
+
+            // take cost to transaction section
+            transactionCost.textContent = (TotalCost.toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');    
+
+            qtyOutput.textContent = (totalQty);   // insert quantity
+            transactionQtyOutput.textContent = (totalQty);  // take quantity transaction section
+        }
+
+        
 
     });
 }

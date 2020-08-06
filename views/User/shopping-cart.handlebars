@@ -7,7 +7,7 @@
 
 			<div class="cart-title">
 				<h2 class="section-title">Your Cart</h2>
-				<p class="total"><output>3 items</output></p>
+				<p class="total"><output>3</output> items</p>
 			</div>
 
 			<section class="cart-list">
@@ -67,8 +67,10 @@
 			</div>
 
 			<section class="transaction-details">
-				<span id="transaction-total"class="transaction-total">ITEMS <strong>3</strong></span>
-				<span id="transaction-cost" class="transaction-cost" >457.98 $CAD</span>
+				<span id="transaction-total"class="transaction-total">ITEMS <strong></strong></span>
+				<span>
+					<span id="transaction-cost" class="transaction-cost"></span> $CAD
+				</span>
 			</section>
 
 			<form id="form-transaction" class="form-transaction" action="" method="post">
@@ -88,7 +90,7 @@
 	            </div>
 
 			    <div class="form-input">
-			        <button class="transaction-btn cta-btn apply">
+			        <button id="transaction-btn-apply" class="transaction-btn cta-btn apply">
 			            APPLY
 			        </button>
 			    </div>

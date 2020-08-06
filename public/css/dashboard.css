@@ -413,8 +413,8 @@ option.product-category {
     font-weight: 900;
 }
 .transaction-cost {
-    font-size: 1em;
-    font-weight: normal;
+    font-size: 1.1em;
+    font-weight: bold;
 }
 .transaction label, .transaction-btn {
     color: var(--blue);
