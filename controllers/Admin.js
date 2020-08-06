@@ -58,7 +58,7 @@ router.get("/admin-dashboard", /*authHome, dashBoardLoader,*/ (req, res) => {
 
 			res.render("Admin/dashboard", {
 				title : "Admin Dashboard",
-				bodyClass : "admin-dashboard",
+				bodyClass : "admin-dashboard-page",
 				data : loadedProducts,
 				categories : loadedCategories
 			});
@@ -134,7 +134,7 @@ router.get("/edit/:id", (req, res) => {
 
 		res.render("Admin/dashboard", {
 			title : "Admin Dashboard",
-			bodyClass : "admin-dashboard",
+			bodyClass : "admin-dashboard-page",
 			data : loadedProducts,
 			categories : loadedCategories,
 			product_id, product_title, product_description, product_price,

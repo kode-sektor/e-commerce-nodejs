@@ -6,11 +6,11 @@ const capitalise = (word) => {
 
 const html = document.documentElement; 
 
-const adminDashboard = document.querySelector(".admin-dashboard");
-const productListing = document.querySelector(".product-listing");
-const shoppingCart = document.querySelector(".shopping-cart");
-const productDetails = document.querySelector(".details");
-const userDashboard = document.querySelector(".user-dashboard");
+const adminDashboard = document.querySelector(".admin-dashboard-page");
+const productListing = document.querySelector(".product-listing-page");
+const shoppingCart = document.querySelector(".shopping-cart-page");
+const productDetails = document.querySelector(".details-page");
+const userDashboard = document.querySelector(".user-dashboard-page");
 
 const loginClose = document.getElementById('login-close');
 const accountClose = document.getElementById('account-close');
@@ -261,7 +261,6 @@ if (userDashboard) {
             (e.target).classList.add("is-active");
         }); 
     });
-
 
 }
 

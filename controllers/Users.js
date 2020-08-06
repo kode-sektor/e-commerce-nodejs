@@ -52,7 +52,7 @@ let formValid = true;
 // This is the route of the next page after filling the form. 
 router.get("/profile",/* isAuth,*/ (req, res) => {
 	res.render("User/profile", {
-		title : "Dashboard"
+		title : "Dashboard",
 	})
 });
 
@@ -133,14 +133,11 @@ router.post("/create-acct", (req, res) => {
 
     if (route == "index") {
         addParams = {
-            title : "Home Page",
-           // data :   // bestSeller.getFeaturedProducts(), Fetch from MongoDB instead
-            //dataCat : // catProduct.getCategProducts(),  Fetch from MongoDB instead
+            title : "Home Page"
         }  
     } else if (route == "productListing") {
        addParams = {
-           title : "Product Listing Page",
-           // data : // product.getNProducts(0,9)  Fetch from MongoDB instead
+           title : "Product Listing Page"
        }   
     }
 
@@ -415,7 +412,7 @@ router.post("/login", (req, res) => {
 router.get("/dashboard", (req, res) => {
 	res.render("User/dashboard.handlebars", {
 		title : "Dashboard", 
-		bodyClass : "user-dashboard"
+		bodyClass : "user-dashboard-page"
 	});
 });
 
@@ -464,7 +461,7 @@ router.get('/productListing', (req, res) => {
 
 		    res.render("User/productListing", {
 		    	title : "Product Listing",
-		    	bodyClass : "product-listing",
+		    	bodyClass : "product-listing-page",
 		    	listing,
 		    	categories : filteredCategory	/*Although this has been passed in sessions but the session may 
 		    									expire and the user may still continue browsing this site
@@ -497,7 +494,7 @@ router.get('/details', (req, res) => {
 
 	    res.render("User/details", {
 	    	title : "Product Details",
-	    	bodyClass : "product-details",
+	    	bodyClass : "product-details-page",
 	    	_id, title, description, price, featured, imgPath, category, quantity, inCart
 	    });
 
@@ -577,7 +574,7 @@ router.get("/shopping-cart", (req, res) => {
 
 		res.render("User/shopping-cart", {
 			title : "Shopping Cart",
-			bodyClass : "shopping-cart",
+			bodyClass : "shopping-cart-page",
 			dataCart : cart/*,
 			categories : filteredCategory*/
 		});	
@@ -673,7 +670,7 @@ router.post("/product-filter", (req, res) => {
 
 			res.render("User/productListing", {
 				title : "Product Listing",
-				bodyClass : "product-listing",
+				bodyClass : "product-listing-page",
 				listing : filteredProducts/*,
 				categories : filteredCategory*/
 			});	
