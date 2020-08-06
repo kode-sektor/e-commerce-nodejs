@@ -79,7 +79,7 @@
 	            	<label for="select-shipping">SHIPPING: </span></label>
 
 	            	<select id="select-shipping" name="select-shipping" class="form-input product-category" required>
-	        	    	<option class="shipping" value="5">Standard Delivery - 10 $CAD</option>
+	        	    	<option selected class="shipping" value="10">Standard Delivery - 10 $CAD</option>
 	        	    	<option class="shipping" value="5">Local Pickup - 5 $CAD</option>
 	            	</select>
 	            </div>
@@ -98,8 +98,10 @@
 			    <hr>
 
 			    <section class="transaction-details">
-			    	<span class="transaction-total">TOTAL COST</span>
-			    	<span id="transaction-cost-grand" class="transaction-cost-grand"></span>
+			    	<span class="transaction-total">TOTAL COST : </span>
+			    	<strong>$ CAD
+			    		<span id="transaction-cost-grand" class="transaction-cost-grand"></span>
+			    	<strong>
 			    </section>
 
 			    <div class="form-input-final">

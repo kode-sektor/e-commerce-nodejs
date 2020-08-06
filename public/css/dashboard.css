@@ -459,3 +459,8 @@ option.product-category {
     font-family: var(--font-primary);
     font-size: 1.2em;
 }
+.transaction-cost-grand {
+    font-size: 1.3em;
+    opacity: .9;
+    color: #ca002a;
+}

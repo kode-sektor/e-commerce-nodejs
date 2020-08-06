@@ -257,7 +257,7 @@ if (productListing) {
 
 if (shoppingCart) {
 
-    let totalCost = TotalCost = totalQty = 0;
+    let totalCost = TotalCost = totalQty = greatGrandTotal = 0;
 
     const cartRow = document.querySelectorAll(".cart-record");
     let grandTotal = document.querySelector("#cart-grand-total b");   // total
@@ -265,6 +265,14 @@ if (shoppingCart) {
 
     let qtyOutput = document.querySelector(".cart-title .total output");
     let transactionQtyOutput = document.querySelector("#transaction-total strong");
+
+    let transactionApplyBtn = document.querySelector("#transaction-btn-apply");
+
+    let cartShipping = document.querySelector("#select-shipping");
+    let $greatGrandTotal = document.querySelector("#transaction-cost-grand");
+
+
+
 
 
     const calcTotal = (qty, price) => {
@@ -294,9 +302,16 @@ if (shoppingCart) {
 
             qtyOutput.textContent = (totalQty);   // insert quantity
             transactionQtyOutput.textContent = (totalQty);  // take quantity transaction section
+
+
+            // Calculate the great grand total by adding grand total with shipping costs
+            let cartShippingVal = Number(cartShipping.value);
+            greatGrandTotal = (TotalCost + cartShippingVal).toFixed(2);
+
+            $greatGrandTotal.textContent = greatGrandTotal;
         }
 
-        
-
     });
+
+
 }
