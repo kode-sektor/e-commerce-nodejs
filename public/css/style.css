@@ -122,7 +122,7 @@ h3 {
 	line-height: 1.3em;
 }
 header {
-	padding: 20px;
+	padding: 20px 0;
 }
 
 main form .error .fa {
@@ -375,7 +375,7 @@ main {
 }
 .slide-product-img {
 	opacity: 0;
-	width: 100%;
+	width: 30%;
 	overflow: hidden;	
 	transition: all .5s .5s ease-out;
 }

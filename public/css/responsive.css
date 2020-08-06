@@ -33,7 +33,6 @@
 		top: 15px;
 		left: 15px;
 		bottom: 15px;
-		width: 30%;
 	}
 	.slide-watchword {
 		position: absolute;
@@ -92,6 +91,18 @@
 		padding: 25px;
 	}
 
+
+	/*PRODUCT DETAILS PAGE*/
+
+	.details-container {
+		flex-flow: row;
+		width: 80%;
+	}
+	.hero-img-product, .product-details-container {
+		position: relative;
+		flex : 0 0 50%;
+	}
+
 }
 
 /*Use max-width instead because if you use min-width , when browser first reads style.css 
@@ -104,6 +115,7 @@ So better to set left at 50% in style.css so browser always meets that first*/
 	.create-account-modal.active {
 	    left: 0%;
 	}
+
 }
 
 @media (min-width: 992px) {
@@ -253,7 +265,7 @@ So better to set left at 50% in style.css so browser always meets that first*/
 
 @media (min-width: 1200px) {
 	.page-header {
-	    padding: 0px 10px;
+	    padding: 0px;
 	}
 	.promo-coupon {
 		transform: scale(1);

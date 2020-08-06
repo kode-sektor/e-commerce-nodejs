@@ -5,17 +5,17 @@
 }
 .details-container {
 	display: flex;
+	flex-flow: column;
 	padding: 20px 25px;
 	align-items: center;
 	min-height: 500px;
-	width: 80%;
+	width: 100%;
 	margin: 0 auto;
 	text-align: center;
 	background: linear-gradient(45deg, rgb(73 160 157 / 78%), #5f2c82, rgb(222 180 6 / 75%));
 }
 .hero-img-product, .product-details-container {
 	position: relative;
-	flex : 0 0 50%;
 }
 .hero-img-product > figure {
 	padding: 30px;
