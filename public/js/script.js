@@ -257,19 +257,30 @@ if (productListing) {
 
 if (shoppingCart) {
 
+    let totalQty = 0;
     let cartRow = document.querySelectorAll(".cart-record");
+    let grandTotal = document.querySelector("#cart-grand-total b");   // total
+
 
     const calcTotal = (qty, price) => {
         return (qty * price).toFixed(2);
     }
 
-    cartRow.forEach((cart) => {
+    cartRow.forEach((cart, indx) => {
 
         let qty = Number((cart).querySelector(".quantity-form").value); // quantity 
         let price = Number((cart).querySelector(".cart-price span").innerText); // price 
         let total = (cart).querySelector(".cart-total span");   // total
 
-        total.textContent = calcTotal (qty, price);    // calculate the price
+        totalCost = calcTotal (qty, price);    // calculate the cost
+        total.textContent = totalCost;
+
+         // fetch newly calculated cost
+        totalQty += Number(totalCost);   // add to it on every loop
+        console.log (grandTotal);
+
+        // Insert grandtotal on last laop
+        if (indx == cartRow.length - 1) grandTotal.textContent = (totalQty.toFixed(2));
 
     });
 }

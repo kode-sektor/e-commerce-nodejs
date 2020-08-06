@@ -57,11 +57,12 @@
 	                    <button data-id="{{this.id}}" class="trash-ctrl"><span data-id="{{this.id}}" data-title="{{this.title}}" data-imgPath="{{this.imgPath}}" class="fa fa-trash" title="delete"></span></button>
 	                </td> 
 	            </tr>
-
 	        	{{else}}
-	            <td colspan="7">
-	                <p>No products in the database yet</p>
-	            </td>
+	        	<tr>
+		            <td colspan="7">
+		                <p>No products in the database yet</p>
+		            </td>
+		        </tr>
 	        {{/each}}
 		    </tbody>
 		</table>

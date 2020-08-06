@@ -435,3 +435,27 @@ option.product-category {
     font-family: var(--font-secondary);
     font-size: .9em;
 }
+
+.grand-total {
+    text-align: right;
+    border: thin solid black;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.grand-total td {
+    text-align: right;
+    font-weight: 600;
+    font-size: 1.1em;
+    color: #696969;
+}
+.grand-total td b {
+    padding-left: 10px;
+    font-size: 1.2em;
+    font-weight: 900;
+    color: black;
+    font-family: var(--font-primary);
+}
+.grand-total .currency {
+    color: var(--blue);
+    font-family: var(--font-primary);
+    font-size: 1.2em;
+}
