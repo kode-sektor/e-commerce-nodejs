@@ -108,11 +108,32 @@
 	}
 
 
-	/*DASHBOARD PAGE*/
+	/*USER DASHBOARD PAGE*/
 
 	.tab-link {
 	    margin-right: 5px;
 	    padding: 10px 20px;
+	}
+
+
+	/*CART PAGE*/
+
+	.dashboard {
+		margin-bottom: 0;
+		padding-bottom: 40px;
+	}
+	.cart-dashboard {
+	    flex-flow: row;
+	    padding: 25px 35px; 
+	}
+	.cart-dashboard-list {
+	    width: 75%;
+	    padding: 0 20px;
+	}
+	.transaction {
+	    position: relative;
+	    width: 30%;
+	    margin: -25px -35px -25px 0;
 	}
 
 }
@@ -269,6 +290,13 @@ So better to set left at 50% in style.css so browser always meets that first*/
 	}
 	.footer-social {
 		width: 25% !important;
+	}
+
+
+	/*CART PAGE*/
+
+	.cart-dashboard {
+	    width: 85%;
 	}
 
 }
