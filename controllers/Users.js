@@ -551,6 +551,7 @@ router.get("/cart/:id", (req, res) => {
 	});
 });
 
+
 // SHOPPING CART PAGE
 router.get("/shopping-cart", (req, res) => {
 
@@ -586,7 +587,13 @@ router.get("/shopping-cart", (req, res) => {
 	});
 });
 
+
 // SHOPPING CART DELETE ITEM
+/*
+	Do 2 things: 
+	1. Delete from cart
+	2. Update "inCart" to false
+*/
 router.get("/cart-del/:id", (req, res) => {
 
 	cartModel.deleteOne({_id : req.params.id}).then(() => {	// First delete item from cart
@@ -603,6 +610,34 @@ router.get("/cart-del/:id", (req, res) => {
 	}).catch(err => console.log(`Error happened when deleting data from the database : ${err}`));
 
 });
+
+
+// PLACE ORDER
+
+/*
+	Do 2 things:
+	1. Clear the entire cart collection
+	2. Find all "inCart" fields and update them to false
+*/
+
+router.post("/place-order", (req, res) => {
+
+	let update = {
+	    $set : {
+		    inCart : "false"
+	    }
+    };
+
+	cartModel.remove({}).then(() => {	//	clear cart collection
+
+		productModel.updateMany({inCart : "true"}, update, (err, doc) => {	// Update all "inCart" to "false"
+			res.redirect("/user/shopping-cart");
+		}).catch(err => console.log(`Error happened when updating data from the database : ${err}`));;
+
+	}).catch(err => console.log(`Error happened when deleting data from the database : ${err}`));
+
+});
+
 
 // CATEGORY FILTER
 
