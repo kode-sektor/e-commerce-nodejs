@@ -313,7 +313,7 @@ if (shoppingCart) {
 
     const $transactionQtyOutput = document.querySelector("#transaction-total strong");
 
-    const transactionApplyBtn = document.querySelector("#transaction-btn-apply");
+    const $transactionApplyBtn = document.querySelector("#transaction-btn-apply");
 
     const $cartShipping = document.querySelector("#select-shipping");
     const $greatGrandTotal = document.querySelector("#transaction-cost-grand");
@@ -323,6 +323,10 @@ if (shoppingCart) {
 
     const calcTotal = (qty, price) => {
         return (qty * price).toFixed(2);
+    }
+
+    const reset = () => {
+        totalCost = TotalCost = totalQty = greatGrandTotal = 0;
     }
 
     const computeCart = () => {
@@ -368,6 +372,14 @@ if (shoppingCart) {
     }
 
     computeCart();
+
+    const $qty = document.querySelectorAll(".quantity-form");
+    $qty.forEach((qty) => {
+        qty.addEventListener("change", (e) => {
+            reset();    // First reset by setting all quantities and costs to 0
+            computeCart();  // Then move on to recalculate price
+        });
+    });
 
     // If no cart products, hide some details on the page like grand total, items etc. 
     // as it does not make sense
