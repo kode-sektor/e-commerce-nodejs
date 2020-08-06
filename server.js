@@ -54,13 +54,13 @@ app.use(fileUpload());
 app.use(session({
     name : 'sid',
     secret: `${process.env.SECRET_KEY}`,
-    resave: true,
-    saveUninitialized: true,
+    resave: false,
+    saveUninitialized: true/*,
     cookie : {
         maxAge : 1000 * 60 * 60 * 10,
         sameSite : true,
         secure : false
-    }
+    }*/
 }));
 
 app.use((req, res, next) => {
@@ -75,6 +75,7 @@ app.use((req, res, next) => {
     res.locals.categories = req.session.categories;
     res.locals.bestSellers = req.session.bestSellers;
     res.locals.cartData = req.session.cart;
+    res.locals.admin = req.session.adminDetails
 
     next();
 });

@@ -294,6 +294,9 @@ a.profile {
 .toggle-btn-nav:hover, .toggle-btn-nav:focus {
 	opacity: .7;
 }
+.admin-dashboard-page .fa-shopping-cart {
+	display: none;
+}
 
 main {
 	min-height: 60vh;

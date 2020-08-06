@@ -59,14 +59,10 @@
                 <nav class="main-menu">
 
                     <ul id="navigation" class="main-menu-nav">  
-
+                        {{#if user}}
+                            <li class=""><a href="/user/dashboard">Account</a></li>                       
+                        {{/if}}
                         <li><a href="/user/productListing">Shop</a></li>
-                        <li class=""><a href="/">Latest</a>
-                            <ul class="submenu">
-                                <li><a href="/">Product list</a></li>
-                                <li><a href="/"> Product Details</a></li>
-                            </ul>
-                        </li>                       
 
                         <li class="categories-first"><a href="/">Computers</a></li>
                         <li class="categories"><a href="/">Electronics</a></li>
@@ -94,18 +90,24 @@
                         <li class="nav-search">
                             <span class="fa fa-search"></span>
                         </li>
-                        <li>
-                            {{#if user}}
-                                <a id="profile" class="profile" href="/user/profile">Dashboard</span></a>
-                            {{/if}}
-                        </li>
                         <li> 
                             {{#if user}}
                                 <a id="logout-btn" class="logout-btn" href="/logout">Logout</a>
                                 {{else}}
                                 <a id="login-create-account" href="/login"><span class="fa fa-user"></span></a>
                             {{/if}}
-                        <li><a href="/user/shopping-cart"><span class="fa fa-shopping-cart"></span></a></li>
+                        <li>
+                            {{#if admin}}   {{!-- Show only if user. Do not show if neither user nor admin --}}
+
+                                {{else}}
+
+                                {{#if user}}
+                                
+                                    <a href="/user/shopping-cart"><span class="fa fa-shopping-cart"></span></a></li>
+
+                                {{/if}}
+                                
+                            {{/if}}
 
                         <li><button type="button" id="toggle-btn-nav" class="toggle-btn-nav"><span class="fa fa-bars"></span></button></li>
 

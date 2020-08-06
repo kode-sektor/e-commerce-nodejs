@@ -102,7 +102,7 @@ router.get('/', (req, res) => {
 
 					res.render("User/index", {
 					    title : "Home Page",
-					    dataCat : products,
+					    dataCat : products
 					    /*filteredBestSellers*/
 					});
 

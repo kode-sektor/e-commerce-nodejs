@@ -26,7 +26,7 @@ const fs = require('fs');
 
 
 // This is the route of the next page after filling the form. 
-router.get("/admin-dashboard", /*authHome, dashBoardLoader,*/ (req, res) => {
+router.get("/admin-dashboard", authHome, dashBoardLoader, (req, res) => {
 
 	// Fetch the products from the products database
 

@@ -50,7 +50,7 @@ let formValid = true;
 /*router.get("/profile", isAuth, dashBoardLoader);
 */
 // This is the route of the next page after filling the form. 
-router.get("/profile",/* isAuth,*/ (req, res) => {
+router.get("/profile", isAuth, (req, res) => {
 	res.render("User/profile", {
 		title : "Dashboard",
 	})
@@ -61,12 +61,12 @@ router.get("/profile",/* isAuth,*/ (req, res) => {
 // but thats not a problem but sometimes user may refresh page with that URL, that is 
 // when the page breaks
 router.get("/login", (req,res) => {
-	res.render("User/index");
+	res.redirect("/");
 });
 
 // This is the route of the next page after filling the form. 
-router.get("/create-acct", (req,res) => {
-	res.render("User/index");
+router.get("/create-acct", (req, res) => {
+	res.redirect("/");
 });
 
 
@@ -94,7 +94,7 @@ router.post("/create-acct", (req, res) => {
         if (!pattern.test(field)) {
             errors.regex[`${key}`] = msg;
         }
-        console.log (pattern.test(field));
+        // console.log (pattern.test(field));
     }
 
     const checkRegexLettersNos = (key, field, pattern, msg) => {
@@ -125,7 +125,7 @@ router.post("/create-acct", (req, res) => {
     } else {
     	route = "User/index";
     }
-    console.log ("referer : " + referer);
+    // console.log ("referer : " + referer);
     // Consider additional parameters to pass to depending on what route user 
     // interacts with the form 
 
@@ -260,7 +260,7 @@ router.post("/create-acct", (req, res) => {
 	                						}).then(()=> {
 
 	                							// Redirect to dashboard after updating record with image
-	                							res.redirect("/user/profile");
+	                							res.redirect("/user/dashboard");
 	                						});
 	                					});
 	                			}
@@ -268,7 +268,7 @@ router.post("/create-acct", (req, res) => {
 
 	                			// Cache user object in session
 	                			req.session.userDetails = user;
-	                			res.redirect("/user/profile");
+	                			res.redirect("/user/dashboard");
 	                		}
 
 	                	}).catch(err => console.log(`Error while inserting into the data ${err}`));	
@@ -380,8 +380,12 @@ router.post("/login", (req, res) => {
  					if (isMatched) {	// password and email matches
 						// Cache user object in session
             			req.session.userDetails = user;
+
+            			if (user.admin) {
+            				req.session.adminDetails = user;	// save this one to hide some elements from admin like cart	
+            			}
             			console.log("SESSION AFTER SUCCESSFUL LOGIN: ", req.session);
-            			res.redirect("/user/profile");
+            			res.redirect("/user/dashboard");
 					} else { 							
 						errors.matchFail = true;
 
@@ -409,7 +413,9 @@ router.post("/login", (req, res) => {
 });
 
 
-router.get("/dashboard", (req, res) => {
+router.get("/dashboard", isAuth, (req, res) => {
+	console.log("SESSION AT INDEX: ", req.session);
+
 	res.render("User/dashboard.handlebars", {
 		title : "Dashboard", 
 		bodyClass : "user-dashboard-page"
@@ -420,7 +426,7 @@ router.get("/dashboard", (req, res) => {
 router.get('/productListing', (req, res) => {
 
 	// First fetch categories used to populate the search filter
-	console.log("SESSION'S STATE AT GET.PRODUCTLISTING : ", (req.session));
+	// console.log("SESSION'S STATE AT GET.PRODUCTLISTING : ", (req.session));
 
 	let filteredCategory = '';
 
@@ -508,7 +514,7 @@ router.get('/details', (req, res) => {
 
 // If url was sth like /user/product?id=343536467546af, then the route would be
 // .get("/cart") and will use "req.query.id" instead of "req.params.id"
-router.get("/cart/:id", (req, res) => {
+router.get("/cart/:id", authHome,  (req, res) => {
 
 	const cartID = req.params.id;
 
@@ -550,7 +556,8 @@ router.get("/cart/:id", (req, res) => {
 
 
 // SHOPPING CART PAGE
-router.get("/shopping-cart", (req, res) => {
+
+router.get("/shopping-cart", authHome, (req, res) => {
 
 	cartModel.find().then((cartProducts) => {	// Fetch filtered products
 
@@ -568,7 +575,7 @@ router.get("/shopping-cart", (req, res) => {
 			}			
 		});
 
-		console.log ("CART FILTERED ", cart);
+		// console.log ("CART FILTERED ", cart);
 
 		req.session.cart = cart;	
 
@@ -591,7 +598,7 @@ router.get("/shopping-cart", (req, res) => {
 	1. Delete from cart
 	2. Update "inCart" to false
 */
-router.get("/cart-del/:id", (req, res) => {
+router.get("/cart-del/:id", authHome, (req, res) => {
 
 	cartModel.deleteOne({_id : req.params.id}).then(() => {	// First delete item from cart
 
@@ -617,7 +624,16 @@ router.get("/cart-del/:id", (req, res) => {
 	2. Find all "inCart" fields and update them to false
 */
 
-router.post("/place-order", (req, res) => {
+router.post("/place-order",  (req, res) => {
+
+	const user = req.session.user;
+	const products = req.body["hdn-products"];
+	const totalItems = req.body["hdn-total-items"];
+	const totalCost = req.body["hdn-total-cost"];
+	const grandTotal = req.body["hdn-grand-total-cost"];
+	const shipping = req.body["select-shipping"]
+
+	console.log ("USER DETAILS RETURNSSSSSSSSSSSSSSSSSSSSSSSSSSSS : ", req.session);
 
 	let update = {
 	    $set : {
@@ -625,25 +641,28 @@ router.post("/place-order", (req, res) => {
 	    }
     };
 
-	cartModel.remove({}).then(() => {	//	clear cart collection
+/*	cartModel.remove({}).then(() => {	//	clear cart collection
 
 		productModel.updateMany({inCart : "true"}, update, (err, doc) => {	// Update all "inCart" to "false"
 
-	        const sgMail = require('@sendgrid/mail');
+	   */     /*const sgMail = require('@sendgrid/mail');
 	        console.log("SENDGRID KEY : ", process.env.SENDGRID_API_KEY);
 	        sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 	        const mail = {
-	            to: email,
+	            to: user.email,
 	            from: senderMail,
 	            subject: 'Thank you for registering with Humber-Zon',
-	            html: `<h1 style="border: rgba(0, 0, 51, 1); color: #000033; font-family: sans-serif; margin-bottom: 14px;">HUMBER-ZON TRULY CARES</h1>
+	            html: `<h1 style="padding: 20px">Hello ${user.firstName}</h1>,
 
-	                <section class="body" style="border: rgba(0, 0, 51, 1); color: #000033; font-family: Calibri; font-size: 18px; padding: 20px; border: 1px solid rgba(222, 180, 6, 0.4)">
-	                        <p>
-	                            Hello <b>${firstName}</b>, thank you once again for registering with us. At Humber-Zon, rest assured 
-	                            you will always get the best deals at competitive prices. Please let us serve you. 
-	                        </p>
-	                    </section>`
+						<p>Thank you for shopping with us. We thought you'd like to know that your item has shipped, and that this completes your order. Your order is on its way, and can no longer be changed. If you need to return an item from this shipment or manage other orders, please visit Your Orders on Humber-Zon.ca.</p>
+
+						<ul>
+							<li>Total Items : ${totalItems}</li>
+							<li>Item Subtotal:	${totalCost} $CAD</li>
+							<li>Shipping and Handling:	${shipping} $CAD/li>
+							<li>Total: ${grandTotal} $CAD</li>
+							<li>Paid by Visa: ${grandTotal} $CAD</li>
+						</ul>`
 	        };
 
 	        (async () => {
@@ -658,12 +677,12 @@ router.post("/place-order", (req, res) => {
 		              console.error(error.response.body)
 		            }
 		        }
-	        })();
+	        })();*/
 			
-		}).catch(err => console.log(`Error happened when updating data from the database : ${err}`));;
+	/*	}).catch(err => console.log(`Error happened when updating data from the database : ${err}`));;
 
 	}).catch(err => console.log(`Error happened when deleting data from the database : ${err}`));
-
+*/
 });
 
 
@@ -673,7 +692,7 @@ router.post("/product-filter", (req, res) => {
 
 	const filterSearch = req.body["filter-search"];
 
-	console.log("FILTER SEARCH CRITERION : ", filterSearch);	// shoe
+	// console.log("FILTER SEARCH CRITERION : ", filterSearch);	// shoe
 
 	productModel.find({category : filterSearch}).then((products) => {	// Fetch filtered products
 

@@ -387,7 +387,7 @@ if (shoppingCart) {
                     // For the order, if this is the last loop, then send the stringified Order details to the
                     // hidden inputs and reset the Order object to 0
 
-                    $hdnProducts.textContent = JSON.stringify(orderProduct);;
+                    $hdnProducts.value = JSON.stringify(orderProduct);;
 
                 }
 

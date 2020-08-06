@@ -45,7 +45,9 @@
 
 				<p class="in-stock">In stock : <span class="stock-amt">{{quantity}}</span></p>
 
-				<a class="purchase-btn cta-btn" href="">Quick Buy!</a>
+				{{#if user}}
+					<a class="purchase-btn cta-btn" href="">Quick Buy!</a>
+				{{/if}}
 
 			</section>
 
