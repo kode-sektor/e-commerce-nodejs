@@ -626,14 +626,16 @@ router.get("/cart-del/:id", authHome, (req, res) => {
 
 router.post("/place-order",  (req, res) => {
 
-	const user = req.session.user;
+	const user = req.session.userDetails;
 	const products = req.body["hdn-products"];
 	const totalItems = req.body["hdn-total-items"];
 	const totalCost = req.body["hdn-total-cost"];
 	const grandTotal = req.body["hdn-grand-total-cost"];
 	const shipping = req.body["select-shipping"]
 
-	console.log ("USER DETAILS RETURNSSSSSSSSSSSSSSSSSSSSSSSSSSSS : ", req.session);
+	// console.log ("USER DETAILS RETURNSSSSSSSSSSSSSSSSSSSSSSSSSSSS : ", req.session);
+
+	console.log(req.session);
 
 	let update = {
 	    $set : {
@@ -641,11 +643,11 @@ router.post("/place-order",  (req, res) => {
 	    }
     };
 
-/*	cartModel.remove({}).then(() => {	//	clear cart collection
+	cartModel.remove({}).then(() => {	//	clear cart collection
 
 		productModel.updateMany({inCart : "true"}, update, (err, doc) => {	// Update all "inCart" to "false"
 
-	   */     /*const sgMail = require('@sendgrid/mail');
+	        const sgMail = require('@sendgrid/mail');
 	        console.log("SENDGRID KEY : ", process.env.SENDGRID_API_KEY);
 	        sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 	        const mail = {
@@ -659,11 +661,13 @@ router.post("/place-order",  (req, res) => {
 						<ul>
 							<li>Total Items : ${totalItems}</li>
 							<li>Item Subtotal:	${totalCost} $CAD</li>
-							<li>Shipping and Handling:	${shipping} $CAD/li>
+							<li>Shipping and Handling:	${shipping} $CAD</li>
 							<li>Total: ${grandTotal} $CAD</li>
 							<li>Paid by Visa: ${grandTotal} $CAD</li>
 						</ul>`
 	        };
+
+	        console.log ("MAIL BODY: ", mail);
 
 	        (async () => {
 	            try {
@@ -677,12 +681,12 @@ router.post("/place-order",  (req, res) => {
 		              console.error(error.response.body)
 		            }
 		        }
-	        })();*/
+	        })();
 			
-	/*	}).catch(err => console.log(`Error happened when updating data from the database : ${err}`));;
+		}).catch(err => console.log(`Error happened when updating data from the database : ${err}`));;
 
 	}).catch(err => console.log(`Error happened when deleting data from the database : ${err}`));
-*/
+
 });
 
 

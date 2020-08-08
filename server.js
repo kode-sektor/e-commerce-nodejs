@@ -52,6 +52,7 @@ app.use(fileUpload());
 
 // Session middleware
 app.use(session({
+    path : '/',
     name : 'sid',
     secret: `${process.env.SECRET_KEY}`,
     resave: false,
