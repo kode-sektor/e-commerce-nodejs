@@ -92,7 +92,7 @@ router.get('/', (req, res) => {
 
 					// Save categories and bestSellers in session: 
 
-					console.log ("BEST SELLERS FOR EACH CATEGORY FETCHED : ", filteredBestSellers);
+					// console.log ("BEST SELLERS FOR EACH CATEGORY FETCHED : ", filteredBestSellers);
 					req.session.bestSellers = filteredBestSellers;
 
 					req.session.categories = filteredCategory;

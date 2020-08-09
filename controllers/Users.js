@@ -259,6 +259,15 @@ router.post("/create-acct", (req, res) => {
 	                							profilePic : req.files["profile-pic"].name 	// pro-pic-3453454344343.png
 	                						}).then(()=> {
 
+												// Cache user object in session
+						            			req.session.userDetails = user;
+
+						            			if (user.admin) {
+						            				req.session.adminDetails = user;	// save this one to hide some elements from admin like cart	
+						            			}
+						            			console.log("SESSION AFTER SUCCESSFUL LOGIN: ", req.session);
+						            			res.redirect("/user/dashboard");
+
 	                							// Redirect to dashboard after updating record with image
 	                							res.redirect("/user/dashboard");
 	                						});
@@ -267,8 +276,14 @@ router.post("/create-acct", (req, res) => {
 	                		} else {	// Redirect to dashboard after saving
 
 	                			// Cache user object in session
-	                			req.session.userDetails = user;
-	                			res.redirect("/user/dashboard");
+								// Cache user object in session
+		            			req.session.userDetails = user;
+
+		            			if (user.admin) {
+		            				req.session.adminDetails = user;	// save this one to hide some elements from admin like cart	
+		            			}
+		            			console.log("SESSION AFTER SUCCESSFUL LOGIN: ", req.session);
+		            			res.redirect("/user/dashboard");
 	                		}
 
 	                	}).catch(err => console.log(`Error while inserting into the data ${err}`));	
