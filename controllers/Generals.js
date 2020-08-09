@@ -6,6 +6,7 @@ const router = express.Router();
 const userModel = require("../models/Users");
 const categoryModel = require("../models/Categories");
 const productModel = require("../models/Products");
+const cartModel = require("../models/Cart");
 
 const path = require("path");	// For easy filename dismembering
 
@@ -120,9 +121,21 @@ router.get('/', (req, res) => {
 
 // LOGOUT ROUTE
 router.get("/logout", (req, res) => {
+
+	let update = {
+	    $set : {
+		    inCart : "false"
+	    }
+    };
+
+	cartModel.remove({}).then(() => {	//	clear cart collection
+		productModel.updateMany({inCart : "true"}, update, (err, doc) => {	// Update all "inCart" to "false"
+			// console.log("Cart cleared; inCart updated to 'false'");
+		});
+	});
+
 	req.session.destroy();
-/*	res.redirect("/user/login");
-*/	res.redirect("/user/login");
+	res.redirect("/user/login");
 });
 
 
