@@ -346,6 +346,7 @@ if (shoppingCart) {
 
             $cartRow.forEach((cart, indx) => {
 
+                let origQty = (cart).getAttribute("data-quantity");
                 let qty = Number((cart).querySelector(".quantity-form").value); // quantity in value (not HTML element)
                 let price = Number((cart).querySelector(".cart-price span").innerText); // price in value
                 let total = (cart).querySelector(".cart-total span");   // total
@@ -405,13 +406,30 @@ if (shoppingCart) {
 
     }
 
-    computeCart();
+    computeCart();  // calculate cart on load event
 
-    const $qty = document.querySelectorAll(".quantity-form");
+    const $qty = document.querySelectorAll(".quantity-form");   // On change of product quantity, reset and recalculate cart
     $qty.forEach((qty) => {
         qty.addEventListener("change", (e) => {
-            reset();    // First reset by setting all quantities and costs to 0
-            computeCart();  // Then move on to recalculate price
+
+            // Fetch original Quantity of products left which is a data-attr on each row. Find it by 
+            // clawing way up and compare it to value user inserts
+
+            // If greater, alert error but if less move on to recalculate costs
+
+            let productRow = (qty).parentElement.parentElement; 
+            let origQty = productRow.getAttribute("data-quantity");
+            let quantity = (qty).value;
+
+            //console.log (origQty, quantity);
+
+            if (Number(quantity) > Number(origQty)) {
+                (qty).value = 1;    // reset
+                alert ("There are only " + origQty + " left in stock. Please buy less");
+            } else {
+                reset();    // First reset by setting all quantities and costs to 0
+                computeCart();  // Then move on to recalculate price
+            }
         });
     });
 

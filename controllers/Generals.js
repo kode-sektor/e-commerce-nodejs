@@ -63,7 +63,7 @@ router.get('/', (req, res) => {
 	         	        	console.log("Error connecting to database : ", err);
 	         	        	return res(err);
 	         	        }
-	         	        if (product) { 
+	         	        if (product && (Number(quantity) > 0)) { 	// If product exists for each category and quantity > 0
 	         	        	products.push({_id, title, description, price, featured, imgPath, category, quantity, inCart});	// Push single product item into products array
 
 	         	        	if (indx === array.length - 1) resolve();	// wait till last record (must be inside .findOne) to work
@@ -78,16 +78,18 @@ router.get('/', (req, res) => {
 				productModel.find({featured : "feature"}).limit(12).then((bestSellers) => {
 
 					const filteredBestSellers = bestSellers.map( bestSeller => {
-						return {
-							id : bestSeller._id,
-							title : bestSeller.title, 
-							description : bestSeller.description,
-							price : bestSeller.price,
-							featured  : bestSeller.featured,
-							imgPath : bestSeller.imgPath,
-							category : bestSeller.category,
-							quantity : bestSeller.quantity,
-							inCart : bestSeller.inCart
+						if (parseInt(bestSeller.quantity) > 0) {	// Ensure to only fetch products in stock
+							return {
+								id : bestSeller._id,
+								title : bestSeller.title, 
+								description : bestSeller.description,
+								price : bestSeller.price,
+								featured  : bestSeller.featured,
+								imgPath : bestSeller.imgPath,
+								category : bestSeller.category,
+								quantity : bestSeller.quantity,
+								inCart : bestSeller.inCart
+							}
 						}
 					});
 

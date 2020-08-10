@@ -23,7 +23,7 @@
 
 				    <tbody>
 			        {{#each dataCart}}
-			            <tr class="cart-record">
+			            <tr class="cart-record" data-quantity="{{this.origQty}}">
 			                <td class="cart-product-name" colspan="4">
 			                   	<div class="related">
 			                   		 <a href="/user/details/?id={{this.id}}">

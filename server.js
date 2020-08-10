@@ -76,7 +76,9 @@ app.use((req, res, next) => {
     res.locals.categories = req.session.categories;
     res.locals.bestSellers = req.session.bestSellers;
     res.locals.cartData = req.session.cart;
-    res.locals.admin = req.session.adminDetails
+    res.locals.admin = req.session.adminDetails;
+
+    res.locals.noProduct = req.session.noProduct;
 
     next();
 });

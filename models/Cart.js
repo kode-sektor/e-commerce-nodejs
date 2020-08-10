@@ -36,7 +36,11 @@ const cartSchema = new Schema({
     },
     quantity : {
         type: String,
-        require : true
+        required : true
+    },
+    origQty : {
+        type: String, 
+        required: true
     },
     dateCreated : {
         type : Date,

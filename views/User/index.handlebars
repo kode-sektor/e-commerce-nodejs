@@ -89,6 +89,7 @@
 								ADD TO CART
 							{{/ifeq}}
 						</a>
+						<small>{{#ifeq noProduct "true"}}Sorry, this product is finished{{/ifeq}}</small>
 					</li>
 					{{/each}}
 				</ul>
@@ -125,7 +126,7 @@
 								ADD TO CART
 							{{/ifeq}}
 						</a>
-						
+						<small>{{#ifeq noProduct "true"}}Sorry, this product is finished{{/ifeq}}</small>
 					</li>
 					{{/each}}
 				</ul>

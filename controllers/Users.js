@@ -548,24 +548,38 @@ router.get("/cart/:id", authHome,  (req, res) => {
 		let { _id, title, description, price, featured, imgPath, category, quantity } = cartItem;
 
 		// Let quantity be 1 for now and not the 'quantity' of the total stock as that does not 
-		// make sense. Another route will be created to handle updating the cart
-		
-		quantity = 1;
+		// make sense (user will likely not want to buy total qty of products). Another route will 
+		// be created to handle updating the cart
 
-		// Then save this product in new collection called "Cart"
-		const cart = new cartModel({_id, title, description, price, featured, imgPath, category, quantity});
+		let origQty = quantity;	// Keep original quantity 
 
-		cart.save().then(() => {
+		if (quantity > 0) {	// Are there any products left? Do not add to cart if qty of product is 0
 
-			productModel.updateOne({_id}, {	// Make update of "inCart"
-				inCart : "true" 
-			}).then(()=> {
-				// Redirect to dashboard after updating record with image
-				res.redirect("/");
+			quantity = 1;
+
+			// Then save this product in new collection called "Cart"
+			const cart = new cartModel({_id, title, description, price, featured, imgPath, category, quantity, origQty});
+
+			cart.save().then(() => {
+
+				productModel.updateOne({_id}, {	// Make update of "inCart"
+					inCart : "true" 
+				}).then(()=> {
+					// Redirect to dashboard after updating record with image
+					res.redirect("/");
+				});
+			}).catch((err) => {
+				console.log(`Error happened when inserting in the database : ${err}`);
 			});
-		}).catch((err) => {
-			console.log(`Error happened when inserting in the database : ${err}`);
-		});
+		} else {
+			req.session.noProduct == "true";	// If no product, tell user on client side but will likely not 
+												// happen because as it will not show up on the index page.
+												// Reason: General.js controller cotnains a  filtered loop 
+												// holding only products in stock 
+												
+			res.redirect("/");
+		}
+		
 	});
 });
 
@@ -586,7 +600,8 @@ router.get("/shopping-cart", authHome, (req, res) => {
 				featured  : cartProduct.featured,
 				imgPath : cartProduct.imgPath,
 				category : cartProduct.category,
-				quantity : cartProduct.quantity
+				quantity : cartProduct.quantity,
+				origQty : cartProduct.origQty
 			}			
 		});
 
