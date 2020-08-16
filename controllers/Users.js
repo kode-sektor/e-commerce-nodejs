@@ -71,16 +71,21 @@ router.get("/create-acct", (req, res) => {
 
 
 router.post("/create-acct", (req, res) => {
+
+	// First clear existing failed registration attempt
+	errors.null = {};
+	errors.regex = {};
+	loginVals = {};
     
     let firstName = (req.body["first-name"]).trim().toLowerCase();
     let lastName = (req.body["last-name"]).trim().toLowerCase();
     let email = (req.body["email"]).trim();
     let accountPassword = (req.body["account-password"]).trim();
 
-    console.log("CREDENTIALS AT REGISTRATION: ", firstName, lastName, email, accountPassword);
-
     firstName = firstName.charAt(0).toUpperCase() + firstName.slice(1); // K + ad
     lastName = lastName.charAt(0).toUpperCase() + lastName.slice(1)
+
+    console.log("CREDENTIALS AT REGISTRATION: ", firstName, lastName, email, accountPassword);
 
     const regexMail = new RegExp(/[a-zA-Z0-9_.+-]+@[a-zA-Z0-9]+\.[a-zA-Z0-9-.]+/);  // kodesektor@rocketmail.com
     const regexLettersNos = new RegExp(/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/);
@@ -149,6 +154,8 @@ router.post("/create-acct", (req, res) => {
     if (Object.keys(errors.null).length > 0) {
         formValid = false;
 
+        console.log("THE ERRORS : ", errors);
+
         res.render(route, {
             errors : errors.null,
             loginVals,
@@ -157,6 +164,8 @@ router.post("/create-acct", (req, res) => {
         });
 
     } else {
+
+    	console.log("No null values yet");
 
         // STAGE 2:
 
