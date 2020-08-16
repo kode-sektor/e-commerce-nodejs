@@ -38,12 +38,6 @@ errors = {
     regex : {accountPassword : 'Should be between 6 and 12 characters long'}
 }
 */
-let errors = {
-    null : {},
-    regex : {}
-};
-let loginVals = {};
-let formValid = true;
 
 
 // This is the route of the next page after filling the form. 
@@ -72,10 +66,13 @@ router.get("/create-acct", (req, res) => {
 
 router.post("/create-acct", (req, res) => {
 
-	// First clear existing failed registration attempt
-	errors.null = {};
-	errors.regex = {};
-	loginVals = {};
+	let errors = {
+	    null : {},
+	    regex : {}
+	};
+	let loginVals = {};
+	let formValid = true;
+
     
     let firstName = (req.body["first-name"]).trim().toLowerCase();
     let lastName = (req.body["last-name"]).trim().toLowerCase();
@@ -90,16 +87,18 @@ router.post("/create-acct", (req, res) => {
     const regexMail = new RegExp(/[a-zA-Z0-9_.+-]+@[a-zA-Z0-9]+\.[a-zA-Z0-9-.]+/);  // kodesektor@rocketmail.com
     const regexLettersNos = new RegExp(/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/);
 
-    // Stage 1: Check for nulls
+    // Stage 1: Check for password length
     const checkLength = (key, field, msg) => {
         if (field.length < 6 || field.length > 12) {
             errors.regex[`${key}`] = msg;
+            console.log("Length test failed");
         }
     }  
 
     const checkRegexMail = (key, field, pattern, msg) => {
         if (!pattern.test(field)) {
             errors.regex[`${key}`] = msg;
+            console.log("Mail regex test failed");
         }
         // console.log (pattern.test(field));
     }
@@ -107,6 +106,7 @@ router.post("/create-acct", (req, res) => {
     const checkRegexLettersNos = (key, field, pattern, msg) => {
         if (!pattern.test(field)) {
             errors.regex[`${key}`] = msg;
+            console.log("Password mix test failed");
         }
     }
 
@@ -192,6 +192,8 @@ router.post("/create-acct", (req, res) => {
     }
 
     if (formValid) {
+
+    	console.log("No errors at mail send stage");
 
         const sgMail = require('@sendgrid/mail');
         console.log("SENDGRID KEY : ", process.env.SENDGRID_API_KEY);
