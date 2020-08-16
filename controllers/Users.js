@@ -77,6 +77,8 @@ router.post("/create-acct", (req, res) => {
     let email = (req.body["email"]).trim();
     let accountPassword = (req.body["account-password"]).trim();
 
+    console.log("CREDENTIALS AT REGISTRATION: ", firstName, lastName, email, accountPassword);
+
     firstName = firstName.charAt(0).toUpperCase() + firstName.slice(1); // K + ad
     lastName = lastName.charAt(0).toUpperCase() + lastName.slice(1)
 
