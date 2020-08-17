@@ -1,4 +1,4 @@
-Hosted Site: https://e-commerce-node-js-wddm-120.herokuapp.com/
+Hosted Site: https://ecommerce-wddm-120.herokuapp.com/
 
 # An E-Commerce Store Using JavaScript, Node Server, Express and Express-Handlebars
 
