@@ -66,8 +66,8 @@ router.get('/', (req, res) => {
 	         	        if (product && (Number(quantity) > 0)) { 	// If product exists for each category and quantity > 0
 	         	        	products.push({_id, title, description, price, featured, imgPath, category, quantity, inCart});	// Push single product item into products array
 
-	         	        	if (indx === array.length - 1) resolve();	// wait till last record (must be inside .findOne) to work
 	         	        }
+	         	        if (indx === array.length - 1) resolve();	// wait till last record (must be inside .findOne) to work
 	         	    });
 	         	});
 			});
