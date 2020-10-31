@@ -1,5 +1,7 @@
 Hosted Site: https://ecommerce-wddm-120.herokuapp.com/
 
+<img src="humber-zone.png" alt="project poster image" />
+
 # An E-Commerce Store Using JavaScript, Node Server, Express and Express-Handlebars
 
 ***
